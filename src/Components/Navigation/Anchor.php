@@ -24,9 +24,9 @@ class Anchor extends Component
 	// -----------------
 	// Content
 
-	public function label(string $label, array|object $args = []): static
+	public function label(string $text, array|object $args = []): static
 	{
-		$this->withText($label, $args);
+		$this->withText($text, $args);
 		return $this;
 	}
 
