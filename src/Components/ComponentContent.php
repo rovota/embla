@@ -28,13 +28,14 @@ trait ComponentContent
 			foreach ($child as $name => $component) {
 				$this->with($component, is_int($name) ? null : $name);
 			}
+			return $this;
 		}
 
 		if ($child instanceof Component) {
 			$child->config->parent = $this;
 		}
 
-		$this->children->set($name?? Str::random(15), $child);
+		$this->children->set($name ?? Str::random(15), $child);
 
 		return $this;
 	}
