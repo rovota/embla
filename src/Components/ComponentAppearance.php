@@ -63,6 +63,18 @@ trait ComponentAppearance
 		return $this;
 	}
 
+	public function paddingTop(int $number): static
+	{
+		$this->replaceClassWithPrefix('pt-', 'pt-'.abs($number));
+		return $this;
+	}
+
+	public function paddingBottom(int $number): static
+	{
+		$this->replaceClassWithPrefix('pb-', 'pb-'.abs($number));
+		return $this;
+	}
+
 	// -----------------
 	// Interactivity
 
