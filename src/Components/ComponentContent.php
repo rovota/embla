@@ -39,7 +39,13 @@ trait ComponentContent
 		return $this;
 	}
 
-	// -----------------
+	public function withForEach(mixed $dataset, callable $callback): static
+	{
+		foreach ($dataset as $key => $value) {
+			$this->with($callback($value, $key), $key);
+		}
+		return $this;
+	}
 
 	// -----------------
 
@@ -47,6 +53,13 @@ trait ComponentContent
 	{
 		$this->with(Str::translate($content, $args));
 		return $this;
+	}
+
+	// -----------------
+
+	protected function getChild(string $name): Component|string|null
+	{
+		return $this->children->get($name);
 	}
 
 }
