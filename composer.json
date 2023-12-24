@@ -20,6 +20,12 @@
       "email": "support@rovota.com",
       "docs": "https://rovota.gitbook.io/embla"
    },
+   "repositories": [
+      {
+         "type": "path",
+         "url": "../Core"
+      }
+   ],
    "require": {
       "php-64bit": "^8.2.0",
       "rovota/core": "*"
