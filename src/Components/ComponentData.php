@@ -35,7 +35,7 @@ trait ComponentData
 	{
 		$attributes = is_array($name) ? $name : [$name => $value];
 		foreach ($attributes as $name => $value) {
-			$this->attributes->set($name, trim($value));
+			$this->attributes->set($name, trim($value ?? ''));
 		}
 		return $this;
 	}
