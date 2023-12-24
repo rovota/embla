@@ -41,12 +41,13 @@ trait ComponentAppearance
 		return $this;
 	}
 
-	public function accent(BackedEnum|string $color): static
+	public function accent(BackedEnum|string $color = 'auto'): static
 	{
 		if ($color instanceof BackedEnum) {
 			$color = $color->value;
 		}
 		$this->replaceClassWithPrefix('accent-', 'accent-'.trim($color));
+		$this->detectLightness();
 		return $this;
 	}
 
