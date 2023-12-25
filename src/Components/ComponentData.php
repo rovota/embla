@@ -52,9 +52,9 @@ trait ComponentData
 		return $this;
 	}
 
-	public function ariaLabel(string $label, array|object $args = []): static
+	public function ariaLabel(string $text, array|object $args = []): static
 	{
-		$this->attribute('aria-label', __($label, $args));
+		$this->attribute('aria-label', Str::translate($text, $args));
 		return $this;
 	}
 
