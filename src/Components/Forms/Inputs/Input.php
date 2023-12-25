@@ -207,7 +207,7 @@ class Input extends Component
 				// TODO: Add support for the select field.
 
 				if ($field instanceof InputCheckable) {
-					$field->checkedIf((string)$value === $field->attributes->string('value'));
+					$field->checkedIf((string) $value === $field->attributes->string('value'));
 				} else {
 					$field->value($value);
 				}

@@ -27,7 +27,7 @@ class Image extends Component
 	public static function from(mixed $location): static
 	{
 		$component = new static;
-		$component->attribute('src', (string)$location);
+		$component->attribute('src', (string) $location);
 		return $component;
 	}
 

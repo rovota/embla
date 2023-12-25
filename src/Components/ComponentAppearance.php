@@ -25,7 +25,7 @@ trait ComponentAppearance
 				$this->classes->append(trim($value));
 			}
 			if ($value === true) {
-				$this->classes->append(trim((string)$key));
+				$this->classes->append(trim((string) $key));
 			}
 		}
 

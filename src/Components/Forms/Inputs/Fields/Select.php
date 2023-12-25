@@ -26,12 +26,12 @@ class Select extends Base
 		foreach ($this->children as $entry) {
 			if ($entry instanceof OptionGroup) {
 				foreach ($entry->children as $option) {
-					if ($option->attributes->get('value') === (string)$value) {
+					if ($option->attributes->get('value') === (string) $value) {
 						$option->selected();
 					}
 				}
 			} else {
-				if ($entry->attributes->get('value') === (string)$value) {
+				if ($entry->attributes->get('value') === (string) $value) {
 					$entry->selected();
 				}
 			}
