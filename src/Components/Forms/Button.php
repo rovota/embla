@@ -37,16 +37,6 @@ class Button extends Component
 		return $this;
 	}
 
-	public function icon(string $icon, string|null $set = null): static
-	{
-		if (function_exists('icon')) {
-			$icon = icon($icon, $set);
-		}
-		$this->with(trim($icon), 'icon');
-		$this->class('icon');
-		return $this;
-	}
-
 	// -----------------
 	// Appearance
 
