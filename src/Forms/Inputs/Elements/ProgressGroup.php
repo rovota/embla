@@ -6,7 +6,7 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Wrappers;
+namespace Rovota\Embla\Forms\Inputs\Elements;
 
 use Rovota\Embla\Component;
 
