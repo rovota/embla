@@ -10,7 +10,6 @@ namespace Rovota\Embla\Forms\Inputs\Elements;
 
 use Rovota\Core\Support\Str;
 use Rovota\Embla\Component;
-use function Rovota\Embla\Iconography\icon;
 
 class Icon extends Component
 {
