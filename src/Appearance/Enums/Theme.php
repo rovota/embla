@@ -28,4 +28,5 @@ enum Theme: string
 			Theme::Dark => 'Dark',
 		};
 	}
+
 }
