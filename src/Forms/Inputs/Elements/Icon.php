@@ -10,6 +10,7 @@ namespace Rovota\Embla\Forms\Inputs\Elements;
 
 use Rovota\Core\Support\Str;
 use Rovota\Embla\Component;
+use function Rovota\Embla\Iconography\icon;
 
 class Icon extends Component
 {
@@ -24,7 +25,7 @@ class Icon extends Component
 
 	public static function use(string $icon, string|null $set = null): static
 	{
-		if (function_exists('icon')) {
+		if (function_exists('Rovota\Embla\Iconography\icon')) {
 			$icon = icon($icon, $set);
 		}
 
