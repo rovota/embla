@@ -23,12 +23,12 @@
    "repositories": [
       {
          "type": "path",
-         "url": "../Core"
+         "url": "../../Rovota/Framework"
       }
    ],
    "require": {
       "php-64bit": "^8.2.0",
-      "rovota/core": "*"
+      "rovota/framework": "*"
    },
    "autoload": {
       "psr-4": {
