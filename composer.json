@@ -27,7 +27,7 @@
       }
    ],
    "require": {
-      "php-64bit": "^8.2.0",
+      "php-64bit": "^8.3.0",
       "rovota/framework": "*"
    },
    "autoload": {
