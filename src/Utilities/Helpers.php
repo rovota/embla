@@ -7,9 +7,10 @@
 
 namespace Rovota\Embla\Utilities;
 
-use Rovota\Framework\Facades\Language;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
+use Rovota\Framework\Support\Str;
+use Stringable;
 
 final class Helpers
 {
@@ -23,7 +24,9 @@ final class Helpers
 	public static function injectObjects(Arrayable|array $objects): void
 	{
 		foreach ($objects as $object) {
-			echo $object;
+			if ($object instanceof Stringable) {
+				echo $object;
+			}
 		}
 	}
 
@@ -48,13 +51,5 @@ final class Helpers
 
 		return $classes->join(' ');
 	}
-
-	// -----------------
-
-	// -----------------
-
-	// -----------------
-
-	// -----------------
 
 }

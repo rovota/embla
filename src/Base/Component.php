@@ -161,5 +161,4 @@ abstract class Component implements Stringable
 		return sprintf('class"%s"', $this->classes->join(' '));
 	}
 
-
 }
