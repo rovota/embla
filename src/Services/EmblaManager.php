@@ -32,6 +32,9 @@ final class EmblaManager extends ServiceProvider
 	{
 		// JavaScript
 		View::attachScript('*', 'framework', [
+			'source' => '/vendor/rovota/embla/src/assets/scripts/jquery-3.7.1.slim.min.js',
+		]);
+		View::attachScript('*', 'framework', [
 			'source' => '/vendor/rovota/embla/src/assets/scripts/framework.js',
 		]);
 
