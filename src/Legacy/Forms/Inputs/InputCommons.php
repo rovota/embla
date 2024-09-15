@@ -17,12 +17,6 @@ use Rovota\Embla\Legacy\Forms\Inputs\Enums\InputType;
 trait InputCommons
 {
 
-	public function type(InputType|string $type): static
-	{
-		$this->attribute('type', $type instanceof InputType ? $type->value : $type);
-		return $this;
-	}
-
 	// -----------------
 	// Identification
 
@@ -37,43 +31,8 @@ trait InputCommons
 		return $this;
 	}
 
-	public function id(string|int $id): static
-	{
-		$this->attribute('id', $id);
-		return $this;
-	}
-
-	// -----------------
-	// Content
-
-	public function value(mixed $value): static
-	{
-		if (strlen((string) $value) > 0) {
-			$this->attribute('value', $value);
-		}
-		return $this;
-	}
-
-	public function placeholder(string $placeholder): static
-	{
-		$this->attribute('placeholder', Str::translate($placeholder));
-		return $this;
-	}
-
 	// -----------------
 	// Constraints
-
-	public function required(): static
-	{
-		$this->attribute('required');
-		return $this;
-	}
-
-	public function readonly(): static
-	{
-		$this->attribute('readonly');
-		return $this;
-	}
 
 	public function minLength(int $number): static
 	{
@@ -89,18 +48,6 @@ trait InputCommons
 
 	// -----------------
 	// Interactivity
-
-	public function disabled(): static
-	{
-		$this->attribute('disabled');
-		return $this;
-	}
-
-	public function autoFocus(): static
-	{
-		$this->attribute('autofocus');
-		return $this;
-	}
 
 	public function autocomplete(Autocomplete|string $type): static
 	{
