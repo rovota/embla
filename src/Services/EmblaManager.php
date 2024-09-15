@@ -7,8 +7,8 @@
 
 namespace Rovota\Embla\Services;
 
+use Rovota\Embla\Icons\IconManager;
 use Rovota\Embla\Internal\EmblaConfig;
-use Rovota\Embla\Services\Extensions\IconManager;
 use Rovota\Framework\Facades\View;
 use Rovota\Framework\Kernel\ServiceProvider;
 

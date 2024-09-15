@@ -5,9 +5,8 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Services\Extensions;
+namespace Rovota\Embla\Icons;
 
-use Rovota\Embla\Icons\Icon;
 use Rovota\Framework\Kernel\ServiceProvider;
 use Rovota\Framework\Structures\Bucket;
 
