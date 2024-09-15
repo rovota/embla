@@ -11,11 +11,8 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 1 1000;
-    src: url('https://cdn.rovota.com/shared/fonts/Inter.ttf') format('truetype-variations');
+    src: url('/vendor/rovota/embla/src/assets/fonts/Inter.ttf') format('truetype-variations');
 }
-
-/* ---------------------- */
-/* Viewbox */
 
 /* ---------------------- */
 /* Base */
