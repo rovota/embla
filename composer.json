@@ -33,7 +33,8 @@
    "autoload": {
       "psr-4": {
          "Rovota\\Embla\\": "src/"
-      }
+      },
+      "files": ["src/functions.php"]
    },
    "config": {
       "sort-packages": true,
