@@ -8,6 +8,7 @@
 namespace Rovota\Embla\Services;
 
 use Rovota\Embla\Internal\EmblaConfig;
+use Rovota\Embla\Services\Extensions\IconManager;
 use Rovota\Framework\Facades\View;
 use Rovota\Framework\Kernel\ServiceProvider;
 
@@ -20,11 +21,15 @@ final class EmblaManager extends ServiceProvider
 
 	protected EmblaConfig $config;
 
+	protected IconManager $icons;
+
 	// -----------------
 
 	public function __construct()
 	{
 		$this->config = EmblaConfig::load('config/embla');
+
+		$this->icons = new IconManager($this->config->array('icons'));
 
 		$this->attachAssets();
 	}
@@ -38,7 +43,10 @@ final class EmblaManager extends ServiceProvider
 
 	// -----------------
 
-	// -----------------
+	public function getIconManager(): IconManager
+	{
+		return $this->icons;
+	}
 
 	// -----------------
 
