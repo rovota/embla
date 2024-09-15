@@ -7,6 +7,8 @@
 
 namespace Rovota\Embla\Base;
 
+use Rovota\Embla\Base\Traits\AccessibilityMethods;
+use Rovota\Embla\Base\Traits\AppearanceMethods;
 use Rovota\Embla\Base\Traits\ComponentChildren;
 use Rovota\Embla\Base\Traits\ComponentData;
 use Rovota\Framework\Structures\Basket;
@@ -19,6 +21,9 @@ abstract class Component implements Stringable
 	use Conditionable;
 	use ComponentChildren;
 	use ComponentData;
+
+	use AppearanceMethods;
+	use AccessibilityMethods;
 
 	// -----------------
 
@@ -47,10 +52,6 @@ abstract class Component implements Stringable
 		$this->variables = new Basket();
 		$this->attributes = new Basket();
 		$this->classes = new Basket();
-
-//		$this->classes->append('accent-auto');
-//		$this->attributes->set('type', 'submit');
-//		$this->attributes->append('required');
 
 		$this->configuration();
 	}
@@ -89,37 +90,33 @@ abstract class Component implements Stringable
 
 	// -----------------
 
-	// -----------------
-
-	// -----------------
-
-	// -----------------
-
-	// -----------------
-
 	protected function render(): string
 	{
 		$this->prepareRender();
 
 		$fragments = Basket::from([
-			'opening' => sprintf('<%s', $this->config->tag),
-			'attributes' => $this->getFormattedAttributes(),
-			'classes' => $this->getFormattedClasses(),
+			sprintf('<%s', $this->config->tag),
+			$this->getFormattedAttributes(),
+			$this->getFormattedClasses(),
 		])->filter(function (string $fragment) {
 			return strlen($fragment) > 0;
 		});
 
 		if ($this->config->self_closing) {
-			return $fragments->append('/>')->join(' ');
+			return $fragments->append('/>')->join(' ', '');
 		}
 
 		if ($this->children->isEmpty()) {
-			return $fragments->append('></'.$this->config->tag.'>')->join($fragments->count() === 2 ? '' : ' ');
+			return $fragments->append('></'.$this->config->tag.'>')->join(' ', '');
 		}
 
-		// TODO: Apply child components.
+		$component = Basket::from([
+			$fragments->append('>')->join(' ', ''),
+			implode('', $this->children->toArray()),
+			'</'.$this->config->tag.'>'
+		]);
 
-		return '';
+		return $component->join();
 	}
 
 	// -----------------
