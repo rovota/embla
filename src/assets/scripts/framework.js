@@ -312,3 +312,10 @@ if (scroll_button !== null) {
 	}
 	scroll_button.addEventListener('click', () => parent.scrollTop = 0);
 }
+
+// Tab navigation
+let tabs_toggle = document.getElementById('tabs-toggle');
+tabs_toggle?.addEventListener("click", () => {
+	tabs_toggle.classList.toggle('active');
+	document.getElementById('tabs-content').classList.toggle('expanded');
+});
