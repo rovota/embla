@@ -18,11 +18,11 @@ final class IconManager extends ServiceProvider
 
 	// -----------------
 
-	public function __construct(array $config = [])
+	public function __construct(array $sources = [])
 	{
 		$this->icons = new Bucket();
 
-		foreach ($config['sources'] ?? [] as $name => $path) {
+		foreach ($sources as $name => $path) {
 			if (file_exists($path)) {
 				$data = include $path;
 				$this->icons->import($data);
