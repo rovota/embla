@@ -8,6 +8,7 @@
 namespace Rovota\Embla\Base\Traits;
 
 use Rovota\Framework\Facades\Cast;
+use Rovota\Framework\Support\Str;
 
 trait ComponentData
 {
@@ -50,6 +51,18 @@ trait ComponentData
 			$this->attribute($name, $value);
 		}
 		return $this;
+	}
+
+	// -----------------
+
+	public function attributeTranslated(string $name, mixed $value): static
+	{
+		return $this->attributeEscaped($name, $value);
+	}
+
+	public function attributeEscaped(string $name, mixed $value): static
+	{
+		return $this->attribute($name, Str::escape((string) $value));
 	}
 
 	// -----------------
