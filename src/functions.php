@@ -6,9 +6,9 @@
  */
 
 use Rovota\Embla\Icons\Icon;
+use Rovota\Embla\Internal\EmblaManager;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
-use Rovota\Embla\Services\EmblaManager;
 use Rovota\Framework\Facades\Language;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;

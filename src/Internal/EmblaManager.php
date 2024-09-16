@@ -5,10 +5,9 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Services;
+namespace Rovota\Embla\Internal;
 
 use Rovota\Embla\Icons\IconManager;
-use Rovota\Embla\Internal\EmblaConfig;
 use Rovota\Framework\Facades\View;
 use Rovota\Framework\Kernel\ServiceProvider;
 
