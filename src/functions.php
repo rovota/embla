@@ -10,7 +10,6 @@ use Rovota\Embla\Internal\EmblaManager;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
-use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
 
 // -----------------
@@ -24,28 +23,6 @@ if (!function_exists('parse_objects')) {
 				echo $object;
 			}
 		}
-	}
-}
-
-if (!function_exists('array_to_classes')) {
-	function array_to_classes(Arrayable|array $items): string
-	{
-		if ($items instanceof Arrayable) {
-			$items = $items->toArray();
-		}
-
-		$classes = new Basket();
-
-		foreach ($items as $key => $value) {
-			if (is_numeric($key)) {
-				$classes->append($value);
-			}
-			if ($value === true) {
-				$classes->append((string) $key);
-			}
-		}
-
-		return $classes->join(' ');
 	}
 }
 
