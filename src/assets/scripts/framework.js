@@ -304,7 +304,7 @@ document.querySelectorAll('table.sortable').forEach(table => {
 });
 
 // Automatically trigger the scroll-to-top button
-let scroll_button = document.querySelector('scroll-button');
+let scroll_button = document.querySelector('scrollbutton');
 if (scroll_button !== null) {
 	let parent = document.querySelector(scroll_button.dataset.parent);
 	parent.onscroll = () => {
