@@ -1534,6 +1534,10 @@ spinner {
     border-radius: 50%; animation: spinner .8s linear infinite;
 }
 
+spinner.double {
+    border-bottom: 3px solid rgba(var(--color-accent), 1);
+}
+
 /* ---------------------- */
 /* Toasts */
 

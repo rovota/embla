@@ -40,9 +40,9 @@ class Button extends Component
 		return $this;
 	}
 
-	public function label(string $text): static
+	public function label(string $text, array|object $data = []): static
 	{
-		return $this->withTranslated($text);
+		return $this->withTranslated($text, $data);
 	}
 
 	// -----------------
