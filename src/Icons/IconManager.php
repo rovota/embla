@@ -9,35 +9,54 @@ namespace Rovota\Embla\Icons;
 
 use Rovota\Framework\Kernel\ServiceProvider;
 use Rovota\Framework\Structures\Bucket;
+use Rovota\Framework\Support\Str;
 
 final class IconManager extends ServiceProvider
 {
 
-	protected Bucket $icons;
+	/**
+	 * @var array<string, Bucket>
+	 */
+	protected array $sources = [];
 
 	// -----------------
 
 	public function __construct(array $sources = [])
 	{
-		$this->icons = new Bucket();
-
 		foreach ($sources as $name => $path) {
 			if (file_exists($path)) {
 				$data = include $path;
-				$this->icons->import($data);
+				$data = array_filter($data, function (string $value) {
+					return strlen($value) > 100;
+				});
+
+				$this->sources[$name] = Bucket::from($data);
 			}
 		}
 	}
 
 	// -----------------
 
+	public function getSource(string $name): Bucket|null
+	{
+		return $this->sources[$name] ?? null;
+	}
+
+	// -----------------
+
 	public function getIcon(string $name): Icon|null
 	{
-		if ($this->icons->has($name)) {
-			return new Icon($this->icons->get($name));
+		if (Str::contains($name, '.') === false) {
+			return null;
 		}
 
-		return null;
+		[$set, $name] = Str::explode($name, '.', 2);
+
+		if (isset($this->sources[$set]) === false || $this->sources[$set]->missing($name)) {
+			return new Icon("[$set.$name]");
+		}
+
+		return new Icon($this->sources[$set]->get($name));
 	}
 
 }
