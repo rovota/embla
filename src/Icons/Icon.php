@@ -44,10 +44,7 @@ final class Icon
 	
 	protected function getFilteredContent(string $content): string
 	{
-		$content = str_replace('#323232', 'currentColor', $content);
 		$content = str_replace('<svg', '<svg class="icon" fill="currentColor"', $content);
-		$content = str_replace('viewBox="0 0 24 24"', 'viewBox="2 2 20 20"', $content);
-		$content = str_replace(' xmlns="http://www.w3.org/2000/svg"', '', $content);
 
 		return trim($content);
 	}
