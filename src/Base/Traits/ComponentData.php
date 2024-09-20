@@ -7,8 +7,10 @@
 
 namespace Rovota\Embla\Base\Traits;
 
+use BackedEnum;
 use Rovota\Framework\Facades\Cast;
 use Rovota\Framework\Support\Str;
+use Stringable;
 
 trait ComponentData
 {
@@ -28,16 +30,15 @@ trait ComponentData
 
 	public function attribute(string $name, mixed $value = null): static
 	{
-		$name = Cast::toRawAutomatic($name);
-
 		if ($value === null) {
+			$name = $this->getUsableValue($name);
 			if ($this->attributes->find($name) === false) {
 				$this->attributes->append($name);
 			}
 			return $this;
 		}
 
-		$this->attributes->set($name, Cast::toRawAutomatic($value));
+		$this->attributes->set($name, $this->getUsableValue($value));
 		return $this;
 	}
 
@@ -71,10 +72,10 @@ trait ComponentData
 	{
 		foreach (convert_to_array($name) as $key => $value) {
 			if (is_numeric($key)) {
-				$this->classes->append(Cast::toRawAutomatic($value));
+				$this->classes->append($this->getUsableValue($value));
 			}
 			if ($value === true) {
-				$this->classes->append(Cast::toRawAutomatic($key));
+				$this->classes->append($this->getUsableValue($key));
 			}
 		}
 
@@ -90,10 +91,25 @@ trait ComponentData
 		});
 
 		if ($key !== false) {
-			$this->classes->set($key, Cast::toRawAutomatic($replacement));
+			$this->classes->set($key, $this->getUsableValue($replacement));
 		} else {
-			$this->classes->append(Cast::toRawAutomatic($replacement));
+			$this->classes->append($this->getUsableValue($replacement));
 		}
+	}
+
+	// -----------------
+
+	protected function getUsableValue(mixed $value): mixed
+	{
+		if ($value instanceof BackedEnum) {
+			return $value->value;
+		}
+
+		if ($value instanceof Stringable) {
+			return (string) $value;
+		}
+
+		return $value;
 	}
 
 }

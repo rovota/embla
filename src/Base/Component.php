@@ -85,7 +85,7 @@ abstract class Component implements Stringable
 
 	public static function make(): static
 	{
-		return new static();
+		return new static;
 	}
 
 	// -----------------
