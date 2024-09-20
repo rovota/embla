@@ -50,8 +50,7 @@ class Button extends Component
 
 	public function disabled(): static
 	{
-		$this->attribute('disabled');
-		return $this;
+		return $this->attribute('disabled');
 	}
 
 	// -----------------
