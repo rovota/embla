@@ -22,30 +22,42 @@ class Notice extends Component
 	// -----------------
 	// Starters
 
-	public static function status(string $content, Status|string $status = Status::Info): static
+	public static function status(Status|string $status = Status::Info): static
 	{
 		if (is_string($status)) {
 			$status = Status::tryFrom($status) ?? Status::Info;
 		}
 
-		$component = self::content($content);
-		$component->icon('level.'.$status->value);
+		$icon = match ($status) {
+			Status::Info => 'symbols.info-circle',
+			Status::Success => 'symbols.check-circle',
+			Status::Warning => 'symbols.alert-triangle',
+			Status::Danger => 'symbols.alert-octagon',
+		};
+
+		$component = new static;
+		$component->icon($icon);
 		$component->accent($status);
 
 		return $component;
 	}
 
-	public static function content(string $text, array|object $data = []): static
+	public static function simple(string $text, array|object $data = []): static
 	{
 		$component = new static;
 		$component->with('', 'icon');
-		$component->with(Content::make()->withTranslated($text, $data));
+		$component->content($text, $data);
 
 		return $component;
 	}
 
 	// -----------------
 	// Content
+
+	public function content(string $text, array|object $data = []): static
+	{
+		return $this->with(Content::make()->withTranslated($text, $data));
+	}
 
 	public function icon(string $name): static
 	{
