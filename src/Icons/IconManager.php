@@ -26,8 +26,12 @@ final class IconManager extends ServiceProvider
 		foreach ($sources as $name => $path) {
 			if (file_exists($path)) {
 				$data = include $path;
-				$data = array_filter($data, function (string $value) {
-					return strlen($value) > 100;
+				$data = array_filter($data, function (string|array $value) {
+					if (is_string($value)) {
+						return strlen($value) > 100;
+					}
+
+					return true;
 				});
 
 				$this->sources[$name] = Bucket::from($data);
