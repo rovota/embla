@@ -5,7 +5,7 @@
  * @license     MIT
  */
 
-use Rovota\Embla\Components\Layout\Icon;
+use Rovota\Embla\Components\Layout\Icons\Icon;
 use Rovota\Embla\Embla;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
