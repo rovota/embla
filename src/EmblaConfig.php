@@ -5,7 +5,7 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Internal;
+namespace Rovota\Embla;
 
 use Rovota\Framework\Support\Config;
 

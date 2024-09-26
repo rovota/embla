@@ -5,7 +5,7 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Icons;
+namespace Rovota\Embla\Components\Layout;
 
 final class Icon
 {

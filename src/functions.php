@@ -5,12 +5,14 @@
  * @license     MIT
  */
 
-use Rovota\Embla\Icons\Icon;
-use Rovota\Embla\Internal\EmblaManager;
+use Rovota\Embla\Components\Layout\Icon;
+use Rovota\Embla\Embla;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
 use Rovota\Framework\Support\Interfaces\Arrayable;
+use Rovota\Framework\Support\Str;
+use Rovota\Framework\Support\Url;
 
 // -----------------
 // Templating Utilities
@@ -39,7 +41,14 @@ if (!function_exists('partial')) {
 if (!function_exists('icon')) {
 	function icon(string $name): Icon|null
 	{
-		return EmblaManager::instance()->getIconManager()->getIcon($name);
+		return Embla::instance()->getIconManager()->getIcon($name);
+	}
+}
+
+if (!function_exists('resource')) {
+	function resource(string $file, array $parameters = []): string
+	{
+		return Url::local('/resources/assets/' . Str::trim($file, '/'), $parameters);
 	}
 }
 

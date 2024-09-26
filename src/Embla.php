@@ -5,13 +5,13 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Internal;
+namespace Rovota\Embla;
 
-use Rovota\Embla\Icons\IconManager;
+use Rovota\Embla\Managers\IconManager;
 use Rovota\Framework\Facades\View;
 use Rovota\Framework\Kernel\ServiceProvider;
 
-final class EmblaManager extends ServiceProvider
+final class Embla extends ServiceProvider
 {
 
 	const string ASSET_FOLDER = '/vendor/rovota/embla/src/assets';
