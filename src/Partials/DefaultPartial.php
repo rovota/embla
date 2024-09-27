@@ -32,6 +32,8 @@ class DefaultPartial implements Stringable, PartialInterface
 		if ($template !== null) {
 			$this->template = $template;
 		}
+
+		$this->configuration();
 	}
 
 	public function __toString(): string
@@ -84,6 +86,11 @@ class DefaultPartial implements Stringable, PartialInterface
 	}
 
 	protected function prepareForPrinting(): void
+	{
+
+	}
+
+	protected function configuration(): void
 	{
 
 	}
