@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @author      Software Department <developers@rovota.com>
- * @copyright   Copyright (c), Rovota
+ * @copyright   Léandro Tijink
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Forms\Inputs\Enums;
+namespace Rovota\Embla\Utilities\Attributes;
 
-use Rovota\Core\Support\Traits\EnumHelpers;
+use Rovota\Framework\Support\Traits\EnumHelpers;
 
 enum Spellcheck: string
 {

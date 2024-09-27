@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @author      Software Department <developers@rovota.com>
- * @copyright   Copyright (c), Rovota
+ * @copyright   Léandro Tijink
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Forms\Inputs;
+namespace Rovota\Embla\Components\Inputs\Interfaces;
 
 interface InputCheckable
 {
