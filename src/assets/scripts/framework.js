@@ -303,6 +303,57 @@ document.querySelectorAll('table.sortable').forEach(table => {
 	});
 });
 
+// Carousel functionality
+document.querySelectorAll('carousel').forEach(carousel => {
+
+	let slides = carousel.querySelectorAll('.item');
+	slides[0].classList.add('visible');
+
+	if (slides.length > 1) {
+
+		let slide_duration = 5000;
+		let lock_duration = 10000;
+		let current_slide = 0;
+
+		let indicators = carousel.nextElementSibling.querySelectorAll('indicator');
+		indicators[current_slide].classList.add('active');
+
+		const getNextSlideId = () => {
+			return current_slide === (slides.length - 1) ? 0 : current_slide + 1;
+		}
+
+		const switchToSlide = function(id) {
+			slides.forEach((slide, index) => {
+				slide.classList.remove('visible');
+				indicators[index].classList.remove('active');
+				indicators[index].classList.remove('extended');
+			})
+			slides[id].classList.add('visible');
+			indicators[id].classList.add('active');
+			current_slide = id;
+		}
+
+		let cycle = setInterval(() => {
+			switchToSlide(getNextSlideId());
+		}, slide_duration);
+
+		let wait = null;
+
+		indicators.forEach((indicator, index) => {
+			indicator.addEventListener('click', () => {
+				clearInterval(cycle); clearInterval(wait); switchToSlide(index);
+				indicators[index].classList.add('extended');
+				wait = setInterval(() => {
+					cycle = setInterval(() => {
+						switchToSlide(getNextSlideId());
+					}, slide_duration);
+					clearInterval(wait);
+				}, lock_duration - slide_duration);
+			})
+		});
+	}
+});
+
 // Automatically trigger the scroll-to-top button
 let scroll_button = document.querySelector('scrollbutton');
 if (scroll_button !== null) {
