@@ -1727,6 +1727,61 @@ carousel + indicators indicator.active.extended::after {
 }
 
 /* ---------------------- */
+/* Breadcrumbs */
+
+breadcrumbs {
+	display: flex; width: 100%;
+	justify-content: center; align-items: center;
+	background: rgba(var(--color-base), 1);
+}
+
+breadcrumbs > container > nav {
+	display: flex; white-space: nowrap;
+	overflow-x: scroll; overflow-y: hidden;
+	column-gap: 30px;
+}
+
+breadcrumbs > container > nav > a {
+	color: rgba(var(--color-font), var(--opacity-font));
+	display: inline-flex; white-space: nowrap;
+	align-items: center; height: 40px;
+	position: relative; font-size: 14px;
+	text-decoration: none;
+}
+
+breadcrumbs > container > nav > a:hover {
+	color: rgba(var(--color-font), 1);
+	text-decoration: underline;
+}
+
+breadcrumbs > container > nav > a::after {
+	border-top: 1px solid rgba(var(--color-font), 1);
+	border-right: 1px solid rgba(var(--color-font), 1);
+	position: absolute; right: -18px; top: 44%;
+	content: ' '; width: 6px; height: 6px;
+	opacity: var(--opacity-font);
+	transform: rotate(45deg);
+	pointer-events: none;
+}
+
+breadcrumbs > container > nav > a:last-child {
+	color: rgba(var(--color-font), 1);
+	font-weight: 600; pointer-events: none;
+}
+
+breadcrumbs > container > nav > a:last-child::after {
+	display: none;
+}
+
+/* ---------------------- */
+
+/* ---------------------- */
+
+/* ---------------------- */
+
+/* ---------------------- */
+
+/* ---------------------- */
 /* Misc */
 
 span.diff, small.diff {
