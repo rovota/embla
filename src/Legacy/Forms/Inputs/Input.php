@@ -8,37 +8,8 @@
 
 namespace Rovota\Embla\Legacy\Forms\Inputs;
 
-use Rovota\Core\Facades\Session;
-use Rovota\Core\Structures\Bucket;
-use Rovota\Core\Structures\ErrorBucket;
-use Rovota\Core\Support\Str;
-use Rovota\Embla\Legacy\Component;
-use Rovota\Embla\Legacy\Forms\Inputs\Elements\Errors;
-use Rovota\Embla\Legacy\Forms\Inputs\Elements\Group;
-use Rovota\Embla\Legacy\Forms\Inputs\Elements\GroupMasked;
-use Rovota\Embla\Legacy\Forms\Inputs\Elements\Note;
-use Rovota\Embla\Legacy\Forms\Inputs\Elements\Slider;
-use Rovota\Embla\Legacy\Forms\Inputs\Fields\Base;
-use Rovota\Embla\Legacy\Forms\Inputs\Fields\Range;
-use Rovota\Embla\Legacy\Typography\Label;
-
 class Input extends Component
 {
-
-	protected Bucket $fields;
-
-	// -----------------
-
-	public function __construct()
-	{
-		parent::__construct('input-group');
-
-		$this->fields = new Bucket();
-
-		// Define order
-		$this->with('', 'label');
-		$this->with('', 'fields');
-	}
 
 	// -----------------
 	// Identification
@@ -53,54 +24,9 @@ class Input extends Component
 	// -----------------
 	// Content
 
-	public function label(string $text, array|object $args = []): static
-	{
-		$label = Label::text($text, $args);
-		if ($this->variables->has('name')) {
-			$label->for($this->variables->string('name'));
-		}
-
-		return $this->with($label, 'label');
-	}
-
 	public function defaultValue(mixed $value): static
 	{
 		$this->variable('defaults', is_array($value) ? $value : [$value]);
-		return $this;
-	}
-
-	// -----------------
-	// Fields
-
-	public function field(Component $field, string|null $name = null): static
-	{
-		$field->config->parent = $this;
-		$this->fields[$name ?? Str::random(15)] = $field;
-
-		if ($field->attributes->missing('name')) {
-			$field->attribute('name', $this->variables->get('name'));
-		}
-
-		if ($field->attributes->missing('id') && $field instanceof InputCheckable === false) {
-			$field->attribute('id', $this->variables->get('name'));
-		}
-
-		return $this;
-	}
-
-	public function fields(array $fields): static
-	{
-		foreach ($fields as $name => $field) {
-			$this->field($field, is_int($name) ? null : $name);
-		}
-		return $this;
-	}
-
-	public function fieldForEach(mixed $dataset, callable $callback): static
-	{
-		foreach ($dataset as $key => $value) {
-			$this->field($callback($value, $key), $key);
-		}
 		return $this;
 	}
 
@@ -138,40 +64,7 @@ class Input extends Component
 
 	// -----------------
 
-	protected function build(): void
-	{
-		$group = $this->getFieldGroup();
-		foreach ($this->fields as $name => $field) {
-			$group->with($field, $name);
-		}
-
-		$this->with($group, 'fields');
-		$this->setValueAutomatically();
-		if ($this->variables->missing('hide_errors')) {
-			$this->withErrors();
-		}
-	}
-
 	// -----------------
-
-	protected function getFieldGroup(): Component
-	{
-		foreach ($this->fields as $field) {
-			if ($field instanceof Base === false) {
-				continue;
-			}
-
-			if ($field instanceof Range) {
-				return Slider::create();
-			}
-
-			if ($field instanceof InputMasked) {
-				return GroupMasked::create();
-			}
-		}
-
-		return Group::create();
-	}
 
 	protected function setValueAutomatically(): void
 	{

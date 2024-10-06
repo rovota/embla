@@ -1,28 +1,27 @@
 <?php
 
 /**
- * @author      Software Department <developers@rovota.com>
- * @copyright   Copyright (c), Rovota
+ * @copyright   Léandro Tijink
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Forms\Inputs\Fields;
+namespace Rovota\Embla\Components\Inputs\Fields;
 
-use Rovota\Embla\Legacy\Forms\Inputs\Enums\Autocomplete;
-use Rovota\Embla\Legacy\Forms\Inputs\Enums\InputType;
+use Rovota\Embla\Utilities\Attributes\Autocomplete;
+use Rovota\Embla\Utilities\Attributes\InputMode;
+use Rovota\Embla\Utilities\Attributes\InputType;
 
 class OneTimeCode extends Base
 {
 
-	public function __construct()
+	protected function configuration(): void
 	{
-		parent::__construct();
-
-		if (isset($this->attributes['type']) === false) {
+		if ($this->attributes->missing('type')) {
 			$this->type(InputType::Text);
 		}
 
 		$this->autocomplete(Autocomplete::OneTimeCode);
+		$this->inputMode(InputMode::Numeric);
 	}
 
 	// -----------------

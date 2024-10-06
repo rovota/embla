@@ -54,6 +54,12 @@ trait ComponentData
 		return $this;
 	}
 
+	public function withoutAttribute(string $name): static
+	{
+		$this->attributes->remove($name);
+		return $this;
+	}
+
 	// -----------------
 
 	public function attributeTranslated(string $name, mixed $value): static

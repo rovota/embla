@@ -29,10 +29,12 @@ class InputComponent extends Component
 
 	public function value(mixed $value): static
 	{
-		$value = Cast::toRawAutomatic($value);
+		if ($value !== null) {
+			$value = Cast::toRawAutomatic($value);
 
-		if (strlen((string) $value) > 0) {
-			$this->attributeEscaped('value', $value);
+			if (strlen((string) $value) > 0) {
+				$this->attributeEscaped('value', $value);
+			}
 		}
 
 		return $this;

@@ -6,18 +6,16 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Forms\Inputs\Fields;
+namespace Rovota\Embla\Components\Inputs\Fields;
 
-use Rovota\Embla\Legacy\Forms\Inputs\Enums\InputType;
+use Rovota\Embla\Utilities\Attributes\InputType;
 
 class Email extends Base
 {
 
-	public function __construct()
+	protected function configuration(): void
 	{
-		parent::__construct();
-
-		if (isset($this->attributes['type']) === false) {
+		if ($this->attributes->missing('type')) {
 			$this->type(InputType::Email);
 		}
 	}
@@ -27,8 +25,7 @@ class Email extends Base
 
 	public function pattern(string $pattern): static
 	{
-		$this->attribute('pattern', $pattern);
-		return $this;
+		return $this->attribute('pattern', $pattern);
 	}
 
 }

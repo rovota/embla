@@ -1,21 +1,23 @@
 <?php
 
 /**
- * @author      Software Department <developers@rovota.com>
- * @copyright   Copyright (c), Rovota
+ * @copyright   Léandro Tijink
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Forms\Inputs\Fields;
+namespace Rovota\Embla\Components\Inputs\Fields;
 
-use Rovota\Embla\Legacy\Forms\Inputs\Elements\OptionGroup;
+use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Inputs\Elements\Extensions\OptionGroup;
 
 class Select extends Base
 {
 
-	public function __construct()
+	public function __construct(Component|null $parent = null)
 	{
-		parent::__construct('select');
+		parent::__construct($parent);
+
+		$this->config->tag = 'select';
 	}
 
 	// -----------------
@@ -36,6 +38,7 @@ class Select extends Base
 				}
 			}
 		}
+
 		return $this;
 	}
 

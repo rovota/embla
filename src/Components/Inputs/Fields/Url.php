@@ -9,13 +9,13 @@ namespace Rovota\Embla\Components\Inputs\Fields;
 
 use Rovota\Embla\Utilities\Attributes\InputType;
 
-class Text extends Base
+class Url extends Base
 {
 
 	protected function configuration(): void
 	{
 		if ($this->attributes->missing('type')) {
-			$this->type(InputType::Text);
+			$this->type(InputType::Url);
 		}
 	}
 
@@ -25,14 +25,6 @@ class Text extends Base
 	public function pattern(string $pattern): static
 	{
 		return $this->attribute('pattern', $pattern);
-	}
-
-	// -----------------
-	// Interactivity
-
-	public function slugify(): static
-	{
-		return $this->attribute('slugify');
 	}
 
 }

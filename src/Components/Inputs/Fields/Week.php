@@ -6,18 +6,16 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Forms\Inputs\Fields;
+namespace Rovota\Embla\Components\Inputs\Fields;
 
-use Rovota\Embla\Legacy\Forms\Inputs\Enums\InputType;
+use Rovota\Embla\Utilities\Attributes\InputType;
 
 class Week extends Base
 {
 
-	public function __construct()
+	protected function configuration(): void
 	{
-		parent::__construct();
-
-		if (isset($this->attributes['type']) === false) {
+		if ($this->attributes->missing('type')) {
 			$this->type(InputType::Week);
 		}
 	}
@@ -38,20 +36,17 @@ class Week extends Base
 
 	public function min(mixed $moment): static
 	{
-		$this->attribute('min', moment($moment)->format('Y-\WW'));
-		return $this;
+		return $this->attribute('min', moment($moment)->format('Y-\WW'));
 	}
 
 	public function max(mixed $moment): static
 	{
-		$this->attribute('max', moment($moment)->format('Y-\WW'));
-		return $this;
+		return $this->attribute('max', moment($moment)->format('Y-\WW'));
 	}
 
 	public function step(int $weeks = 1): static
 	{
-		$this->attribute('step', abs($weeks));
-		return $this;
+		return $this->attribute('step', abs($weeks));
 	}
 
 }

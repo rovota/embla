@@ -9,13 +9,13 @@ namespace Rovota\Embla\Components\Inputs\Fields;
 
 use Rovota\Embla\Utilities\Attributes\InputType;
 
-class Text extends Base
+class Search extends Base
 {
 
 	protected function configuration(): void
 	{
 		if ($this->attributes->missing('type')) {
-			$this->type(InputType::Text);
+			$this->type(InputType::Search);
 		}
 	}
 
@@ -30,9 +30,20 @@ class Text extends Base
 	// -----------------
 	// Interactivity
 
-	public function slugify(): static
+	/**
+	 * This attribute is only supported on Safari.
+	 */
+	public function autocorrect(bool $value): static
 	{
-		return $this->attribute('slugify');
+		return $this->attribute('autocorrect', $value ? 'on' : 'off');
+	}
+
+	/**
+	 * This attribute is only supported on Safari.
+	 */
+	public function maxResults(int $number): static
+	{
+		return $this->attribute('results', abs($number));
 	}
 
 }

@@ -18,7 +18,7 @@ class Password extends Base
 	protected function configuration(): void
 	{
 		if ($this->attributes->missing('type')) {
-			$this->attribute('type', InputType::Password);
+			$this->type(InputType::Password);
 		}
 
 		$this->capitalize(Capitalization::Off);
