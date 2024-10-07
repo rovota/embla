@@ -1,27 +1,26 @@
 <?php
 
 /**
- * @author      Software Department <developers@rovota.com>
- * @copyright   Copyright (c), Rovota
+ * @copyright   Léandro Tijink
  * @license     MIT
  */
 
-namespace Rovota\Embla\Legacy\Indicators;
+namespace Rovota\Embla\Components\Indicators\Progress;
 
-use Rovota\Embla\Legacy\Component;
+use Rovota\Embla\Base\Component;
 
 class Progress extends Component
 {
 
-	public function __construct()
+	protected function configuration(): void
 	{
-		parent::__construct('progress');
+		$this->config->tag = 'progress';
 	}
 
 	// -----------------
 	// Appearance
 
-	public function max(int|float $number): static
+	public function total(int|float $number): static
 	{
 		$this->attribute('max', abs($number));
 		return $this;
