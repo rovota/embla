@@ -50,6 +50,11 @@ class ProgressLabel extends Component
 		return $this->variable('suffix', $value);
 	}
 
+	public function valueOfTotal(): static
+	{
+		return $this->variable('suffix', '/');
+	}
+
 	// -----------------
 	// Misc
 	
