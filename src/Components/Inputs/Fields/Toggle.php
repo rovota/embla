@@ -39,8 +39,7 @@ class Toggle extends Base implements InputCheckable, InputMasked
 
 	public function description(string $content, array|object $data = []): static
 	{
-		$this->variables->set('description', Str::translate($content, $data));
-		return $this;
+		return $this->variable('description', Str::translate($content, $data));
 	}
 
 	// -----------------

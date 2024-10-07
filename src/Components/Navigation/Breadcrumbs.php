@@ -24,8 +24,7 @@ class Breadcrumbs extends Component
 
 	public function current(string $content): static
 	{
-		$this->variables->set('current', Str::escape($content));
-		return $this;
+		return $this->variable('current', Str::escape($content));
 	}
 
 	// -----------------

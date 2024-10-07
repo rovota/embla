@@ -11,7 +11,9 @@ use Rovota\Embla\Base\Component;
 use Rovota\Embla\Base\Extensions\InputComponent;
 use Rovota\Embla\Components\Inputs\Elements\Extensions\MaskedGroup;
 use Rovota\Embla\Components\Inputs\Elements\Group;
+use Rovota\Embla\Components\Inputs\Elements\Slider;
 use Rovota\Embla\Components\Inputs\Fields\Base;
+use Rovota\Embla\Components\Inputs\Fields\Range;
 use Rovota\Embla\Components\Inputs\Interfaces\InputCheckable;
 use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
 use Rovota\Embla\Components\Typography\Label;
@@ -31,8 +33,8 @@ class Input extends Component
 
 		$this->config->tag = 'input-group';
 
-		$this->with('', 'label');
-		$this->with('', 'box');
+		$this->addChild('', 'label');
+		$this->addChild('', 'box');
 	}
 
 	// -----------------
@@ -122,10 +124,10 @@ class Input extends Component
 				continue;
 			}
 
-//			if ($field instanceof Range) {
-//				return Slider::create();
-//			}
-//
+			if ($field instanceof Range) {
+				return Slider::make();
+			}
+
 			if ($field instanceof InputMasked) {
 				return MaskedGroup::make();
 			}

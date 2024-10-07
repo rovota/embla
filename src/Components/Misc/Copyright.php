@@ -17,7 +17,7 @@ class Copyright extends Component
 	{
 		$this->config->tag = 'span';
 
-		$this->with(__('&copy; 2009 - :year :site_name', [
+		$this->addChild(__('&copy; 2009 - :year :site_name', [
 			'year' => date('Y'),
 			'site_name' => Registry::string('about.author'),
 		]));

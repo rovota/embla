@@ -22,10 +22,7 @@ class OrderedList extends Component
 
 	public static function withItems(array $items): static
 	{
-		$component = new static;
-		$component->with($items);
-
-		return $component;
+		return (new static)->with($items);
 	}
 
 }

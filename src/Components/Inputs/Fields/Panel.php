@@ -37,8 +37,7 @@ class Panel extends Base implements InputCheckable, InputMasked
 
 	public function description(string $content, array|object $data = []): static
 	{
-		$this->variables->set('description', Str::translate($content, $data));
-		return $this;
+		return $this->variable('description', Str::translate($content, $data));
 	}
 
 	// -----------------
@@ -46,8 +45,7 @@ class Panel extends Base implements InputCheckable, InputMasked
 
 	public function checkbox(): static
 	{
-		$this->type(InputType::Checkbox);
-		return $this;
+		return $this->type(InputType::Checkbox);
 	}
 
 	public function checkedIf(bool $condition): static
