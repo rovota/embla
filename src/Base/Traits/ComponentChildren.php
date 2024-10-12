@@ -45,9 +45,9 @@ trait ComponentChildren
 		return $this->withEscaped(Str::translate($content, $data));
 	}
 
-	public function withEscaped(string $content): static
+	public function withEscaped(string|null $content): static
 	{
-		return $this->with(Str::escape($content));
+		return $this->with(Str::escape($content ?? ''));
 	}
 
 	// -----------------
