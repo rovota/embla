@@ -89,14 +89,14 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	}
 
 	// Focus when icon is clicked
-	let icon = input.parentNode.querySelector('input-icon');
+	let icon = input.parentElement.querySelector('input-icon');
 	icon?.addEventListener('click', () => {
 		input.focus();
 	});
 
 	// Password input functionality
 	if (input.getAttribute('type') === 'password') {
-		let indicator = input.parentNode.querySelector('.capslock');
+		let indicator = input.parentElement.querySelector('.capslock');
 		input.addEventListener('keyup', event => {
 			if (input === document.activeElement && event.getModifierState('CapsLock')) {
 				if (!indicator.classList.contains('visible')) {
@@ -146,7 +146,7 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 	// Slug input functionality
 	if (input.hasAttribute('slugify')) {
-		let note = input.parentNode.nextElementSibling.querySelector('span');
+		let note = input.parentElement.nextElementSibling.querySelector('span');
 		note.innerHTML = slugify(input.value);
 		input.addEventListener('input', () => {
 			note.innerHTML = slugify(input.value);
@@ -156,9 +156,9 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	// Input length limit on input
 	if (input.hasAttribute('maxlength')) {
 		let limit = input.getAttribute('maxlength');
-		let counter = input.parentNode.nextElementSibling?.querySelector('charcount');
+		let counter = input.parentElement.nextElementSibling?.querySelector('charcount');
 		if (counter != null) {
-			input.parentNode.nextElementSibling.querySelector('charlimit').innerHTML = limit;
+			input.parentElement.nextElementSibling.querySelector('charlimit').innerHTML = limit;
 			counter.innerHTML = input.value.length;
 			input.addEventListener('input', () => {
 				counter.innerHTML = input.value.length;
@@ -167,12 +167,12 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	}
 
 	// Input error functionality
-	if (input.parentNode.nextElementSibling?.nodeName === 'INPUT-ERRORS') {
-		input.parentNode.classList.add('has-error');
+	if (input.parentElement.nextElementSibling?.nodeName === 'INPUT-ERRORS') {
+		input.parentElement.classList.add('has-error');
 		input.addEventListener('input', event => {
-			if (input.parentNode.classList.contains('has-error')) {
-				event.target.parentNode.nextElementSibling.remove();
-				input.parentNode.classList.remove('has-error');
+			if (input.parentElement.classList.contains('has-error')) {
+				event.target.parentElement.nextElementSibling.remove();
+				input.parentElement.classList.remove('has-error');
 			}
 		});
 	}
@@ -251,7 +251,7 @@ document.querySelectorAll('table.sortable').forEach(table => {
 			selected_trigger = trigger;
 			selected_trigger.classList.add('sorted');
 
-			let column = Array.prototype.indexOf.call(trigger.parentNode.children, trigger);
+			let column = Array.prototype.indexOf.call(trigger.parentElement.children, trigger);
 			let rows = table.querySelectorAll('tbody')[0].rows;
 			let index, counter = 0, scanning = true, reorder = false, order = 'asc';
 
@@ -289,7 +289,7 @@ document.querySelectorAll('table.sortable').forEach(table => {
 					}
 				}
 				if (reorder === true) {
-					rows[index].parentNode.insertBefore(rows[index + 1], rows[index]);
+					rows[index].parentElement.insertBefore(rows[index + 1], rows[index]);
 					scanning = true;
 					counter++;
 				} else {
