@@ -17,6 +17,9 @@ use Rovota\Embla\Components\Inputs\Fields\Range;
 use Rovota\Embla\Components\Inputs\Interfaces\InputCheckable;
 use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
 use Rovota\Embla\Components\Typography\Label;
+use Rovota\Framework\Caching\Enums\Driver;
+use Rovota\Framework\Facades\Cache;
+use Rovota\Framework\Facades\Request;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Str;
 
@@ -98,6 +101,16 @@ class Input extends Component
 	// -----------------
 	// Content
 
+	public function defaultValue(mixed $value): static
+	{
+		return $this->variable('defaults', is_array($value) ? $value : [$value]);
+	}
+
+	public function withoutErrors(): static
+	{
+		return $this->variable('hide_errors', true);
+	}
+
 	// -----------------
 
 	protected function prepareRender(): void
@@ -109,13 +122,49 @@ class Input extends Component
 		}
 
 		$this->with($group, 'box');
-//		$this->setValueAutomatically();
-//		if ($this->variables->missing('hide_errors')) {
+		$this->setValueAutomatically();
+
+		if ($this->variables->missing('hide_errors')) {
 //			$this->withErrors();
-//		}
+		}
 	}
 
 	// -----------------
+
+	protected function setValueAutomatically(): void
+	{
+		$data = $this->getValueData();
+
+		foreach ($this->fields as $field) {
+			if ($field instanceof Base === false) {
+				continue;
+			}
+
+			if ($field->attributes->has('name')) {
+				$name = $field->attributes->get('name');
+				$value = $data[$name] ?? $data['defaults'][$name] ?? $data['defaults'][0] ?? null;
+
+				if ($field instanceof InputCheckable) {
+					$field->checkedIf($value === $field->attributes->string('value'));
+					continue;
+				}
+
+				// TODO: Add support for the select field.
+
+				$field->value($value);
+			}
+		}
+	}
+
+	protected function getValueData(): array
+	{
+		$cache = convert_to_array(Cache::storeWithDriver(Driver::Session)?->all() ?? []);
+		$request = Request::current()->post->toArray();
+
+		return array_merge([
+			'defaults' => $this->variables->array('defaults')
+		], $request, $cache);
+	}
 
 	protected function getFieldGroup(): Component
 	{

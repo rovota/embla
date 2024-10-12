@@ -12,25 +12,6 @@ class Input extends Component
 {
 
 	// -----------------
-	// Identification
-
-	public static function name(string $name): static
-	{
-		$component = new static;
-		$component->variable('name', $name);
-		return $component;
-	}
-
-	// -----------------
-	// Content
-
-	public function defaultValue(mixed $value): static
-	{
-		$this->variable('defaults', is_array($value) ? $value : [$value]);
-		return $this;
-	}
-
-	// -----------------
 	// Content
 
 	public function withNote(Component|string $note, array|object $args = []): static
@@ -56,41 +37,7 @@ class Input extends Component
 		return $this;
 	}
 
-	public function withoutErrors(): static
-	{
-		$this->variable('hide_errors', true);
-		return $this;
-	}
-
 	// -----------------
-
-	// -----------------
-
-	protected function setValueAutomatically(): void
-	{
-		$defaults = $this->variables->array('defaults');
-		$data = array_merge(['defaults' => $defaults], request()->post->toArray(), Session::all());
-
-		foreach ($this->fields as $field) {
-			if ($field instanceof Base === false) {
-				continue;
-			}
-
-			if ($field->attributes->has('name')) {
-				$name = $field->attributes->get('name');
-				$value = $data[$name] ?? $data['defaults'][$name] ?? $data['defaults'][0] ?? null;
-
-				// TODO: Add support for setting multiple checkboxes values as active.
-				// TODO: Add support for the select field.
-
-				if ($field instanceof InputCheckable) {
-					$field->checkedIf((string) $value === $field->attributes->string('value'));
-				} else {
-					$field->value($value);
-				}
-			}
-		}
-	}
 
 	protected function withErrors(ErrorBucket|string|null $errors = null): static
 	{
