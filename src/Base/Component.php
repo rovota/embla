@@ -11,6 +11,7 @@ use Rovota\Embla\Base\Traits\AccessibilityMethods;
 use Rovota\Embla\Base\Traits\AppearanceMethods;
 use Rovota\Embla\Base\Traits\ComponentChildren;
 use Rovota\Embla\Base\Traits\ComponentData;
+use Rovota\Embla\Base\Traits\ComponentMeta;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Str;
 use Rovota\Framework\Support\Traits\Conditionable;
@@ -21,6 +22,7 @@ abstract class Component implements Stringable
 	use Conditionable;
 	use ComponentChildren;
 	use ComponentData;
+	use ComponentMeta;
 
 	use AppearanceMethods;
 	use AccessibilityMethods;
