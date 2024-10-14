@@ -11,6 +11,7 @@ use Rovota\Embla\Base\Component;
 use Rovota\Embla\Base\Extensions\InputComponent;
 use Rovota\Embla\Components\Inputs\Elements\Extensions\MaskedGroup;
 use Rovota\Embla\Components\Inputs\Elements\Group;
+use Rovota\Embla\Components\Inputs\Elements\Note;
 use Rovota\Embla\Components\Inputs\Elements\Slider;
 use Rovota\Embla\Components\Inputs\Fields\Base;
 use Rovota\Embla\Components\Inputs\Fields\Range;
@@ -95,6 +96,30 @@ class Input extends Component
 		foreach ($dataset as $key => $value) {
 			$this->field($callback($value, $key), $key);
 		}
+		return $this;
+	}
+
+	// -----------------
+	// Children
+
+	public function withNote(string $text, array|object $data = []): static
+	{
+		return $this->with(Note::text($text, $data), 'note');
+	}
+
+	public function withCharacterCount(): static
+	{
+		return $this->with(Note::characterCount(), 'note');
+	}
+
+	public function withSlugPreview(string $prefix = '/'): static
+	{
+		$this->with(Note::slugPreview($prefix), 'note');
+
+		if ($this->fields->count() === 1) {
+			$this->fields->first()->slugify();
+		}
+
 		return $this;
 	}
 
