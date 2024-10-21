@@ -1,10 +1,6 @@
 // Created and designed by Rovota
 // ----------------------
 
-document.addEventListener('DOMContentLoaded', function () {
-	document.body.classList.remove('preload');
-});
-
 // Slugification
 function slugify(str) {
 	str = str.trim().toLowerCase().replace(/./g, function (char) {
@@ -325,6 +321,7 @@ document.querySelectorAll('carousel').forEach(carousel => {
 		const switchToSlide = function(id) {
 			slides.forEach((slide, index) => {
 				slide.classList.remove('visible');
+				indicators[index].classList.remove('focus');
 				indicators[index].classList.remove('active');
 				indicators[index].classList.remove('extended');
 			})
@@ -350,6 +347,16 @@ document.querySelectorAll('carousel').forEach(carousel => {
 					clearInterval(wait);
 				}, lock_duration - slide_duration);
 			})
+		});
+
+		slides.forEach((slide, index) => {
+			slide.addEventListener("focus", () => {
+				indicators[index].click();
+				indicators[index].classList.add('focus');
+			});
+			slide.addEventListener("blur", () => {
+				indicators[index].classList.remove('focus');
+			});
 		});
 	}
 });
