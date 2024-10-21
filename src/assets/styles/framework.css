@@ -291,7 +291,7 @@ grid, gallery, split {
 }
 
 grid, gallery {
-	margin: 1.2em 0 0;
+	margin: 1.25rem 0 0;
 }
 
 grid.grid-2, gallery.grid-2 {
@@ -336,7 +336,7 @@ split {
 
 table-scroller {
 	display: block;
-	margin: 1.2rem 0 0;
+	margin: 1.25rem 0 0;
 	max-width: 100%;
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -347,7 +347,7 @@ table {
 	border: none;
 	border-collapse: separate;
 	border-spacing: 0;
-	margin: 1.2rem 0 0;
+	margin: 1.25rem 0 0;
 	width: 100%;
 }
 
@@ -860,7 +860,7 @@ input[type="radio"]:checked:focus-visible + indicator {
 }
 
 label + input-masked .input-toggle:first-child {
-	margin-top: 1.2rem;
+	margin-top: 1.25rem;
 }
 
 .input-toggle + .input-toggle {
@@ -958,7 +958,7 @@ label + input-masked .input-toggle:first-child {
 }
 
 label + input-masked .input-choice:first-child {
-	margin-top: 1.2rem;
+	margin-top: 0.8rem;
 }
 
 .input-choice + .input-choice {
@@ -1009,7 +1009,7 @@ label + input-masked .input-choice:first-child {
 }
 
 label + input-masked .input-panel:first-child {
-	margin-top: 1.2rem;
+	margin-top: 0.8rem;
 }
 
 .input-panel + .input-panel {
@@ -1037,6 +1037,7 @@ label + input-masked .input-panel:first-child {
 	grid-gap: 0.5rem;
 	grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
 	width: 100%;
+	margin-top: 0.8rem;
 }
 
 .input-swatch {
@@ -1167,7 +1168,7 @@ accordion {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	margin: 1.2em 0 0;
+	margin: 1.25rem 0 0;
 }
 
 accordion.borderless {
@@ -1215,7 +1216,7 @@ info {
 	border-radius: var(--radius-medium);
 	color: rgba(var(--color-font), 1);
 	display: block;
-	margin: 1.2em 0 0;
+	margin: 1.25rem 0 0;
 	overflow: hidden;
 	padding: 0.8rem 1.25rem;
 	position: relative;
@@ -1605,7 +1606,7 @@ pre > code {
 pre {
 	border: 1px solid rgba(var(--color-font), .1);
 	line-height: 1.4;
-	margin: 1.2em 0 0;
+	margin: 1.25rem 0 0;
 	overflow: auto;
 	padding: 0.8rem 1.25rem;
 }
