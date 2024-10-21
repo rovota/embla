@@ -1093,6 +1093,7 @@ label + input-masked .input-panel:first-child {
 	grid-gap: 0.5rem;
 	grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
 	width: 100%;
+	margin-top: 0.8rem;
 }
 
 .input-theme {
@@ -1121,6 +1122,7 @@ label + input-masked .input-panel:first-child {
 }
 
 .input-theme > content {
+	user-select: none;
 	display: block;
 	flex-grow: 1;
 }
