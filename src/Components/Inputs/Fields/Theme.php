@@ -10,10 +10,12 @@ namespace Rovota\Embla\Components\Inputs\Fields;
 use BackedEnum;
 use Rovota\Embla\Components\Inputs\Interfaces\InputCheckable;
 use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
+use Rovota\Embla\Components\Media\Image;
+use Rovota\Embla\Components\Typography\Span;
 use Rovota\Embla\Utilities\Attributes\InputType;
 use Rovota\Framework\Support\Str;
 
-class Swatch extends Base implements InputCheckable, InputMasked
+class Theme extends Base implements InputCheckable, InputMasked
 {
 
 	protected function configuration(): void
@@ -31,23 +33,23 @@ class Swatch extends Base implements InputCheckable, InputMasked
 		$components = [];
 		/** @var array<int, BackedEnum|string> $items */
 		foreach ($items as $item) {
-			$components[] = Swatch::using($item)->when($trigger_preview, function (Swatch $component) {
+			$components[] = Theme::using($item)->when($trigger_preview, function (Theme $component) {
 				return $component->triggerPreview();
 			});
 		}
 		return $components;
 	}
 
-	public static function using(mixed $color = 'auto'): static
+	public static function using(BackedEnum|string $theme = 'automatic'): static
 	{
 		$component = new static;
-		$component->value(is_string($color) ? $color : $color->value);
-		$component->accent($color);
+		$component->value(is_string($theme) ? $theme : $theme->value);
+		$component->image(is_string($theme) ? $theme : $theme->value);
 
-		if ($color instanceof BackedEnum) {
-			$component->label(method_exists($color, 'label') ? $color->label() : $color->value);
+		if ($theme instanceof BackedEnum) {
+			$component->label(method_exists($theme, 'label') ? $theme->label() : $theme->value);
 		} else {
-			$component->label($color);
+			$component->label($theme);
 		}
 
 		return $component;
@@ -90,36 +92,26 @@ class Swatch extends Base implements InputCheckable, InputMasked
 	// -----------------
 	// Appearance
 
-	public function accent(mixed $color = 'auto'): static
-	{
-		if ($color instanceof BackedEnum) {
-			$color = $color->value;
-		}
-		return $this->variable('accent', 'accent-'.trim($color));
-	}
-
 	public function triggerPreview(): static
 	{
-		return $this->attribute('preview-accent');
+		return $this->attribute('preview-theme');
 	}
 
 	// -----------------
 
 	protected function render(): string
 	{
-		$html = '<label class="input-swatch';
+		$html = '<label class="input-theme">'.parent::render().'<content>';
 
-		if ($this->variables->has('accent')) {
-			$html .= ' '.$this->variables->get('accent').' detect-lightness';
+		if ($this->variables->has('image')) {
+			$html .= Image::source($this->variables->get('image'))->fallback('Preview');
 		}
-
-		$html .= '"';
 
 		if ($this->variables->has('label')) {
-			$html .= ' title="'.$this->variables->get('label').'"';
+			$html .= Span::content($this->variables->get('label'));
 		}
 
-		return $html.'>'.parent::render().'<checkmark></checkmark></label>';
+		return $html.'</content></label>';
 	}
 
 }
