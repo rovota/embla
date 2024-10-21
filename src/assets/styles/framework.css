@@ -783,6 +783,7 @@ input-masked > label {
 input-masked > label > input {
 	position: absolute;
 	opacity: 0 !important;
+	width: 2px; height: 2px;
 }
 
 /* ---------------------- */

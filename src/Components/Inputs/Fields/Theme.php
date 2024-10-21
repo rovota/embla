@@ -92,6 +92,12 @@ class Theme extends Base implements InputCheckable, InputMasked
 	// -----------------
 	// Appearance
 
+	public function image(string $name): static
+	{
+//		$this->variables->set('image', asset_url('theme/interface/previews/'.$name.'.svg'));
+		return $this;
+	}
+
 	public function triggerPreview(): static
 	{
 		return $this->attribute('preview-theme');
