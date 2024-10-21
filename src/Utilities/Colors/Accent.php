@@ -13,7 +13,6 @@ enum Accent: string
 {
 	use EnumHelpers;
 
-	case Default = 'default';
 	case Azure = 'azure';
 	case Blueberry = 'blueberry';
 	case Carolina = 'carolina';
@@ -32,7 +31,6 @@ enum Accent: string
 	public function label(): string
 	{
 		return match ($this) {
-			Accent::Default => 'Default',
 			Accent::Azure => 'Azure',
 			Accent::Blueberry => 'Blueberry',
 			Accent::Carolina => 'Carolina',

@@ -78,11 +78,6 @@
 /* ---------------------- */
 /* General Accents */
 
-.accent-default {
-    --color-accent: 220, 57, 73;
-    --color-accent-alt: 237, 61, 79;
-}
-
 .accent-blueberry {
     --color-accent: 131, 73, 236;
     --color-accent-alt: 142, 107, 240;
