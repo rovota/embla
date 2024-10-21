@@ -814,7 +814,7 @@ input[type="checkbox"] + indicator::after {
 	left: 6px;
 	position: absolute;
 	top: 2px;
-	transform: rotate(45deg) scale(.2);
+	transform: rotate(45deg) scale(0);
 	transition: all .2s ease;
 	width: 4px;
 }
@@ -966,6 +966,7 @@ label + input-masked .input-choice:first-child {
 }
 
 .input-choice > content {
+	user-select: none;
 	display: block;
 	flex-grow: 1;
 }
@@ -986,7 +987,6 @@ label + input-masked .input-choice:first-child {
 	flex-direction: row;
 	padding: 1rem;
 	transition: all .2s ease;
-	user-select: none;
 }
 
 .input-panel:hover {
@@ -1706,6 +1706,10 @@ carousel + indicators indicator {
 	cursor: pointer;
 }
 
+carousel + indicators indicator.focus {
+	box-shadow: 0 0 0 2px rgba(var(--color-accent), 1);
+}
+
 carousel + indicators indicator:hover {
 	background: rgba(var(--color-font), .5);
 }
@@ -1742,7 +1746,7 @@ breadcrumbs > container > nav {
 }
 
 breadcrumbs > container > nav > a {
-	color: rgba(var(--color-font), var(--opacity-font));
+	color: rgba(var(--color-font), var(--opacity-standard));
 	display: inline-flex; white-space: nowrap;
 	align-items: center; height: 40px;
 	position: relative; font-size: 14px;
@@ -1759,7 +1763,7 @@ breadcrumbs > container > nav > a::after {
 	border-right: 1px solid rgba(var(--color-font), 1);
 	position: absolute; right: -18px; top: 44%;
 	content: ' '; width: 6px; height: 6px;
-	opacity: var(--opacity-font);
+	opacity: var(--opacity-standard);
 	transform: rotate(45deg);
 	pointer-events: none;
 }
