@@ -1049,7 +1049,7 @@ label + input-masked .input-panel:first-child {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--radius-small);
+	border-radius: var(--radius-medium);
 	transition: all .2s ease;
 }
 

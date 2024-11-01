@@ -82,7 +82,11 @@ class DefaultPartial implements Stringable, PartialInterface
 		extract($this->config->array('variables'));
 		$this->config->remove('variables');
 
-		include $this->getTemplatePath();
+		$template = $this->getTemplatePath();
+
+		if (file_exists($template)) {
+			include $template;
+		}
 	}
 
 	protected function prepareForPrinting(): void
