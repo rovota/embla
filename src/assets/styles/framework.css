@@ -1728,6 +1728,54 @@ toast.visible {
 /* ---------------------- */
 /* Attachments */
 
+.attachment {
+	display: flex;
+	padding: 12px 15px;
+	border: 1px solid rgba(var(--color-font), .1);
+	color: rgba(var(--color-font), 1);
+	column-gap: 15px;
+	flex-direction: row;
+	border-top: none;
+	transition: all .12s ease;
+	width: 100%;
+	text-decoration: none;
+}
+
+.attachment svg {
+	flex: 0 0 1.625rem; opacity: var(--opacity-subtext);
+}
+
+.attachment span {
+	flex-grow: 1; font-weight: 600;
+	color: rgba(var(--color-font), 1);
+	overflow: hidden; word-wrap: break-word;
+	line-height: 26px; width: 100%;
+}
+
+.attachment:hover {
+	background: rgba(var(--color-font), .025);
+}
+
+.attachment:hover svg {
+	color: rgba(var(--color-accent), 1);
+}
+
+.attachment:first-child {
+	border-top: 1px solid rgba(var(--color-font), .1);
+	border-top-left-radius: var(--radius-medium);
+	border-top-right-radius: var(--radius-medium);
+}
+
+.attachment:last-child {
+	border-bottom-left-radius: var(--radius-medium);
+	border-bottom-right-radius: var(--radius-medium);
+}
+
+split .attachment {
+	border: 1px solid rgba(var(--color-font), .1);
+	border-radius: var(--radius-medium);
+}
+
 /* ---------------------- */
 /* Codeblocks */
 
