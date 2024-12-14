@@ -620,6 +620,39 @@ table.datalist tbody tr td > :first-child {
 }
 
 /* ---------------------- */
+/* Filters */
+
+table-filters {
+	background: rgba(var(--color-font), .025);
+	display: block;
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+}
+
+table-filters > form, table-filters {
+	display: flex; flex-direction: row;
+	column-gap: 10px; row-gap: 10px;
+	align-items: flex-end;
+}
+
+table-filters input-group {
+	width: auto;
+	min-width: 150px;
+}
+
+table-filters input, table-filters select {
+	height: 34px; padding: 0 10px;
+}
+
+table-filters button, table-filters .button {
+	height: 36px; margin: 0 5px 0 0;
+}
+
+table-filters + table {
+	border-top: 1px solid rgba(var(--color-font), 0.05);
+}
+
+/* ---------------------- */
 /* Inputs */
 
 [disabled] {
@@ -733,7 +766,7 @@ input-group {
 	width: 100%;
 }
 
-input-group + input-group, input-group + split, split + input-group {
+input-group + input-group:not(table-filters input-group), input-group + split, split + input-group {
 	margin-top: 1.25rem;
 }
 
