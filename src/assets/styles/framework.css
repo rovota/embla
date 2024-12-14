@@ -1742,7 +1742,9 @@ toast.visible {
 }
 
 .attachment svg {
-	flex: 0 0 1.625rem; opacity: var(--opacity-subtext);
+	flex: 0 0 1.625rem;
+	opacity: var(--opacity-subtext);
+	transition: all .12s ease;
 }
 
 .attachment span {
@@ -1758,6 +1760,7 @@ toast.visible {
 
 .attachment:hover svg {
 	color: rgba(var(--color-accent), 1);
+	opacity: 1;
 }
 
 .attachment:first-child {
