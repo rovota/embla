@@ -9,6 +9,7 @@ namespace Rovota\Embla\Components\Media;
 
 use Rovota\Embla\Components\Navigation\Anchor;
 use Rovota\Embla\Components\Typography\Span;
+use Rovota\Framework\Support\Str;
 
 class Attachment extends Anchor
 {
@@ -19,7 +20,6 @@ class Attachment extends Anchor
 		$this->class('attachment');
 
 		$this->addChild('', 'icon');
-		$this->addChild('', 'label');
 	}
 
 	// -----------------
@@ -33,6 +33,19 @@ class Attachment extends Anchor
 	public function label(string $text, array|object $data = []): static
 	{
 		return $this->with(Span::content($text, $data), 'label');
+	}
+
+	// -----------------
+	// Automatic
+
+	protected function prepareRender(): void
+	{
+		if ($this->children->missing('label')) {
+			$target = $this->attributes->get('href');
+			if ($target !== null) {
+				$this->label(Str::afterLast($target, '/'));
+			}
+		}
 	}
 
 }
