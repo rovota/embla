@@ -563,6 +563,30 @@ table td.td-image img {
 	object-fit: cover;
 }
 
+table td.td-image.medium-wide img {
+	width: 70px; height: 40px;
+}
+
+table td.td-image.medium-regular img {
+	width: 54px; height: 40px;
+}
+
+table td.td-image.medium-square img {
+	width: 40px; height: 40px;
+}
+
+table td.td-image.small-wide img {
+	width: 54px; height: 30px;
+}
+
+table td.td-image.small-regular img {
+	width: 40px; height: 30px;
+}
+
+table td.td-image.small-square img {
+	width: 30px; height: 30px;
+}
+
 table.datalist {
 	max-width: 100%;
 }
