@@ -52,9 +52,6 @@ final class Embla extends ServiceProvider
 	protected function attachAssets(): void
 	{
 		// JavaScript
-		View::attachScript('*', 'jquery', [
-			'source' => self::ASSET_FOLDER . '/scripts/jquery-3.7.1.slim.min.js',
-		]);
 		View::attachScript('*', 'framework', [
 			'source' => self::ASSET_FOLDER . '/scripts/framework.js',
 		]);
