@@ -57,18 +57,20 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	// Process required checkboxes
 	if (input.hasAttribute('required') && input.getAttribute('type') === 'checkbox') {
 		let form = input.closest('form');
-		if (!input.checked) {
-			if (!form.requiredfields) {
-				form.requiredfields = 1;
-			} else {
-				form.requiredfields++;
+		if (form !== null) {
+			if (!input.checked) {
+				if (!form.requiredfields) {
+					form.requiredfields = 1;
+				} else {
+					form.requiredfields++;
+				}
 			}
+			input.addEventListener('change', () => {
+				let submit = form.querySelector('[type="submit"]');
+				input.checked ? form.requiredfields-- : form.requiredfields++;
+				submit.disabled = (form.requiredfields !== 0);
+			});
 		}
-		input.addEventListener('change', () => {
-			let submit = form.querySelector('[type="submit"]');
-			input.checked ? form.requiredfields-- : form.requiredfields++;
-			submit.disabled = (form.requiredfields !== 0);
-		});
 	}
 
 	// Automatically add a required indicator
