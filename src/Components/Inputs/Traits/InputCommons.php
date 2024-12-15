@@ -52,7 +52,7 @@ trait InputCommons
 
 	public function capitalize(Capitalization|string $type): static
 	{
-		return $this->attribute('autocapitzalize', $type instanceof Capitalization ? $type->value : $type);
+		return $this->attribute('autocapitalize', $type instanceof Capitalization ? $type->value : $type);
 	}
 
 	public function inputMode(InputMode|string $mode): static
