@@ -1739,6 +1739,7 @@ toast.visible {
 	transition: all .12s ease;
 	width: 100%;
 	text-decoration: none;
+	align-items: center;
 }
 
 .attachment svg {
