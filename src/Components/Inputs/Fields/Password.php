@@ -22,7 +22,7 @@ class Password extends Base
 		}
 
 		$this->capitalize(Capitalization::Off);
-		$this->attribute('autocorrect', 'off');
+		$this->autocomplete(Autocomplete::CurrentPassword);
 	}
 
 	// -----------------
