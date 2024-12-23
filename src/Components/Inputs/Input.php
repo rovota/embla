@@ -102,8 +102,11 @@ class Input extends Component
 	// -----------------
 	// Children
 
-	public function withNote(string $text, array|object $data = []): static
+	public function withNote(string|Component $text, array|object $data = []): static
 	{
+		if ($text instanceof Component) {
+			return $this->with(Note::make()->with($text), 'note');
+		}
 		return $this->with(Note::text($text, $data), 'note');
 	}
 
