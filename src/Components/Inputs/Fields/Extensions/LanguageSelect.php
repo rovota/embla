@@ -20,7 +20,7 @@ class LanguageSelect extends Select
 	{
 		$this->title('Change language');
 		$this->attribute('locale-switch');
-		
+
 		$this->name('language-switch');
 		$this->autocomplete(Autocomplete::Off);
 

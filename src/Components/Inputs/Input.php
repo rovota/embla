@@ -20,6 +20,7 @@ use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
 use Rovota\Embla\Components\Typography\Label;
 use Rovota\Framework\Caching\Enums\Driver;
 use Rovota\Framework\Facades\Cache;
+use Rovota\Framework\Facades\Cast;
 use Rovota\Framework\Facades\Request;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Str;
@@ -173,7 +174,7 @@ class Input extends Component
 				$value = $data[$name] ?? $data['defaults'][$name] ?? $data['defaults'][0] ?? null;
 
 				if ($field instanceof InputCheckable) {
-					$field->checkedIf($value === $field->attributes->string('value'));
+					$field->checkedIf((string) Cast::toRawAutomatic($value) === $field->attributes->string('value'));
 					continue;
 				}
 
