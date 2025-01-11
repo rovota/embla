@@ -1592,15 +1592,15 @@ button:disabled, .button[disabled] {
 	pointer-events: none;
 }
 
-[class*='accent-'] > button, [class*='accent-'] > .button {
-	background: rgba(var(--color-light), .1);
-	color: rgba(var(--color-light), 1);
-}
+/*[class*='accent-'] > button, [class*='accent-'] > .button {*/
+/*	background: rgba(var(--color-light), .1);*/
+/*	color: rgba(var(--color-light), 1);*/
+/*}*/
 
-[class*='accent-'] > button:hover, [class*='accent-'] > .button:hover {
-	background: rgba(var(--color-light), .2);
-	color: rgba(var(--color-light), 1);
-}
+/*[class*='accent-'] > button:hover, [class*='accent-'] > .button:hover {*/
+/*	background: rgba(var(--color-light), .2);*/
+/*	color: rgba(var(--color-light), 1);*/
+/*}*/
 
 [class*='accent-'] > button.outlined, [class*='accent-'] > .button.outlined {
 	background: rgba(var(--color-card), 0);
