@@ -350,11 +350,13 @@ split {
 }
 
 .image-left {
-	float: left; margin: 0 1.5em 1em 0;
+	float: left;
+	margin: 0 1.5em 1em 0;
 }
 
 .image-right {
-	float: right; margin: 0 0 1em 1.5em;
+	float: right;
+	margin: 0 0 1em 1.5em;
 }
 
 .image.spotlight {
@@ -382,19 +384,28 @@ gallery > a, gallery > span {
 
 gallery > a > img, gallery > span > img {
 	position: absolute;
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
 }
 
 gallery > a[caption]::after, .image[caption]::after {
-	content: attr(caption); position: absolute;
-	display: block; bottom: 0; left: 0; width: 100%;
+	content: attr(caption);
+	position: absolute;
+	display: block;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 	background: rgba(var(--color-dark), 1);
 	color: rgba(var(--color-light), 1);
-	padding: 0 15px; transition: .2s ease;
-	font-size: 14px; transform: translateY(100%);
-	height: 30px; line-height: 30px;
-	text-align: center; box-sizing: border-box;
+	padding: 0 15px;
+	transition: .2s ease;
+	font-size: 14px;
+	transform: translateY(100%);
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	box-sizing: border-box;
 }
 
 gallery > a[caption]:hover::after, .image[caption]:hover::after {
@@ -564,27 +575,33 @@ table td.td-image img {
 }
 
 table td.td-image.medium-wide img {
-	width: 70px; height: 40px;
+	width: 70px;
+	height: 40px;
 }
 
 table td.td-image.medium-regular img {
-	width: 54px; height: 40px;
+	width: 54px;
+	height: 40px;
 }
 
 table td.td-image.medium-square img {
-	width: 40px; height: 40px;
+	width: 40px;
+	height: 40px;
 }
 
 table td.td-image.small-wide img {
-	width: 54px; height: 30px;
+	width: 54px;
+	height: 30px;
 }
 
 table td.td-image.small-regular img {
-	width: 40px; height: 30px;
+	width: 40px;
+	height: 30px;
 }
 
 table td.td-image.small-square img {
-	width: 30px; height: 30px;
+	width: 30px;
+	height: 30px;
 }
 
 table.datalist {
@@ -630,8 +647,10 @@ table-filters {
 }
 
 table-filters > form, table-filters {
-	display: flex; flex-direction: row;
-	column-gap: 10px; row-gap: 10px;
+	display: flex;
+	flex-direction: row;
+	column-gap: 10px;
+	row-gap: 10px;
 	align-items: flex-end;
 }
 
@@ -641,11 +660,13 @@ table-filters input-group {
 }
 
 table-filters input, table-filters select {
-	height: 34px; padding: 0 10px;
+	height: 34px;
+	padding: 0 10px;
 }
 
 table-filters button, table-filters .button {
-	height: 36px; margin: 0 5px 0 0;
+	height: 36px;
+	margin: 0 5px 0 0;
 }
 
 table-filters + table {
@@ -922,7 +943,8 @@ input-masked > label {
 input-masked > label > input {
 	position: absolute;
 	opacity: 0 !important;
-	width: 2px; height: 2px;
+	width: 2px;
+	height: 2px;
 }
 
 /* ---------------------- */
@@ -1725,6 +1747,43 @@ toast.visible {
 /* ---------------------- */
 /* Pagination */
 
+pagination {
+	display: flex;
+	flex-direction: row;
+	column-gap: 6px;
+}
+
+pagination a {
+	color: rgba(var(--color-font), var(--opacity-subtext));
+	border-radius: var(--radius-small);
+	display: flex;
+	align-items: center;
+	height: 2.5em;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+pagination a:not([tabindex='-1']) {
+	background: rgba(var(--color-font), .05);
+	padding: 0 10px;
+	transition: all .12s ease;
+	box-shadow: inset 0 0 0 2px rgba(var(--color-accent), 0);
+}
+
+pagination a.icon {
+	padding: 0 4px;
+}
+
+pagination a:not([tabindex='-1']):hover {
+	background: rgba(var(--color-font), .1);
+	color: rgba(var(--color-font), 1);
+}
+
+pagination a:not([tabindex='-1']).active {
+	background: rgba(var(--color-accent), 1);
+	color: rgba(var(--color-light), 1);
+}
+
 /* ---------------------- */
 /* Attachments */
 
@@ -1749,10 +1808,13 @@ toast.visible {
 }
 
 .attachment span {
-	flex-grow: 1; font-weight: 600;
+	flex-grow: 1;
+	font-weight: 600;
 	color: rgba(var(--color-font), 1);
-	overflow: hidden; word-wrap: break-word;
-	line-height: 26px; width: 100%;
+	overflow: hidden;
+	word-wrap: break-word;
+	line-height: 26px;
+	width: 100%;
 }
 
 .attachment:hover {
@@ -1880,9 +1942,14 @@ carousel .item.visible {
 }
 
 carousel + indicators {
-	display: flex; width: 100%; height: 60px;
-	position: absolute; bottom: 0; overflow: hidden;
-	justify-content: center; align-items: center;
+	display: flex;
+	width: 100%;
+	height: 60px;
+	position: absolute;
+	bottom: 0;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
 }
 
 carousel + indicators > container {
@@ -1892,11 +1959,14 @@ carousel + indicators > container {
 }
 
 carousel + indicators indicator {
-	display: block; width: 30px; height: 3px;
+	display: block;
+	width: 30px;
+	height: 3px;
 	background: rgba(var(--color-font), .2);
 	border-radius: var(--radius-small);
 	transition: all .12s ease;
-	position: relative; overflow: hidden;
+	position: relative;
+	overflow: hidden;
 	cursor: pointer;
 }
 
@@ -1909,9 +1979,14 @@ carousel + indicators indicator:hover {
 }
 
 carousel + indicators indicator.active::after {
-	position: absolute; top: 0; left: 0; width: 5%;
-	height: 100%; background: rgba(var(--color-font), 1);
-	border-radius: var(--radius-small); content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 5%;
+	height: 100%;
+	background: rgba(var(--color-font), 1);
+	border-radius: var(--radius-small);
+	content: '';
 	animation: 5s indicator-progress linear;
 }
 
@@ -1920,30 +1995,41 @@ carousel + indicators indicator.active.extended::after {
 }
 
 @keyframes indicator-progress {
-	from { width: 0; }
-	to { width: 100%; }
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
 }
 
 /* ---------------------- */
 /* Breadcrumbs */
 
 breadcrumbs {
-	display: flex; width: 100%;
-	justify-content: center; align-items: center;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
 	background: rgba(var(--color-base), 1);
 }
 
 breadcrumbs > container > nav {
-	display: flex; white-space: nowrap;
-	overflow-x: scroll; overflow-y: hidden;
+	display: flex;
+	white-space: nowrap;
+	overflow-x: scroll;
+	overflow-y: hidden;
 	column-gap: 30px;
 }
 
 breadcrumbs > container > nav > a {
 	color: rgba(var(--color-font), var(--opacity-standard));
-	display: inline-flex; white-space: nowrap;
-	align-items: center; height: 40px;
-	position: relative; font-size: 14px;
+	display: inline-flex;
+	white-space: nowrap;
+	align-items: center;
+	height: 40px;
+	position: relative;
+	font-size: 14px;
 	text-decoration: none;
 }
 
@@ -1955,8 +2041,12 @@ breadcrumbs > container > nav > a:hover {
 breadcrumbs > container > nav > a::after {
 	border-top: 1px solid rgba(var(--color-font), 1);
 	border-right: 1px solid rgba(var(--color-font), 1);
-	position: absolute; right: -18px; top: 44%;
-	content: ' '; width: 6px; height: 6px;
+	position: absolute;
+	right: -18px;
+	top: 44%;
+	content: ' ';
+	width: 6px;
+	height: 6px;
 	opacity: var(--opacity-standard);
 	transform: rotate(45deg);
 	pointer-events: none;
@@ -1964,7 +2054,8 @@ breadcrumbs > container > nav > a::after {
 
 breadcrumbs > container > nav > a:last-child {
 	color: rgba(var(--color-font), 1);
-	font-weight: 600; pointer-events: none;
+	font-weight: 600;
+	pointer-events: none;
 }
 
 breadcrumbs > container > nav > a:last-child::after {
