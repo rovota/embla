@@ -10,6 +10,7 @@ use Rovota\Embla\Embla;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
+use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
 use Rovota\Framework\Support\Str;
 use Rovota\Framework\Support\Url;
@@ -32,6 +33,28 @@ if (!function_exists('partial')) {
 	function partial(string $template, string|null $class = null): PartialInterface
 	{
 		return PartialManager::instance()->createPartial($template, $class);
+	}
+}
+
+if (!function_exists('array_to_classes')) {
+	function array_to_classes(Arrayable|array $data): string
+	{
+		if ($data instanceof Arrayable) {
+			$data = $data->toArray();
+		}
+
+		$classes = new Basket();
+
+		foreach ($data as $key => $value) {
+			if (is_numeric($key)) {
+				$classes->append($value);
+			}
+			if ($value === true) {
+				$classes->append((string)$key);
+			}
+		}
+
+		return $classes->join(' ');
 	}
 }
 
