@@ -87,11 +87,9 @@ final class PartialManager extends ServiceProvider
 
 	protected function getDataForType(string $type, string|null $name): array
 	{
-		$items = [];
-
-		foreach ($this->config->array($type . '.*') as $key => $value) {
-			$items[$key] = $value;
-		}
+		$items = array_map(function ($value) {
+			return $value;
+		}, $this->config->array($type . '.*'));
 
 		if ($name !== null) {
 			$levels = explode('.', $name);

@@ -8,8 +8,6 @@
 namespace Rovota\Embla\Facades;
 
 use Closure;
-use Rovota\Embla\Partials\Interfaces\PartialInterface;
-use Rovota\Embla\Partials\PartialManager;
 use Rovota\Embla\Tabs\TabsManager;
 use Rovota\Framework\Support\Facade;
 

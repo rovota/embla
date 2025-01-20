@@ -21,7 +21,7 @@ class LanguageOption extends Option
 	{
 		return self::label($language->label())
 			->value($language->locale)
-			->when($language->locale === Language::current()->locale, function (Option $option) {
+			->when($language->locale === Language::active()->locale, function (Option $option) {
 				return $option->selected();
 			});
 	}

@@ -8,8 +8,6 @@
 namespace Rovota\Embla\Components\Blocks;
 
 use Rovota\Embla\Base\Component;
-use Rovota\Embla\Components\Layout\Content;
-use Rovota\Embla\Utilities\Colors\Status;
 use Rovota\Framework\Support\Str;
 
 class Toast extends Component

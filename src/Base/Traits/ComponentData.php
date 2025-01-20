@@ -8,7 +8,6 @@
 namespace Rovota\Embla\Base\Traits;
 
 use BackedEnum;
-use Rovota\Framework\Facades\Cast;
 use Rovota\Framework\Support\Str;
 use Stringable;
 

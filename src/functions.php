@@ -81,13 +81,13 @@ if (!function_exists('resource')) {
 if (!function_exists('language_iso2')) {
 	function language_iso2(): string
 	{
-		return Language::current()->iso2();
+		return Language::active()->iso2();
 	}
 }
 
 if (!function_exists('language_direction')) {
 	function language_direction(): string
 	{
-		return Language::current()->textDirection();
+		return Language::active()->textDirection();
 	}
 }
