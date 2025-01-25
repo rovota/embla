@@ -35,6 +35,9 @@ abstract class Component implements Stringable
 
 	// -----------------
 
+	/**
+	 * @var Basket<string|int, Component>
+	 */
 	public Basket $children;
 
 	public Basket $variables;
