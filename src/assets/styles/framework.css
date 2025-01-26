@@ -1337,12 +1337,29 @@ accordion {
 }
 
 accordion.borderless {
-	border-radius: 0;
 	border: none;
 }
 
-accordion > details:not(:last-child) {
-	border-bottom: 1px solid rgba(var(--color-font), 0.07);
+accordion > details {
+	overflow: hidden;
+}
+
+accordion > details:first-child {
+	border-top-left-radius: var(--radius-medium);
+	border-top-right-radius: var(--radius-medium);
+}
+
+accordion > details:last-child {
+	border-bottom-left-radius: var(--radius-medium);
+	border-bottom-right-radius: var(--radius-medium);
+}
+
+accordion.borderless > details {
+	border-radius: 0;
+}
+
+accordion > details:not(:first-child) {
+	border-top: 1px solid rgba(var(--color-font), 0.07);
 }
 
 accordion > details > summary {
@@ -1350,6 +1367,7 @@ accordion > details > summary {
 	font-size: 16px;
 	cursor: pointer;
 	transition: all .12s ease;
+	user-select: none;
 }
 
 accordion > details > summary:hover {
@@ -1358,10 +1376,6 @@ accordion > details > summary:hover {
 
 accordion > details[open] > summary {
 	background: rgba(var(--color-font), .035);
-}
-
-accordion > details:last-child[open] > summary {
-	border-radius: 0;
 }
 
 accordion > details > details-content {
