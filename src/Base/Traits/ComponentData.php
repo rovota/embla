@@ -61,9 +61,9 @@ trait ComponentData
 
 	// -----------------
 
-	public function attributeTranslated(string $name, mixed $value): static
+	public function attributeTranslated(string $name, string $value, array $data = []): static
 	{
-		return $this->attributeEscaped($name, $value);
+		return $this->attributeEscaped($name, Str::translate($value, $data));
 	}
 
 	public function attributeEscaped(string $name, mixed $value): static

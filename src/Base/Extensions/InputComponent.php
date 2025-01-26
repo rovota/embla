@@ -40,9 +40,9 @@ class InputComponent extends Component
 		return $this;
 	}
 
-	public function placeholder(string $placeholder): static
+	public function placeholder(string $value, array $data = []): static
 	{
-		return $this->attributeTranslated('placeholder', $placeholder);
+		return $this->attributeTranslated('placeholder', $value, $data);
 	}
 
 	// -----------------
