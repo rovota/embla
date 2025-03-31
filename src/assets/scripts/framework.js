@@ -16,6 +16,34 @@ function slugify(str) {
 	return str.replace(/([^a-z0-9-]|(-))+/g, '-').replace(/^-|-$/g, '');
 }
 
+// Correct canvas scaling
+function fixDrawingCanvas(canvas, drawing) {
+	const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+	canvas.width = canvas.offsetWidth * ratio;
+	canvas.height = canvas.offsetHeight * ratio;
+	canvas.getContext("2d").scale(ratio, ratio);
+
+	drawing.fromData(drawing.toData());
+}
+
+function dataUrlToFile(data, filename) {
+	let fragments = data.split(",");
+	let mime = fragments[0].match(/:(.*?);/)[1];
+	let content = atob(fragments[fragments.length - 1]);
+
+	let n = content.length;
+	let u8arr = new Uint8Array(n);
+
+	while (n--) {
+		u8arr[n] = content.charCodeAt(n);
+	}
+
+	return new File([u8arr], filename, { type: mime });
+}
+
+// -----------------
+
 // Automatic background lightness detection
 document.querySelectorAll('.detect-lightness').forEach(element => {
 	const raw = window.getComputedStyle(element).backgroundColor;
@@ -49,6 +77,68 @@ document.querySelectorAll('.drawer-toggle').forEach(toggle => {
 		document.querySelector('#drawer').classList.toggle('visible');
 		document.querySelector('#shading').classList.toggle('visible');
 	});
+});
+
+// Drawing functionality
+document.querySelectorAll('#drawing').forEach(element => {
+	element.getContext("2d", { willReadFrequently: true })
+
+	let input = null, options = {
+		penColor: element.dataset.pencil ?? '#000000',
+		backgroundColor: 'transparent',
+		minDistance: 3,
+	};
+
+	let canvas = new SignaturePad(element, options);
+
+	if (element.dataset.input !== null) {
+		input = document.querySelector(`input[name="${element.dataset.input}"]`);
+	}
+
+	// Correct scaling issues on load and resizing
+	fixDrawingCanvas(element, canvas);
+	window.onresize = function() {
+		fixDrawingCanvas(element, canvas);
+	}
+
+	let wrapper = element.parentNode;
+	let clearButton = wrapper.querySelector('#clear');
+
+	if (clearButton !== null) {
+		clearButton.addEventListener("click", () => {
+			if (input !== null) {
+				const transfer = new DataTransfer();
+
+				input.files = transfer.files;
+				input.dispatchEvent(new Event('change'));
+			}
+			canvas.clear();
+		});
+	}
+
+	// When an input is present, assign the drawing as image.
+	if (input !== null) {
+		canvas.addEventListener("endStroke", () => {
+
+			let data = canvas.toData();
+			let originalWidth = canvas._ctx.canvas.width;
+			let originalHeight = canvas._ctx.canvas.height;
+
+			canvas.removeBlanks();
+
+			const file = dataUrlToFile(canvas.toDataURL('image/png'), (input.name ?? 'drawing') + '.png');
+			const transfer = new DataTransfer();
+
+			transfer.items.add(file);
+
+			input.files = transfer.files;
+			input.dispatchEvent(new Event('change'));
+
+			canvas._ctx.canvas.width = originalWidth;
+			canvas._ctx.canvas.height = originalHeight;
+			canvas.fromData(data);
+		});
+	}
 });
 
 // Input functionality
@@ -117,29 +207,31 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	if (input.getAttribute('type') === 'file') {
 		let label = input.nextElementSibling;
 
-		label.innerHTML = input.dataset.missingcaption;
+		if (label !== null) {
+			label.innerHTML = input.dataset.missingcaption;
 
-		input.addEventListener('change', event => {
-			let fileName;
+			input.addEventListener('change', event => {
+				let fileName;
 
-			if (input.files) {
-				if (input.files.length > 1) {
-					fileName = (input.dataset.selectedcaption || '').replace('%1$s', input.files.length.toString);
+				if (input.files) {
+					if (input.files.length > 1) {
+						fileName = (input.dataset.selectedcaption || '').replace('%1$s', input.files.length.toString);
+					}
+					if (input.files.length === 1) {
+						fileName = event.target.value.split('\\').pop();
+					}
+					if (input.files.length === 0) {
+						fileName = input.dataset.missingcaption;
+					}
 				}
-				if (input.files.length === 1) {
-					fileName = event.target.value.split('\\').pop();
-				}
-				if (input.files.length === 0) {
-					fileName = input.dataset.missingcaption;
-				}
-			}
 
-			if (fileName) {
-				label.innerHTML = fileName;
-			} else {
-				label.innerHTML = input.dataset.missingcaption;
-			}
-		});
+				if (fileName) {
+					label.innerHTML = fileName;
+				} else {
+					label.innerHTML = input.dataset.missingcaption;
+				}
+			});
+		}
 	}
 
 	// Slug input functionality

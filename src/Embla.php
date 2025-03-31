@@ -52,13 +52,22 @@ final class Embla extends ServiceProvider
 	protected function attachAssets(): void
 	{
 		// JavaScript
+		View::attachScript('*', 'signature', [
+			'source' => self::ASSET_FOLDER . '/scripts/signature.min.js',
+		]);
 		View::attachScript('*', 'framework', [
 			'source' => self::ASSET_FOLDER . '/scripts/framework.js',
+		]);
+		View::attachScript('*', 'spotlight', [
+			'source' => self::ASSET_FOLDER . '/scripts/spotlight.min.js',
 		]);
 
 		// CSS
 		View::attachLink('*', 'framework', [
 			'style' => self::ASSET_FOLDER . '/styles/framework.css',
+		]);
+		View::attachLink('*', 'spotlight', [
+			'style' => self::ASSET_FOLDER . '/styles/spotlight.min.css',
 		]);
 		View::attachLink('*', 'theming', [
 			'style' => self::ASSET_FOLDER . '/styles/theming.css',

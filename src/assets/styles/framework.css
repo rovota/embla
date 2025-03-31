@@ -715,7 +715,7 @@ input:invalid:not(:focus), textarea:invalid:not(:focus), textarea:invalid:not(:f
 
 input[type='file'] {
 	display: block;
-	height: 2.75rem;
+	height: 2px;
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
@@ -1322,6 +1322,52 @@ input-slider > input-prefix + input {
 
 input-slider > input {
 	flex-grow: 1;
+}
+
+/* ---------------------- */
+/* Drawings */
+
+.input-drawing {
+	background: rgba(var(--color-input), 1);
+	border: 1px solid rgba(var(--color-font), .1);
+	border-radius: var(--radius-medium);
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: all .12s ease;
+}
+
+.input-drawing:hover {
+	border: 1px solid rgba(var(--color-font), .3);
+}
+
+.input-drawing + input-group {
+	margin-top: 0.5rem;
+}
+
+.input-drawing > canvas {
+	background: rgba(var(--color-card), 1);
+}
+
+.input-drawing > canvas.light {
+	background: rgba(var(--color-light), 1);
+}
+
+.input-drawing > canvas-toolbar {
+	border-top: 1px solid rgba(var(--color-font), .1);
+	display: flex;
+	column-gap: 12px;
+	padding: 8px 12px;
+}
+
+.input-drawing > canvas-toolbar > input-group label {
+	height: calc(2.4rem - 1px);
+	line-height: calc(2.4rem - 1px);
+}
+
+.input-drawing > canvas-toolbar > .button {
+	margin: 0;
 }
 
 /* ---------------------- */
