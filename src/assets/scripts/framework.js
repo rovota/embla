@@ -79,6 +79,23 @@ document.querySelectorAll('.drawer-toggle').forEach(toggle => {
 	});
 });
 
+function cloneCanvas(oldCanvas) {
+	const newCanvas = document.createElement('canvas');
+	const context = oldCanvas.getContext('2d', { willReadFrequently: true });
+	if (context) {
+		newCanvas.width = oldCanvas.width;
+		newCanvas.height = oldCanvas.height;
+		const newContext = newCanvas.getContext('2d', { willReadFrequently: true });
+		if (newContext) {
+			const imageData = context.getImageData(0, 0, oldCanvas.width, oldCanvas.height);
+			newContext.putImageData(imageData, 0, 0);
+		}
+
+	}
+
+	return newCanvas;
+}
+
 // Drawing functionality
 document.querySelectorAll('#drawing').forEach(element => {
 	element.getContext("2d", { willReadFrequently: true })
@@ -119,24 +136,23 @@ document.querySelectorAll('#drawing').forEach(element => {
 	// When an input is present, assign the drawing as image.
 	if (input !== null) {
 		canvas.addEventListener("endStroke", () => {
-
 			let data = canvas.toData();
-			let originalWidth = canvas._ctx.canvas.width;
-			let originalHeight = canvas._ctx.canvas.height;
+			let originalHeight = element.scrollHeight;
+			let originalWidth = element.scrollWidth;
+			let clone = new SignaturePad(cloneCanvas(element));
 
-			canvas.removeBlanks();
+			clone._ctx.canvas.width = originalWidth;
+			clone._ctx.canvas.height = originalHeight;
+			clone.fromData(data);
+			clone.removeBlanks();
 
-			const file = dataUrlToFile(canvas.toDataURL('image/png'), (input.name ?? 'drawing') + '.png');
+			const file = dataUrlToFile(clone.toDataURL('image/png'), (input.name ?? 'drawing') + '.png');
 			const transfer = new DataTransfer();
 
 			transfer.items.add(file);
 
 			input.files = transfer.files;
 			input.dispatchEvent(new Event('change'));
-
-			canvas._ctx.canvas.width = originalWidth;
-			canvas._ctx.canvas.height = originalHeight;
-			canvas.fromData(data);
 		});
 	}
 });
