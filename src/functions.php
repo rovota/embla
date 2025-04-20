@@ -10,6 +10,7 @@ use Rovota\Embla\Embla;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
+use Rovota\Framework\Facades\Registry;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
 use Rovota\Framework\Support\Str;
@@ -89,5 +90,29 @@ if (!function_exists('language_direction')) {
 	function language_direction(): string
 	{
 		return Language::active()->textDirection();
+	}
+}
+
+// -----------------
+// Security
+
+if (!function_exists('form_submit_time')) {
+	function form_submit_time(): float
+	{
+		if (request()->missing('submit_timestamp')) {
+			return 0.0;
+		}
+		return microtime(true) - request()->float('submit_timestamp');
+	}
+}
+
+if (!function_exists('form_submit_time_allowed')) {
+	function form_submit_time_allowed(): bool
+	{
+		$submit_time = form_submit_time();
+		$submit_time_min = Registry::float('security.form.submit_time_min');
+		$submit_time_max = Registry::float('security.form.submit_time_max');
+
+		return $submit_time > $submit_time_min && $submit_time < $submit_time_max;
 	}
 }
