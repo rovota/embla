@@ -8,7 +8,6 @@
 namespace Rovota\Embla\Components\Media;
 
 use Rovota\Embla\Base\Component;
-use Rovota\Framework\Support\Str;
 
 class Canvas extends Component
 {
@@ -23,21 +22,7 @@ class Canvas extends Component
 
 	public static function id(string $identifier): static
 	{
-		return (new static)->attribute('src', (string) $location);
-	}
-
-	public static function sources(array $sources): static
-	{
-		$last = array_key_last($sources);
-
-		$component = new static;
-		$component->attribute('src', Str::beforeLast($sources[$last], ' '));
-
-		if (count($sources) > 1) {
-			$component->attribute('srcset', join(', ', $sources));
-		}
-
-		return $component;
+		return (new static)->attribute('id', $identifier);
 	}
 
 	// -----------------
