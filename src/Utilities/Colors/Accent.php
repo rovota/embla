@@ -7,11 +7,8 @@
 
 namespace Rovota\Embla\Utilities\Colors;
 
-use Rovota\Framework\Support\Traits\EnumHelpers;
-
 enum Accent: string
 {
-	use EnumHelpers;
 
 	case Azure = 'azure';
 	case Blueberry = 'blueberry';

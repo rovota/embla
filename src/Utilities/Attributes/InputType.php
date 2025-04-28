@@ -7,11 +7,8 @@
 
 namespace Rovota\Embla\Utilities\Attributes;
 
-use Rovota\Framework\Support\Traits\EnumHelpers;
-
 enum InputType: string
 {
-	use EnumHelpers;
 
 	case Checkbox = 'checkbox';
 	case Color = 'color';

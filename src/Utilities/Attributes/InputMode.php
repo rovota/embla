@@ -7,11 +7,8 @@
 
 namespace Rovota\Embla\Utilities\Attributes;
 
-use Rovota\Framework\Support\Traits\EnumHelpers;
-
 enum InputMode: string
 {
-	use EnumHelpers;
 
 	case Decimal = 'decimal';
 	case Email = 'email';

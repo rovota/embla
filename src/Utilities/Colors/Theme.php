@@ -7,11 +7,8 @@
 
 namespace Rovota\Embla\Utilities\Colors;
 
-use Rovota\Framework\Support\Traits\EnumHelpers;
-
 enum Theme: string
 {
-	use EnumHelpers;
 
 	case Automatic = 'automatic';
 	case Light = 'light';

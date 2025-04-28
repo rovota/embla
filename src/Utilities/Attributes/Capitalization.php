@@ -7,11 +7,8 @@
 
 namespace Rovota\Embla\Utilities\Attributes;
 
-use Rovota\Framework\Support\Traits\EnumHelpers;
-
 enum Capitalization: string
 {
-	use EnumHelpers;
 
 	case Off = 'off';
 	case On = 'on';
