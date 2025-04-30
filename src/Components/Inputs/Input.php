@@ -9,6 +9,7 @@ namespace Rovota\Embla\Components\Inputs;
 
 use Rovota\Embla\Base\Component;
 use Rovota\Embla\Base\Extensions\InputComponent;
+use Rovota\Embla\Components\Inputs\Elements\Errors;
 use Rovota\Embla\Components\Inputs\Elements\Extensions\MaskedGroup;
 use Rovota\Embla\Components\Inputs\Elements\Group;
 use Rovota\Embla\Components\Inputs\Elements\Note;
@@ -140,6 +141,24 @@ class Input extends Component
 		return $this->variable('hide_errors', true);
 	}
 
+	protected function withErrors(): static
+	{
+		if (request()->errors->isEmpty()) {
+			return $this;
+		}
+
+		if ($this->variables->has('name')) {
+			$field = $this->variables->get('name', '---');
+			$errors = request()->errors->get($field) ?? [];
+
+			if (empty($errors) === false) {
+				$this->with(Errors::using($errors), 'errors');
+			}
+		}
+
+		return $this;
+	}
+
 	// -----------------
 
 	protected function prepareRender(): void
@@ -154,7 +173,7 @@ class Input extends Component
 		$this->setValueAutomatically();
 
 		if ($this->variables->missing('hide_errors')) {
-//			$this->withErrors();
+			$this->withErrors();
 		}
 	}
 
