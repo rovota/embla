@@ -69,8 +69,8 @@ if (!function_exists('icon')) {
 	}
 }
 
-if (!function_exists('resource')) {
-	function resource(string $file, array $parameters = []): string
+if (!function_exists('asset_url')) {
+	function asset_url(string $file, array $parameters = []): string
 	{
 		return Url::local('/resources/assets/' . Str::trim($file, '/'), $parameters);
 	}
