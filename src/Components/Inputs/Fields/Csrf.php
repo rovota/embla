@@ -8,7 +8,7 @@
 namespace Rovota\Embla\Components\Inputs\Fields;
 
 use Rovota\Embla\Utilities\Attributes\InputType;
-use Rovota\Framework\Auth\CsrfManager;
+use Rovota\Framework\Security\CsrfManager;
 
 class Csrf extends Base
 {
