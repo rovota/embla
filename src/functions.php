@@ -55,7 +55,7 @@ if (!function_exists('array_to_classes')) {
 			}
 		}
 
-		return $classes->join(' ');
+		return trim($classes->join(' '));
 	}
 }
 
