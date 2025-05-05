@@ -24,6 +24,11 @@ class Image extends Component
 	// -----------------
 	// Starters
 
+	public static function asset(string $target): static
+	{
+		return (new static)->attribute('src', asset_url($target));
+	}
+
 	public static function source(mixed $location): static
 	{
 		return (new static)->attribute('src', (string) $location);
