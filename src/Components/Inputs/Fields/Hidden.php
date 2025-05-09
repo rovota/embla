@@ -20,4 +20,12 @@ class Hidden extends Base
 		}
 	}
 
+	// -----------------
+	// Shortcuts
+
+	public function renderTimestamp(): static
+	{
+		return $this->name('render_timestamp')->value(microtime(true));
+	}
+
 }
