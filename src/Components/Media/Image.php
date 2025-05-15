@@ -8,6 +8,8 @@
 namespace Rovota\Embla\Components\Media;
 
 use Rovota\Embla\Base\Component;
+use Rovota\Framework\Facades\Cache;
+use Rovota\Framework\Facades\Storage;
 use Rovota\Framework\Support\Str;
 
 class Image extends Component
@@ -23,6 +25,17 @@ class Image extends Component
 
 	// -----------------
 	// Starters
+
+	public static function file(string $location, string|null $disk = null, int|null $retention = null): static
+	{
+		$target = Cache::remember('image:'.$location, function() use ($location, $disk) {
+			return Storage::disk($disk)->file($location)?->url;
+		}, $retention);
+
+		return (new static)->when($target !== null, function (Component $component) use ($target) {
+			$component->attribute('src', $target);
+		});
+	}
 
 	public static function asset(string $target): static
 	{
