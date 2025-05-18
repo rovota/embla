@@ -47,6 +47,11 @@ class Option extends Component
 	// -----------------
 	// Interactivity
 
+	public function selectedIf(bool $condition): static
+	{
+		return $condition ? $this->selected() : $this;
+	}
+
 	public function selected(): static
 	{
 		return $this->attribute('selected');
