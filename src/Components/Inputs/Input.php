@@ -16,6 +16,7 @@ use Rovota\Embla\Components\Inputs\Elements\Note;
 use Rovota\Embla\Components\Inputs\Elements\Slider;
 use Rovota\Embla\Components\Inputs\Fields\Base;
 use Rovota\Embla\Components\Inputs\Fields\Range;
+use Rovota\Embla\Components\Inputs\Fields\Select;
 use Rovota\Embla\Components\Inputs\Interfaces\InputCheckable;
 use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
 use Rovota\Embla\Components\Typography\Label;
@@ -197,7 +198,11 @@ class Input extends Component
 					continue;
 				}
 
-				// TODO: Add support for the select field.
+				if ($field instanceof Select) {
+					foreach ($field->children as $option) {
+						$option->selectedIf((string) Cast::toRawAutomatic($value) === $option->attributes->string('value'));
+					}
+				}
 
 				$field->value($value);
 			}
