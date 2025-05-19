@@ -94,7 +94,7 @@ class Theme extends Base implements InputCheckable, InputMasked
 
 	public function image(string $name): static
 	{
-//		$this->variables->set('image', asset_url('theme/interface/previews/'.$name.'.svg'));
+		$this->variables->set('image', asset_url('interface/previews/'.$name.'.svg'));
 		return $this;
 	}
 
