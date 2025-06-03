@@ -706,7 +706,7 @@ select option:disabled {
 }
 
 input::placeholder, textarea::placeholder, select::placeholder {
-	color: rgba(var(--color-font), var(--opacity-subtext));
+	color: rgba(var(--color-font), 0.5);
 }
 
 input:invalid:not(:focus), textarea:invalid:not(:focus), textarea:invalid:not(:focus) {
@@ -1588,11 +1588,20 @@ button, .button {
 	font-size: 1rem;
 	font-weight: 500;
 	height: 2.4rem;
-	margin: 2px 5px 2px 0;
+	margin-right: 5px;
 	padding: 0 1.25rem;
 	text-decoration: none;
 	transition: all .12s ease;
 	white-space: nowrap;
+	column-gap: 0.6rem;
+}
+
+button:has(svg:first-child), .button:has(svg:first-child) {
+	padding-left: 0.8rem;
+}
+
+button:has(svg:last-child), .button:has(svg:last-child) {
+	padding-right: 0.8rem;
 }
 
 button:hover, .button:hover {
@@ -2174,6 +2183,10 @@ span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
 
 .no-padding {
 	padding: 0 !important;
+}
+
+.no-margin {
+	margin: 0 !important;
 }
 
 .full-width {
