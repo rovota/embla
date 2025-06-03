@@ -22,11 +22,17 @@ trait AppearanceMethods
 
 	public function accent(mixed $color = 'auto'): static
 	{
+		if ($color === null) {
+			$color = 'auto';
+		}
+
 		if ($color instanceof BackedEnum) {
 			$color = $color->value;
 		}
+
 		$this->replaceClassWithPrefix('accent-', 'accent-'.trim($color));
 		$this->detectLightness();
+
 		return $this;
 	}
 
