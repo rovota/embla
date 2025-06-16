@@ -1596,6 +1596,10 @@ button, .button {
 	column-gap: 0.6rem;
 }
 
+button:last-child, .button:last-child {
+	margin-right: 0;
+}
+
 button:has(svg:first-child), .button:has(svg:first-child) {
 	padding-left: 0.8rem;
 }
