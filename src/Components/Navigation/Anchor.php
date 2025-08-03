@@ -37,6 +37,11 @@ class Anchor extends Component
 		return self::toUrl(Url::foreign($location, $parameters));
 	}
 
+	public static function toFile(string $location, array $parameters = [], string|null $disk = null): static
+	{
+		return self::toUrl(Url::file($location, $parameters, $disk));
+	}
+
 	public static function toRoute(string $name, array $context = [], array $parameters = []): static
 	{
 		return self::toUrl(Url::route($name, $context, $parameters));
