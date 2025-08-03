@@ -15,6 +15,7 @@ class Button extends Component
 	protected function configuration(): void
 	{
 		$this->config->tag = 'button';
+		$this->attribute('type', 'submit');
 	}
 
 	// -----------------
@@ -22,10 +23,7 @@ class Button extends Component
 
 	public static function name(string $name): static
 	{
-		return (new static)->attributes([
-			'name' => $name,
-			'type' => 'submit',
-		]);
+		return (new static)->attribute('name', $name);
 	}
 
 	// -----------------
