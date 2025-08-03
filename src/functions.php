@@ -12,6 +12,7 @@ use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
 use Rovota\Framework\Facades\Registry;
 use Rovota\Framework\Facades\Storage;
+use Rovota\Framework\Routing\UrlObject;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
 use Rovota\Framework\Support\Str;
@@ -71,9 +72,9 @@ if (!function_exists('icon')) {
 }
 
 if (!function_exists('asset_url')) {
-	function asset_url(string $file, array $parameters = [], string|null $disk = null): string
+	function asset_url(string $file, array $parameters = [], string|null $disk = null): UrlObject
 	{
-		return Url::foreign(Storage::disk($disk)->url . '/' . Str::trim($file, '/'), $parameters);
+		return Url::file($file, $parameters, $disk);
 	}
 }
 
