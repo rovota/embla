@@ -10,37 +10,39 @@ namespace Rovota\Embla\Tabs;
 use Rovota\Embla\Components\Navigation\Tab;
 use Rovota\Embla\Components\Navigation\TabAction;
 use Rovota\Framework\Kernel\ServiceProvider;
+use Rovota\Framework\Structures\Bucket;
 
 final class TabsManager extends ServiceProvider
 {
 
 	/**
-	 * @var null|array<string, mixed>
+	 * @var null|array<string, array{label: string, target: mixed}>
 	 */
-	protected array|null $title = null;
+	public array|null $title = null;
 
 	/**
-	 * @var array<string, Tab>
+	 * @var Bucket<string, Tab>
 	 */
-	protected array $tabs = [];
+	public Bucket $tabs {
+		get => $this->tabs;
+	}
 
 	/**
-	 * @var array<int, TabAction>
+	 * @var Bucket<string, TabAction>
 	 */
-	protected array $actions = [];
+	public Bucket $actions {
+		get => $this->actions;
+	}
 
 	// -----------------
 
 	public function __construct()
 	{
+		$this->tabs = new Bucket();
+		$this->actions = new Bucket();
 	}
 
 	// -----------------
-
-	public function hasTitle(): bool
-	{
-		return $this->title !== null;
-	}
 
 	public function setTitle(string $label, mixed $target = null): void
 	{
@@ -50,47 +52,20 @@ final class TabsManager extends ServiceProvider
 		];
 	}
 
-	public function getTitle(): array|null
-	{
-		return $this->title;
-	}
-
 	// -----------------
-
-	public function hasTabs(): bool
-	{
-		return empty($this->tabs) === false;
-	}
 
 	public function addTabs(array $tabs): void
 	{
 		foreach ($tabs as $tab) {
-			$this->tabs[] = $tab;
+			$this->tabs->append($tab);
 		}
-	}
-
-	public function getTabs(): array
-	{
-		return $this->tabs;
-	}
-
-	// -----------------
-
-	public function hasActions(): bool
-	{
-		return empty($this->actions) === false;
 	}
 
 	public function addActions(array $actions): void
 	{
 		foreach ($actions as $action) {
-			$this->actions[] = $action;
+			$this->actions->append($action);
 		}
-	}
-
-	public function getActions(): array
-	{
-		return $this->actions;
 	}
 
 }
