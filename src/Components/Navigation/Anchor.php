@@ -82,7 +82,7 @@ class Anchor extends Component
 	// -----------------
 	// Interactivity
 
-	public function asDownload(string $name = null): static
+	public function asDownload(string|null $name = null): static
 	{
 		return $this->attribute('download', $name);
 	}
