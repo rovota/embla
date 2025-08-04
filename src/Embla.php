@@ -35,13 +35,6 @@ final class Embla extends ServiceProvider
 
 	// -----------------
 
-	public function getConfig(): EmblaConfig
-	{
-		return $this->config;
-	}
-
-	// -----------------
-
 	public function getIconManager(): IconManager
 	{
 		return $this->icons;

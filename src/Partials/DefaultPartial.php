@@ -46,13 +46,6 @@ class DefaultPartial implements Stringable, PartialInterface
 
 	// -----------------
 
-	public function getConfig(): PartialConfig
-	{
-		return $this->config;
-	}
-
-	// -----------------
-
 	public static function make(array $variables = []): static
 	{
 		$view = PartialManager::instance()->createPartial(null, static::class);

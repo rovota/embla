@@ -55,7 +55,7 @@ trait ComponentChildren
 	protected function addChild(Component|string $child, string|null $name = null): void
 	{
 		if ($child instanceof Component) {
-			$child->setParent($this);
+			$child->withParent($this);
 		}
 
 		$this->children->set($name ?? Str::random(14), $child);

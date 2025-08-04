@@ -16,10 +16,6 @@ interface PartialInterface
 
 	// -----------------
 
-	public function getConfig(): PartialConfig;
-
-	// -----------------
-
 	public function with(array|string $name, mixed $value = null): static;
 
 	public function getVariables(): array;

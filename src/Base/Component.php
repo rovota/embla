@@ -29,9 +29,16 @@ abstract class Component implements Stringable
 
 	// -----------------
 
-	protected Component|null $parent;
+	public Component|null $parent {
+		get => $this->parent;
+		set {
+			$this->parent = $value;
+		}
+	}
 
-	protected ComponentConfig $config;
+	public ComponentConfig $config {
+		get => $this->config;
+	}
 
 	// -----------------
 
@@ -68,22 +75,10 @@ abstract class Component implements Stringable
 
 	// -----------------
 
-	public function setParent(Component|null $parent): static
+	public function withParent(Component|null $parent): static
 	{
 		$this->parent = $parent;
 		return $this;
-	}
-
-	public function getParent(): Component|null
-	{
-		return $this->parent;
-	}
-
-	// -----------------
-
-	public function getConfig(): ComponentConfig
-	{
-		return $this->config;
 	}
 
 	// -----------------

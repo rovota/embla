@@ -28,7 +28,7 @@ class Keystroke extends Component
 	public static function sequence(array $keystrokes): static
 	{
 		$component = new static;
-		$component->getConfig()->tag = 'span';
+		$component->config->tag = 'span';
 
 		foreach ($keystrokes as $value) {
 			$component->with(Keystroke::value($value));
