@@ -58,5 +58,8 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
+    <inspection_tool class="PhpUnused" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES">
+      <scope name="Open Files" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
   </profile>
 </component>
