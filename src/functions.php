@@ -10,12 +10,9 @@ use Rovota\Embla\Embla;
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
-use Rovota\Framework\Facades\Registry;
-use Rovota\Framework\Facades\Storage;
 use Rovota\Framework\Routing\UrlObject;
 use Rovota\Framework\Structures\Basket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
-use Rovota\Framework\Support\Str;
 use Rovota\Framework\Support\Url;
 
 // -----------------
