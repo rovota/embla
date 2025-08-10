@@ -345,6 +345,13 @@ document.querySelectorAll('nav-trigger').forEach(trigger => {
 	trigger.remove();
 });
 
+// Automatic fragment identification
+document.querySelectorAll('h2').forEach(heading => {
+	if (!heading.hasAttribute('id')) {
+		heading.setAttribute('id', slugify(heading.textContent));
+	}
+});
+
 // Sortable Table functionality
 document.querySelectorAll('table.sortable').forEach(table => {
 	let selected_trigger;
