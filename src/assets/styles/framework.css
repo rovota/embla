@@ -928,7 +928,7 @@ input-errors {
 	row-gap: 5px;
 }
 
-input-errors > span::before {
+input-errors > span:not(:only-child)::before {
 	content: '• ';
 }
 
