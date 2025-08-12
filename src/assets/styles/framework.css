@@ -1600,11 +1600,11 @@ button:last-child, .button:last-child {
 	margin-right: 0;
 }
 
-button:has(svg:first-child), .button:has(svg:first-child) {
+button:has(svg:first-child:not(:only-child)), .button:has(svg:first-child:not(:only-child)) {
 	padding-left: 0.8rem;
 }
 
-button:has(svg:last-child), .button:has(svg:last-child) {
+button:has(svg:last-child:not(:only-child)), .button:has(svg:last-child:not(:only-child)) {
 	padding-right: 0.8rem;
 }
 
