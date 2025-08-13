@@ -1588,16 +1588,11 @@ button, .button {
 	font-size: 1rem;
 	font-weight: 500;
 	height: 2.4rem;
-	margin-right: 5px;
 	padding: 0 1.25rem;
 	text-decoration: none;
 	transition: all .12s ease;
 	white-space: nowrap;
 	column-gap: 0.6rem;
-}
-
-button:last-child, .button:last-child {
-	margin-right: 0;
 }
 
 button:has(svg:first-child:not(:only-child)), .button:has(svg:first-child:not(:only-child)) {
@@ -1708,6 +1703,19 @@ button:disabled, .button[disabled] {
 
 [class*='accent-'] > button.link, [class*='accent-'] > .button.link {
 	background: transparent;
+}
+
+button-group {
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+button-group > * {
+	justify-content: center;
+	flex-grow: 1;
 }
 
 /* ---------------------- */

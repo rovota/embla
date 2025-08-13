@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="48">
+          <list size="49">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -53,6 +53,7 @@
             <item index="45" class="java.lang.String" itemvalue="table-filters" />
             <item index="46" class="java.lang.String" itemvalue="pagination" />
             <item index="47" class="java.lang.String" itemvalue="canvas-toolbar" />
+            <item index="48" class="java.lang.String" itemvalue="button-group" />
           </list>
         </value>
       </option>
