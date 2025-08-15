@@ -28,7 +28,7 @@ class Note extends Component
 
 	public static function characterCount(): static
 	{
-		return (new static)->with(Str::translate('Characters: ') . '<charcount></charcount> / <charlimit></charlimit>');
+		return (new static)->with(Str::translate('Characters:') . ' <charcount></charcount> / <charlimit></charlimit>');
 	}
 
 	public static function slugPreview(string $prefix = '/'): static
