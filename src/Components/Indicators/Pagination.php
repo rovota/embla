@@ -32,7 +32,7 @@ class Pagination extends Component
 	{
 		$page_count = $this->variables->int('page_count');
 
-		if ($page_count > 1) {
+		if ($page_count > 0) {
 
 			$current = request()->int('page', 1);
 			$url = request()->url();
