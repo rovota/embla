@@ -13,6 +13,7 @@ use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
 use Rovota\Embla\Components\Media\Image;
 use Rovota\Embla\Components\Typography\Span;
 use Rovota\Embla\Utilities\Attributes\InputType;
+use Rovota\Framework\Support\Arr;
 use Rovota\Framework\Support\Str;
 
 class Theme extends Base implements InputCheckable, InputMasked
@@ -28,13 +29,18 @@ class Theme extends Base implements InputCheckable, InputMasked
 	// -----------------
 	// Starters
 
-	public static function fromArray(array $items, bool $trigger_preview = false): array
+	public static function fromArray(array $items, array $options = []): array
 	{
 		$components = [];
 		/** @var array<int, BackedEnum|string> $items */
 		foreach ($items as $item) {
-			$components[] = Theme::using($item)->when($trigger_preview, function (Theme $component) {
-				return $component->triggerPreview();
+			$components[] = Theme::using($item)->when(empty($options) === false, function (Theme $component) use ($options) {
+				foreach ($options as $option => $value) {
+					if (is_int($option)) {
+						$option = $value;
+					}
+					$component->{Str::camel($option)}(...Arr::from($value));
+				}
 			});
 		}
 		return $components;

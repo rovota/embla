@@ -11,6 +11,7 @@ use BackedEnum;
 use Rovota\Embla\Components\Inputs\Interfaces\InputCheckable;
 use Rovota\Embla\Components\Inputs\Interfaces\InputMasked;
 use Rovota\Embla\Utilities\Attributes\InputType;
+use Rovota\Framework\Support\Arr;
 use Rovota\Framework\Support\Str;
 
 class Swatch extends Base implements InputCheckable, InputMasked
@@ -26,13 +27,18 @@ class Swatch extends Base implements InputCheckable, InputMasked
 	// -----------------
 	// Starters
 
-	public static function fromArray(array $items, bool $trigger_preview = false): array
+	public static function fromArray(array $items, array $options = []): array
 	{
 		$components = [];
 		/** @var array<int, BackedEnum|string> $items */
 		foreach ($items as $item) {
-			$components[] = Swatch::using($item)->when($trigger_preview, function (Swatch $component) {
-				return $component->triggerPreview();
+			$components[] = Swatch::using($item)->when(empty($options) === false, function (Swatch $component) use ($options) {
+				foreach ($options as $option => $value) {
+					if (is_int($option)) {
+						$option = $value;
+					}
+					$component->{Str::camel($option)}(...Arr::from($value));
+				}
 			});
 		}
 		return $components;
