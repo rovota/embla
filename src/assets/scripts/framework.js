@@ -16,6 +16,28 @@ function slugify(str) {
 	return str.replace(/([^a-z0-9-]|(-))+/g, '-').replace(/^-|-$/g, '');
 }
 
+function updateFormElementUsingDirective(form, config, input) {
+	let [action, target, value] = config.split(':');
+	form.querySelectorAll('[name="' + target + '"]').forEach(element => {
+		if (action === 'check') {
+			element.checked = true;
+		}
+		if (action === 'uncheck') {
+			element.checked = false;
+		}
+		if (action === 'disable') {
+			element.disabled = true;
+		}
+		if (action === 'enable') {
+			element.disabled = false;
+		}
+
+		// Enable chain reactions
+		let event = new Event('change');
+		element.dispatchEvent(event);
+	});
+}
+
 // Correct canvas scaling
 function fixDrawingCanvas(canvas, drawing) {
 	const ratio = Math.max(window.devicePixelRatio || 1, 1);
@@ -25,6 +47,23 @@ function fixDrawingCanvas(canvas, drawing) {
 	canvas.getContext("2d").scale(ratio, ratio);
 
 	drawing.fromData(drawing.toData());
+}
+
+function cloneCanvas(oldCanvas) {
+	const newCanvas = document.createElement('canvas');
+	const context = oldCanvas.getContext('2d', { willReadFrequently: true });
+	if (context) {
+		newCanvas.width = oldCanvas.width;
+		newCanvas.height = oldCanvas.height;
+		const newContext = newCanvas.getContext('2d', { willReadFrequently: true });
+		if (newContext) {
+			const imageData = context.getImageData(0, 0, oldCanvas.width, oldCanvas.height);
+			newContext.putImageData(imageData, 0, 0);
+		}
+
+	}
+
+	return newCanvas;
 }
 
 function dataUrlToFile(data, filename) {
@@ -79,23 +118,6 @@ document.querySelectorAll('.drawer-toggle').forEach(toggle => {
 	});
 });
 
-function cloneCanvas(oldCanvas) {
-	const newCanvas = document.createElement('canvas');
-	const context = oldCanvas.getContext('2d', { willReadFrequently: true });
-	if (context) {
-		newCanvas.width = oldCanvas.width;
-		newCanvas.height = oldCanvas.height;
-		const newContext = newCanvas.getContext('2d', { willReadFrequently: true });
-		if (newContext) {
-			const imageData = context.getImageData(0, 0, oldCanvas.width, oldCanvas.height);
-			newContext.putImageData(imageData, 0, 0);
-		}
-
-	}
-
-	return newCanvas;
-}
-
 // Drawing functionality
 document.querySelectorAll('#drawing').forEach(element => {
 	element.getContext("2d", { willReadFrequently: true })
@@ -112,7 +134,7 @@ document.querySelectorAll('#drawing').forEach(element => {
 		input = document.querySelector(`input[name="${element.dataset.input}"]`);
 	}
 
-	// Correct scaling issues on load and resizing
+	// Correct scaling issues on a page load and resizing
 	fixDrawingCanvas(element, canvas);
 	window.onresize = function() {
 		fixDrawingCanvas(element, canvas);
@@ -133,7 +155,7 @@ document.querySelectorAll('#drawing').forEach(element => {
 		});
 	}
 
-	// When an input is present, assign the drawing as image.
+	// When an input is present, assign the drawing as an image.
 	if (input !== null) {
 		canvas.addEventListener("endStroke", () => {
 			let data = canvas.toData();
@@ -160,9 +182,10 @@ document.querySelectorAll('#drawing').forEach(element => {
 // Input functionality
 document.querySelectorAll('input, textarea, select').forEach(input => {
 
+	let form = input.closest('form');
+
 	// Process required checkboxes
 	if (input.hasAttribute('required') && input.getAttribute('type') === 'checkbox') {
-		let form = input.closest('form');
 		if (form !== null) {
 			if (!input.checked) {
 				if (!form.requiredfields) {
@@ -192,7 +215,7 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		}
 	}
 
-	// Focus when icon is clicked
+	// Focus when the icon is clicked
 	let icon = input.parentElement.querySelector('input-icon');
 	icon?.addEventListener('click', () => {
 		input.focus();
@@ -318,12 +341,35 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		}
 	}
 
-	// Range input functionality
+	// Locale input functionality
 	if (input.hasAttribute('locale-switch')) {
 		input.addEventListener('change', () => {
 			window.location.href = window.location.href.replace(/\?locale=[a-z]{2}_[A-Z]{2}/g, '') + '?locale=' + input.value;
 		});
 	}
+
+	// Cross-Input Synchronization
+	if (input.hasAttribute('data-sync')) {
+		input.addEventListener('change', () => {
+			let attribute =  input.dataset.sync ?? '';
+			let directives = attribute.includes('&') ? input.dataset.sync.split('&') : [attribute];
+
+			directives.forEach(directive => {
+				let trigger = directive.substring(0, directive.indexOf('['));
+				let config = directive.substring(directive.indexOf('[') + 1, directive.indexOf(']'));
+
+				if (trigger !== null && config !== null) {
+					if (trigger === 'checked' && input.checked === true) {
+						updateFormElementUsingDirective(form, config, input);
+					}
+					if (trigger === 'unchecked' && input.checked === false) {
+						updateFormElementUsingDirective(form, config, input);
+					}
+				}
+			})
+		});
+	}
+
 });
 
 // Simulate anchor functionality by a data tag.
