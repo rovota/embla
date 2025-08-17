@@ -494,3 +494,13 @@ tabs_toggle?.addEventListener("click", () => {
 	tabs_toggle.classList.toggle('active');
 	document.getElementById('tabs-content').classList.toggle('expanded');
 });
+
+// Standalone Fixes
+if (window.matchMedia('(display-mode: standalone)').matches) {
+
+	// Removes duplicated site name
+	const separator = ' - ';
+	if (document.title.includes(separator)) {
+		document.title = document.title.split(separator)[0].trim();
+	}
+}
