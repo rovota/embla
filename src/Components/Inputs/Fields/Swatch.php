@@ -92,7 +92,7 @@ class Swatch extends Base implements InputCheckable, InputMasked
 
 	public function triggerPreview(): static
 	{
-		return $this->attribute('preview-accent');
+		return $this->attribute('data-preview', 'accent');
 	}
 
 	// -----------------

@@ -83,6 +83,17 @@ function dataUrlToFile(data, filename) {
 
 // -----------------
 
+// Toast messages
+document.querySelectorAll('toast').forEach(toast => {
+	const message = document.createTextNode(toast.dataset.message);
+	toast.appendChild(message);
+
+	toast.classList.add('accent-' + toast.dataset.type);
+	setTimeout(() => toast.classList.add('visible'), 100);
+	setTimeout(() => toast.classList.remove('visible'), 3200);
+	setTimeout(() => toast.remove(), 5000);
+});
+
 // Automatic background lightness detection
 document.querySelectorAll('.detect-lightness').forEach(element => {
 	const raw = window.getComputedStyle(element).backgroundColor;
@@ -97,17 +108,6 @@ document.querySelectorAll('.detect-lightness').forEach(element => {
 		element.setAttribute('lightness', lightness.toString());
 		element.classList.add((lightness > 180) ? 'above-threshold' : 'below-threshold');
 	}
-});
-
-// Toast messages
-document.querySelectorAll('toast').forEach(toast => {
-	const message = document.createTextNode(toast.dataset.message);
-	toast.appendChild(message);
-
-	toast.classList.add('accent-' + toast.dataset.type);
-	setTimeout(() => toast.classList.add('visible'), 100);
-	setTimeout(() => toast.classList.remove('visible'), 3200);
-	setTimeout(() => toast.remove(), 5000);
 });
 
 // Drawer open/close triggers
@@ -183,6 +183,17 @@ document.querySelectorAll('#drawing').forEach(element => {
 document.querySelectorAll('input, textarea, select').forEach(input => {
 
 	let form = input.closest('form');
+
+	// Input error functionality
+	if (input.parentElement.nextElementSibling?.nodeName === 'INPUT-ERRORS') {
+		input.parentElement.classList.add('has-error');
+		input.addEventListener('input', event => {
+			if (input.parentElement.classList.contains('has-error')) {
+				event.target.parentElement.nextElementSibling.remove();
+				input.parentElement.classList.remove('has-error');
+			}
+		});
+	}
 
 	// Process required checkboxes
 	if (input.hasAttribute('required') && input.getAttribute('type') === 'checkbox') {
@@ -273,6 +284,17 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		}
 	}
 
+	// Range input functionality
+	if (input.getAttribute('type') === 'range') {
+		let prefix = input.previousElementSibling;
+		if (prefix !== null) {
+			prefix.innerHTML = input.value;
+			input.addEventListener('input', () => {
+				prefix.innerHTML = input.value;
+			});
+		}
+	}
+
 	// Slug input functionality
 	if (input.hasAttribute('slugify')) {
 		let note = input.parentElement.nextElementSibling.querySelector('span');
@@ -295,50 +317,19 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		}
 	}
 
-	// Input error functionality
-	if (input.parentElement.nextElementSibling?.nodeName === 'INPUT-ERRORS') {
-		input.parentElement.classList.add('has-error');
-		input.addEventListener('input', event => {
-			if (input.parentElement.classList.contains('has-error')) {
-				event.target.parentElement.nextElementSibling.remove();
-				input.parentElement.classList.remove('has-error');
+	// Preview functionality
+	if (input.hasAttribute('data-preview')) {
+		input.addEventListener('change', () => {
+			let attribute =  input.dataset.preview;
+			if (attribute !== null) {
+				document.body.classList.forEach(item => {
+					if (item.startsWith(attribute + '-')) {
+						document.body.classList.remove(item);
+					}
+				});
+				document.body.classList.add(attribute + '-' + input.value);
 			}
 		});
-	}
-
-	// Accent Preview functionality
-	if (input.hasAttribute('preview-accent')) {
-		input.addEventListener('click', () => {
-			document.body.classList.forEach(item => {
-				if (item.startsWith('accent-')) {
-					document.body.classList.remove(item);
-				}
-			});
-			document.body.classList.add('accent-' + input.value);
-		});
-	}
-
-	// Theme Preview functionality
-	if (input.hasAttribute('preview-theme')) {
-		input.addEventListener('change', () => {
-			document.body.classList.forEach(item => {
-				if (item.startsWith('theme-')) {
-					document.body.classList.remove(item);
-				}
-			});
-			document.body.classList.add('theme-' + input.value);
-		});
-	}
-
-	// Range input functionality
-	if (input.getAttribute('type') === 'range') {
-		let prefix = input.previousElementSibling;
-		if (prefix !== null) {
-			prefix.innerHTML = input.value;
-			input.addEventListener('input', () => {
-				prefix.innerHTML = input.value;
-			});
-		}
 	}
 
 	// Locale input functionality
@@ -543,7 +534,6 @@ tabs_toggle?.addEventListener("click", () => {
 
 // Standalone Fixes
 if (window.matchMedia('(display-mode: standalone)').matches) {
-
 	// Removes duplicated site name
 	const separator = ' - ';
 	if (document.title.includes(separator)) {

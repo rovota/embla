@@ -92,7 +92,7 @@ class Theme extends Base implements InputCheckable, InputMasked
 
 	public function triggerPreview(): static
 	{
-		return $this->attribute('preview-theme');
+		return $this->attribute('data-preview', 'theme');
 	}
 
 	// -----------------
