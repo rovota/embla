@@ -2170,6 +2170,59 @@ body > shading.visible {
 	pointer-events: all;
 }
 
+body > overlay {
+	max-width: 100%;
+	max-height: 100%;
+	position: fixed;
+	left: 0; top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	background: rgba(0, 0, 0, 0.15);
+	transition: all .2s ease;
+	pointer-events: none;
+	opacity: 0;
+	z-index: 40;
+}
+
+body > overlay.visible {
+	pointer-events: auto;
+	opacity: 1;
+}
+
+body > overlay::backdrop {
+	display: none;
+}
+
+body > overlay > content {
+	display: flex;
+	width: 90%;
+	max-width: 600px;
+	min-height: 200px;
+	max-height: 70%;
+	flex-direction: column;
+	background: rgba(var(--color-base), 1);
+	box-shadow: 0 0 0 1px rgba(var(--color-font), .1);
+	border-radius: var(--radius-large);
+	overflow: hidden;
+	transition: all .2s ease;
+	transform: scale(0.8);
+	opacity: 0;
+}
+
+body > overlay > content.visible {
+	transform: scale(1);
+	opacity: 1;
+}
+
+body > overlay > content > iframe {
+	min-height: 200px;
+	flex-grow: 1;
+}
+
 /* ---------------------- */
 /* Misc */
 

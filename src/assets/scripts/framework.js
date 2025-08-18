@@ -355,9 +355,56 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 });
 
+document.querySelectorAll('[data-overlay]').forEach(trigger => {
+	trigger.addEventListener("click", (event) => {
+		event.preventDefault();
+		trigger.blur();
+
+		let overlay = document.createElement('overlay');
+		let content = document.createElement('content');
+		let iframe = document.createElement('iframe');
+
+		document.body.appendChild(overlay);
+
+		overlay.appendChild(content);
+		content.appendChild(iframe);
+
+		setTimeout(function () {
+			overlay.classList.add('visible');
+		}, 10);
+
+		if (iframe !== null) {
+			iframe.src = trigger.href;
+
+			iframe.onload = function() {
+				iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
+				setTimeout(function () {
+					content.classList.add('visible');
+				}, 180);
+			};
+		}
+
+		window.addEventListener('message', function(event) {
+			if (event.data === 'close:dialog') {
+				content.classList.remove('visible');
+				overlay.classList.remove('visible');
+				setTimeout(() => overlay.remove(), 300);
+			}
+		}, {
+			once: true
+		});
+	});
+});
+
+document.querySelectorAll('[data-message]').forEach(trigger => {
+	trigger.addEventListener("click", (event) => {
+		event.preventDefault();
+		window.top.postMessage(trigger.dataset.message, '*');
+	});
+});
+
 // Toggle functionality
 document.querySelectorAll('[data-toggle]').forEach(toggle => {
-	console.log(toggle)
 	toggle.addEventListener("click", () => {
 		// Enable drawer functionality
 		if (toggle.dataset.toggle === 'drawer') {
