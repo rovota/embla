@@ -92,6 +92,11 @@ class Anchor extends Component
 		return $this->attribute('target', '_blank');
 	}
 
+	public function inOverlay(): static
+	{
+		return $this->attribute('data-overlay');
+	}
+
 	public function withoutReferrer(): static
 	{
 		return $this->attribute('rel', 'noreferrer');
