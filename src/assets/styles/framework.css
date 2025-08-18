@@ -1804,24 +1804,31 @@ spinner.double {
 /* Toasts */
 
 toast {
-	background: rgba(var(--color-accent), 1);
-	border-radius: var(--radius-standard);
-	bottom: 30px;
-	box-shadow: 0 4px 10px 0 rgba(var(--color-dark), .04);
-	color: rgba(var(--color-light), 1);
-	left: 30px;
-	line-height: 1.4;
-	opacity: 0;
-	padding: 0.75rem 1.5rem;
+	background: rgba(var(--color-card), 1);
+	border-top: 1px solid rgba(var(--color-font), .07);
+	box-shadow: 0 0 10px 0 rgba(var(--color-dark), .02);
+	color: rgba(var(--color-font), 1);
 	position: fixed;
-	transform: translate(0, 40px);
+	bottom: 0; left: 0;
+	width: 100%;
+	transform: translateY(100%);
+	opacity: 0;
+	text-align: center;
 	transition: all .3s ease;
+	padding: 1rem 1.5rem;
+	line-height: 1.4;
 	z-index: 14;
 }
 
+toast[class*='accent-'] {
+	border-top: 1px solid rgba(var(--color-font), .2);
+	background: rgba(var(--color-accent), 1);
+	color: rgba(var(--color-light), 1);
+}
+
 toast.visible {
+	transform: translateY(0);
 	opacity: 1;
-	transform: translate(0, 0);
 }
 
 /* ---------------------- */
@@ -2474,6 +2481,24 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
 @media screen and (max-width: 400px) {
 	iframe.youtube {
 		height: 200px;
+	}
+}
+
+/* ---------------------- */
+/* Installed App */
+
+@media (display-mode: standalone) {
+	toast {
+		border: 1px solid rgba(var(--color-font), .07);
+		box-shadow: 0 4px 10px 0 rgba(var(--color-dark), .02);
+		border-radius: var(--radius-medium);
+		bottom: 0; left: 0;
+		margin: 0 10px 10px 10px;
+		width: calc(100% - 20px);
+	}
+
+	toast[class*='accent-'] {
+		border: 1px solid rgba(var(--color-font), .2);
 	}
 }
 
