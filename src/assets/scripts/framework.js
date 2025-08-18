@@ -309,6 +309,13 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		}
 	}
 
+	// Locale input functionality
+	if (input.hasAttribute('locale-switch')) {
+		input.addEventListener('change', () => {
+			window.location.href = window.location.href.replace(/\?locale=[a-z]{2}_[A-Z]{2}/g, '') + '?locale=' + input.value;
+		});
+	}
+
 	// Preview functionality
 	if (input.hasAttribute('data-preview')) {
 		input.addEventListener('change', () => {
@@ -321,13 +328,6 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 				});
 				document.body.classList.add(attribute + '-' + input.value);
 			}
-		});
-	}
-
-	// Locale input functionality
-	if (input.hasAttribute('locale-switch')) {
-		input.addEventListener('change', () => {
-			window.location.href = window.location.href.replace(/\?locale=[a-z]{2}_[A-Z]{2}/g, '') + '?locale=' + input.value;
 		});
 	}
 
@@ -362,7 +362,7 @@ document.querySelectorAll('[data-toggle]').forEach(toggle => {
 		// Enable drawer functionality
 		if (toggle.dataset.toggle === 'drawer') {
 			document.querySelector('#drawer').classList.toggle('visible');
-			document.querySelector('shading').classList.toggle('visible');
+			document.querySelector('#drawer-shading').classList.toggle('visible');
 		}
 	});
 });
