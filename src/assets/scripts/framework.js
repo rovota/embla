@@ -110,14 +110,6 @@ document.querySelectorAll('.detect-lightness').forEach(element => {
 	}
 });
 
-// Drawer open/close triggers
-document.querySelectorAll('.drawer-toggle').forEach(toggle => {
-	toggle.addEventListener("click", () => {
-		document.querySelector('#drawer').classList.toggle('visible');
-		document.querySelector('#shading').classList.toggle('visible');
-	});
-});
-
 // Drawing functionality
 document.querySelectorAll('#drawing').forEach(element => {
 	element.getContext("2d", { willReadFrequently: true })
@@ -361,6 +353,18 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		});
 	}
 
+});
+
+// Toggle functionality
+document.querySelectorAll('[data-toggle]').forEach(toggle => {
+	console.log(toggle)
+	toggle.addEventListener("click", () => {
+		// Enable drawer functionality
+		if (toggle.dataset.toggle === 'drawer') {
+			document.querySelector('#drawer').classList.toggle('visible');
+			document.querySelector('shading').classList.toggle('visible');
+		}
+	});
 });
 
 // Simulate anchor functionality by a data tag.
