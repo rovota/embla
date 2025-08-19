@@ -51,6 +51,13 @@ function showDataOverlay(url) {
 	let content = document.createElement('content');
 	let iframe = document.createElement('iframe');
 
+	let close = (event) => {
+		if (event.key === 'Escape') {
+			removeDataOverlay();
+			document.removeEventListener('keyup', close);
+		}
+	}
+
 	document.body.appendChild(overlay);
 
 	overlay.appendChild(content);
@@ -61,6 +68,7 @@ function showDataOverlay(url) {
 
 		iframe.onload = function() {
 			iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
+			document.addEventListener('keyup', close);
 			overlay.classList.add('visible');
 		};
 	}
