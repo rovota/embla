@@ -2181,7 +2181,8 @@ body > overlay {
 	justify-content: center;
 	align-items: center;
 	border: none;
-	background: rgba(0, 0, 0, 0.3);
+	background: rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
 	transition: all .15s ease;
 	pointer-events: none;
 	opacity: 0;
@@ -2205,7 +2206,7 @@ body > overlay > content {
 	max-height: 70%;
 	flex-direction: column;
 	background: rgba(var(--color-base), 1);
-	box-shadow: 0 0 0 1px rgba(var(--color-font), .1);
+	border: 1px solid rgba(var(--color-font), .1);
 	border-radius: var(--radius-large);
 	overflow: hidden;
 	transition: all .15s ease;
@@ -2542,13 +2543,6 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
 
 	gallery.sm-grid-1, grid.sm-grid-1 {
 		grid-template-columns: minmax(0, 1fr);
-	}
-
-	notice {
-		align-items: flex-start;
-		row-gap: 0.7rem;
-		padding: 1rem;
-		flex-direction: column;
 	}
 }
 
