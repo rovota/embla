@@ -45,6 +45,13 @@ function removeDataOverlay() {
 	}
 }
 
+function hideDataOverlay() {
+	let overlay = document.querySelector('overlay');
+	if (overlay !== null) {
+		overlay.classList.remove('visible');
+	}
+}
+
 function showDataOverlay(url) {
 
 	let overlay = document.createElement('overlay');
@@ -66,10 +73,10 @@ function showDataOverlay(url) {
 	if (iframe !== null) {
 		iframe.src = url;
 
-		iframe.onload = function() {
+		iframe.onload = function () {
 			iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
 			document.addEventListener('keyup', close);
-			overlay.classList.add('visible');
+			setTimeout(() => overlay.classList.add('visible'), 20);
 		};
 	}
 }
@@ -86,11 +93,11 @@ function fixDrawingCanvas(canvas, drawing) {
 
 function cloneCanvas(oldCanvas) {
 	const newCanvas = document.createElement('canvas');
-	const context = oldCanvas.getContext('2d', { willReadFrequently: true });
+	const context = oldCanvas.getContext('2d', {willReadFrequently: true});
 	if (context) {
 		newCanvas.width = oldCanvas.width;
 		newCanvas.height = oldCanvas.height;
-		const newContext = newCanvas.getContext('2d', { willReadFrequently: true });
+		const newContext = newCanvas.getContext('2d', {willReadFrequently: true});
 		if (newContext) {
 			const imageData = context.getImageData(0, 0, oldCanvas.width, oldCanvas.height);
 			newContext.putImageData(imageData, 0, 0);
@@ -113,7 +120,7 @@ function dataUrlToFile(data, filename) {
 		u8arr[n] = content.charCodeAt(n);
 	}
 
-	return new File([u8arr], filename, { type: mime });
+	return new File([u8arr], filename, {type: mime});
 }
 
 // -----------------
@@ -151,7 +158,7 @@ document.querySelectorAll('.detect-lightness').forEach(element => {
 // Drawing
 
 document.querySelectorAll('#drawing').forEach(element => {
-	element.getContext("2d", { willReadFrequently: true })
+	element.getContext("2d", {willReadFrequently: true})
 
 	let input = null, options = {
 		penColor: element.dataset.pencil ?? '#000000',
@@ -167,7 +174,7 @@ document.querySelectorAll('#drawing').forEach(element => {
 
 	// Correct scaling issues on a page load and resizing
 	fixDrawingCanvas(element, canvas);
-	window.onresize = function() {
+	window.onresize = function () {
 		fixDrawingCanvas(element, canvas);
 	}
 
@@ -485,17 +492,6 @@ document.querySelectorAll('[data-sortable]').forEach(table => {
 	});
 });
 
-
-// -----------------
-// Process Triggers
-
-document.querySelectorAll('nav-trigger').forEach(trigger => {
-	document.querySelectorAll(trigger.dataset.prefix + trigger.dataset.item).forEach(element => {
-		element.classList.add(trigger.dataset.class);
-	});
-	trigger.remove();
-});
-
 // -----------------
 // Fragment Identification
 
@@ -526,7 +522,7 @@ document.querySelectorAll('carousel').forEach(carousel => {
 			return current_slide === (slides.length - 1) ? 0 : current_slide + 1;
 		}
 
-		const switchToSlide = function(id) {
+		const switchToSlide = function (id) {
 			slides.forEach((slide, index) => {
 				slide.classList.remove('visible');
 				indicators[index].classList.remove('focus');
@@ -546,7 +542,9 @@ document.querySelectorAll('carousel').forEach(carousel => {
 
 		indicators.forEach((indicator, index) => {
 			indicator.addEventListener('click', () => {
-				clearInterval(cycle); clearInterval(wait); switchToSlide(index);
+				clearInterval(cycle);
+				clearInterval(wait);
+				switchToSlide(index);
 				indicators[index].classList.add('extended');
 				wait = setInterval(() => {
 					cycle = setInterval(() => {
@@ -604,6 +602,26 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 }
 
 // -----------------
+// Triggers
+
+document.querySelectorAll('trigger').forEach(trigger => {
+	if (trigger.dataset.type === 'overlay') {
+		showDataOverlay(trigger.dataset.target);
+		trigger.remove();
+	}
+	if (trigger.dataset.type === 'parent') {
+		window.top.postMessage(trigger.dataset.message, '*');
+		trigger.remove();
+	}
+	if (trigger.dataset.type === 'highlight') {
+		document.querySelectorAll(trigger.dataset.prefix + trigger.dataset.item).forEach(element => {
+			element.classList.add(trigger.dataset.class);
+		});
+		trigger.remove();
+	}
+})
+
+// -----------------
 // Dialog Interactivity
 
 if (window.self === window.top) {
@@ -615,13 +633,23 @@ if (window.self === window.top) {
 		});
 	});
 
-	window.addEventListener('message', function(event) {
-		if (event.data.startsWith('close:dialog')) {
+	window.addEventListener('message', function (event) {
+		if (event.data.startsWith('overlay:close')) {
 			removeDataOverlay();
 		}
-		if (event.data.startsWith('switch:dialog')) {
+		if (event.data.startsWith('overlay:hide')) {
+			hideDataOverlay();
+		}
+		if (event.data.startsWith('overlay:reload')) {
 			removeDataOverlay();
-			setTimeout(() => showDataOverlay(event.data.split('dialog:')[1]), 150);
+			setTimeout(() => showDataOverlay(window.location.href), 150);
+		}
+		if (event.data.startsWith('overlay:switch')) {
+			removeDataOverlay();
+			setTimeout(() => showDataOverlay(event.data.split('switch:')[1]), 150);
+		}
+		if (event.data.startsWith('parent:reload')) {
+			window.location.reload();
 		}
 	});
 }
@@ -634,9 +662,14 @@ if (window.self !== window.top) {
 				if (link.hasAttribute('data-message')) {
 					window.top.postMessage(link.dataset.message, '*');
 				} else {
-					window.top.postMessage('switch:dialog:' + link.href, '*');
+					window.top.postMessage('overlay:switch:' + link.href, '*');
 				}
 			}
+		});
+	});
+	document.querySelectorAll('button').forEach(button => {
+		button.addEventListener("click", (event) => {
+			window.top.postMessage('overlay:hide', '*');
 		});
 	});
 }

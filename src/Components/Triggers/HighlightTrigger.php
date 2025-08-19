@@ -5,18 +5,18 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Components\Navigation;
+namespace Rovota\Embla\Components\Triggers;
 
 use Rovota\Embla\Base\Component;
 
-class NavTrigger extends Component
+class HighlightTrigger extends Component
 {
 
 	protected function configuration(): void
 	{
-		$this->config->tag = 'nav-trigger';
+		$this->config->tag = 'trigger';
 
-		$this->attribute('data-class', 'selected');
+		$this->attribute('data-type', 'highlight');
 	}
 
 	// -----------------
@@ -33,6 +33,11 @@ class NavTrigger extends Component
 	public function target(string $value): static
 	{
 		return $this->attribute('data-item', trim($value));
+	}
+
+	public function modifier(string $value): static
+	{
+		return $this->attribute('data-class', trim($value));
 	}
 
 }

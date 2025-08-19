@@ -1197,8 +1197,8 @@ label + input-masked .input-panel:first-child {
 
 .input-swatches > input-masked {
 	display: grid;
-	grid-gap: 0.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+	grid-gap: 0.6rem;
+	grid-template-columns: repeat(auto-fit, minmax(2.5rem, 1fr));
 	width: 100%;
 	margin-top: 0.8rem;
 }
@@ -2202,16 +2202,32 @@ body > overlay > content {
 	display: flex;
 	width: 90%;
 	max-width: 600px;
-	min-height: 200px;
+	min-height: 150px;
 	max-height: 70%;
 	flex-direction: column;
 	background: rgba(var(--color-base), 1);
 	border: 1px solid rgba(var(--color-font), .1);
 	border-radius: var(--radius-large);
+	position: relative;
 	overflow: hidden;
 	transition: all .15s ease;
 	transform: scale(0.8);
 	opacity: 0;
+	z-index: 41;
+}
+
+body > overlay > content::after {
+	position: absolute;
+	content: '';
+	left: calc(50% - 20px);
+	top: calc(50% - 20px);
+	display: block;
+	width: 40px;
+	height: 40px;
+	border: 3px solid rgba(var(--color-font), .1);
+	border-top: 3px solid rgba(var(--color-accent), 1);
+	border-radius: 50%;
+	animation: spinner .8s linear infinite;
 }
 
 body > overlay.visible > content {
@@ -2220,7 +2236,8 @@ body > overlay.visible > content {
 }
 
 body > overlay > content > iframe {
-	min-height: 200px;
+	z-index: 42;
+	min-height: 0;
 	flex-grow: 1;
 }
 

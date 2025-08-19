@@ -35,6 +35,12 @@ trait WebFunctions
 		return $this;
 	}
 
+	public function withOverlay(string $value): static
+	{
+		Partial::attachVariable('*', 'overlay', $value);
+		return $this;
+	}
+
 	// -----------------
 
 	public function withTitle(string $title, array|object $data = []): static

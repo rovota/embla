@@ -32,9 +32,9 @@ class Anchor extends Component
 		return self::toUrl(Url::local($path, $parameters));
 	}
 
-	public static function toForeign(string $location, array $parameters = []): static
+	public static function toCurrent(): static
 	{
-		return self::toUrl(Url::foreign($location, $parameters));
+		return self::toUrl(Url::current());
 	}
 
 	public static function toFile(string $location, array $parameters = [], string|null $disk = null): static
@@ -76,7 +76,7 @@ class Anchor extends Component
 	public static function sendMessage(string $message): static
 	{
 		return (new static)->attributes([
-			'href', 'data-message' => $message
+			'href' => request()->url(), 'data-message' => $message
 		]);
 	}
 

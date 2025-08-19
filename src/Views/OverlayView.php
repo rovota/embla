@@ -7,13 +7,13 @@
 
 namespace Rovota\Embla\Views;
 
-use Rovota\Embla\Views\Traits\WebFunctions;
+use Rovota\Embla\Views\Traits\OverlayFunctions;
 use Rovota\Framework\Views\DefaultView;
 use Rovota\Framework\Views\ViewConfig;
 
-class EmbeddedView extends DefaultView
+class OverlayView extends DefaultView
 {
-	use WebFunctions;
+	use OverlayFunctions;
 
 	public function __construct(string|null $template, ViewConfig $config)
 	{
