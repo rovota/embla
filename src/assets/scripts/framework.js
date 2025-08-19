@@ -621,11 +621,13 @@ if (window.self === window.top) {
 if (window.self !== window.top) {
 	document.querySelectorAll('[href]').forEach(link => {
 		link.addEventListener("click", (event) => {
-			event.preventDefault();
-			if (link.hasAttribute('data-message')) {
-				window.top.postMessage(link.dataset.message, '*');
-			} else {
-				window.top.postMessage('switch:dialog:' + link.href, '*');
+			if (link.hasAttribute('target') === false) {
+				event.preventDefault();
+				if (link.hasAttribute('data-message')) {
+					window.top.postMessage(link.dataset.message, '*');
+				} else {
+					window.top.postMessage('switch:dialog:' + link.href, '*');
+				}
 			}
 		});
 	});
