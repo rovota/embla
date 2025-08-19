@@ -2181,8 +2181,8 @@ body > overlay {
 	justify-content: center;
 	align-items: center;
 	border: none;
-	background: rgba(0, 0, 0, 0.15);
-	transition: all .2s ease;
+	background: rgba(0, 0, 0, 0.3);
+	transition: all .15s ease;
 	pointer-events: none;
 	opacity: 0;
 	z-index: 40;
@@ -2208,12 +2208,12 @@ body > overlay > content {
 	box-shadow: 0 0 0 1px rgba(var(--color-font), .1);
 	border-radius: var(--radius-large);
 	overflow: hidden;
-	transition: all .2s ease;
+	transition: all .15s ease;
 	transform: scale(0.8);
 	opacity: 0;
 }
 
-body > overlay > content.visible {
+body > overlay.visible > content {
 	transform: scale(1);
 	opacity: 1;
 }

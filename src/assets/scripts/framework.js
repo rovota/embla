@@ -310,33 +310,30 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	}
 
 	// Locale input functionality
-	if (input.hasAttribute('locale-switch')) {
+	if (input.hasAttribute('data-switch')) {
 		input.addEventListener('change', () => {
-			window.location.href = window.location.href.replace(/\?locale=[a-z]{2}_[A-Z]{2}/g, '') + '?locale=' + input.value;
+			if (input.dataset.switch === 'locale') {
+				window.location.href = window.location.href.replace(/\?locale=[a-z]{2}_[A-Z]{2}/g, '') + '?locale=' + input.value;
+			}
 		});
 	}
 
 	// Preview functionality
 	if (input.hasAttribute('data-preview')) {
 		input.addEventListener('change', () => {
-			let attribute =  input.dataset.preview;
-			if (attribute !== null) {
-				document.body.classList.forEach(item => {
-					if (item.startsWith(attribute + '-')) {
-						document.body.classList.remove(item);
-					}
-				});
-				document.body.classList.add(attribute + '-' + input.value);
-			}
+			document.body.classList.forEach(item => {
+				if (item.startsWith(input.dataset.preview + '-')) {
+					document.body.classList.remove(item);
+				}
+			});
+			document.body.classList.add(input.dataset.preview + '-' + input.value);
 		});
 	}
 
 	// Cross-Input Synchronization
 	if (input.hasAttribute('data-sync')) {
 		input.addEventListener('change', () => {
-			let attribute =  input.dataset.sync ?? '';
-			let directives = attribute.includes('&') ? input.dataset.sync.split('&') : [attribute];
-
+			let directives = input.dataset.sync.includes('&') ? input.dataset.sync.split('&') : [input.dataset.sync];
 			directives.forEach(directive => {
 				let trigger = directive.substring(0, directive.indexOf('['));
 				let config = directive.substring(directive.indexOf('[') + 1, directive.indexOf(']'));
@@ -355,44 +352,61 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 });
 
+function removeDataOverlay() {
+	let overlay = document.querySelector('overlay');
+	if (overlay !== null) {
+		overlay.classList.remove('visible');
+		setTimeout(() => overlay.remove(), 150);
+	}
+}
+
+function showDataOverlay(url) {
+
+	let overlay = document.createElement('overlay');
+	let content = document.createElement('content');
+	let iframe = document.createElement('iframe');
+
+	document.body.appendChild(overlay);
+
+	overlay.appendChild(content);
+	content.appendChild(iframe);
+
+	if (iframe !== null) {
+		iframe.src = url;
+
+		iframe.onload = function() {
+			iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
+			overlay.classList.add('visible');
+		};
+	}
+}
+
+if (window.self === window.top) {
+	window.addEventListener('message', function(event) {
+		if (event.data.startsWith('close:dialog')) {
+			removeDataOverlay();
+		}
+		if (event.data.startsWith('switch:dialog')) {
+			removeDataOverlay();
+			setTimeout(() => showDataOverlay(event.data.split('dialog:')[1]), 150);
+		}
+	});
+}
+
+if (window.self !== window.top) {
+	document.querySelectorAll('[href]').forEach(link => {
+		link.addEventListener("click", (event) => {
+			event.preventDefault();
+			window.top.postMessage('switch:dialog:' + link.href, '*');
+		});
+	});
+}
+
 document.querySelectorAll('[data-overlay]').forEach(trigger => {
 	trigger.addEventListener("click", (event) => {
 		event.preventDefault();
 		trigger.blur();
-
-		let overlay = document.createElement('overlay');
-		let content = document.createElement('content');
-		let iframe = document.createElement('iframe');
-
-		document.body.appendChild(overlay);
-
-		overlay.appendChild(content);
-		content.appendChild(iframe);
-
-		setTimeout(function () {
-			overlay.classList.add('visible');
-		}, 10);
-
-		if (iframe !== null) {
-			iframe.src = trigger.href;
-
-			iframe.onload = function() {
-				iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
-				setTimeout(function () {
-					content.classList.add('visible');
-				}, 180);
-			};
-		}
-
-		window.addEventListener('message', function(event) {
-			if (event.data === 'close:dialog') {
-				content.classList.remove('visible');
-				overlay.classList.remove('visible');
-				setTimeout(() => overlay.remove(), 300);
-			}
-		}, {
-			once: true
-		});
+		showDataOverlay(trigger.href);
 	});
 });
 

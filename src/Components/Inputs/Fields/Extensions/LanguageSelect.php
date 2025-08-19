@@ -19,7 +19,7 @@ class LanguageSelect extends Select
 	protected function configuration(): void
 	{
 		$this->title('Change language');
-		$this->attribute('locale-switch');
+		$this->attribute('data-switch', 'locale');
 
 		$this->name('language-switch');
 		$this->autocomplete(Autocomplete::Off);

@@ -72,6 +72,13 @@ class Anchor extends Component
 	}
 
 	// -----------------
+
+	public static function sendMessage(string $message): static
+	{
+		return (new static)->attribute('data-message', $message);
+	}
+
+	// -----------------
 	// Content
 
 	public function label(string $text, array|object $data = []): static

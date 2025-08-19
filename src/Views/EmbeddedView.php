@@ -7,11 +7,13 @@
 
 namespace Rovota\Embla\Views;
 
+use Rovota\Embla\Views\Traits\WebFunctions;
 use Rovota\Framework\Views\DefaultView;
 use Rovota\Framework\Views\ViewConfig;
 
 class EmbeddedView extends DefaultView
 {
+	use WebFunctions;
 
 	public function __construct(string|null $template, ViewConfig $config)
 	{
