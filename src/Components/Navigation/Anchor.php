@@ -75,7 +75,9 @@ class Anchor extends Component
 
 	public static function sendMessage(string $message): static
 	{
-		return (new static)->attribute('data-message', $message);
+		return (new static)->attributes([
+			'href', 'data-message' => $message
+		]);
 	}
 
 	// -----------------

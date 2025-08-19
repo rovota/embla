@@ -1,7 +1,6 @@
 // Created and designed by Rovota
 // ----------------------
 
-// Slugification
 function slugify(str) {
 	str = str.trim().toLowerCase().replace(/./g, function (char) {
 		return {
@@ -38,7 +37,35 @@ function updateFormElementUsingDirective(form, config, input) {
 	});
 }
 
-// Correct canvas scaling
+function removeDataOverlay() {
+	let overlay = document.querySelector('overlay');
+	if (overlay !== null) {
+		overlay.classList.remove('visible');
+		setTimeout(() => overlay.remove(), 150);
+	}
+}
+
+function showDataOverlay(url) {
+
+	let overlay = document.createElement('overlay');
+	let content = document.createElement('content');
+	let iframe = document.createElement('iframe');
+
+	document.body.appendChild(overlay);
+
+	overlay.appendChild(content);
+	content.appendChild(iframe);
+
+	if (iframe !== null) {
+		iframe.src = url;
+
+		iframe.onload = function() {
+			iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
+			overlay.classList.add('visible');
+		};
+	}
+}
+
 function fixDrawingCanvas(canvas, drawing) {
 	const ratio = Math.max(window.devicePixelRatio || 1, 1);
 
@@ -82,8 +109,8 @@ function dataUrlToFile(data, filename) {
 }
 
 // -----------------
+// Toast Messages
 
-// Toast messages
 document.querySelectorAll('toast').forEach(toast => {
 	const message = document.createTextNode(toast.dataset.message);
 	toast.appendChild(message);
@@ -94,7 +121,9 @@ document.querySelectorAll('toast').forEach(toast => {
 	setTimeout(() => toast.remove(), 5000);
 });
 
-// Automatic background lightness detection
+// -----------------
+// Lightness Detection
+
 document.querySelectorAll('.detect-lightness').forEach(element => {
 	const raw = window.getComputedStyle(element).backgroundColor;
 	const rgb = raw.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
@@ -110,7 +139,9 @@ document.querySelectorAll('.detect-lightness').forEach(element => {
 	}
 });
 
-// Drawing functionality
+// -----------------
+// Drawing
+
 document.querySelectorAll('#drawing').forEach(element => {
 	element.getContext("2d", { willReadFrequently: true })
 
@@ -171,7 +202,9 @@ document.querySelectorAll('#drawing').forEach(element => {
 	}
 });
 
-// Input functionality
+// -----------------
+// Inputs
+
 document.querySelectorAll('input, textarea, select').forEach(input => {
 
 	let form = input.closest('form');
@@ -352,72 +385,9 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 });
 
-function removeDataOverlay() {
-	let overlay = document.querySelector('overlay');
-	if (overlay !== null) {
-		overlay.classList.remove('visible');
-		setTimeout(() => overlay.remove(), 150);
-	}
-}
+// -----------------
+// Toggles
 
-function showDataOverlay(url) {
-
-	let overlay = document.createElement('overlay');
-	let content = document.createElement('content');
-	let iframe = document.createElement('iframe');
-
-	document.body.appendChild(overlay);
-
-	overlay.appendChild(content);
-	content.appendChild(iframe);
-
-	if (iframe !== null) {
-		iframe.src = url;
-
-		iframe.onload = function() {
-			iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
-			overlay.classList.add('visible');
-		};
-	}
-}
-
-if (window.self === window.top) {
-	window.addEventListener('message', function(event) {
-		if (event.data.startsWith('close:dialog')) {
-			removeDataOverlay();
-		}
-		if (event.data.startsWith('switch:dialog')) {
-			removeDataOverlay();
-			setTimeout(() => showDataOverlay(event.data.split('dialog:')[1]), 150);
-		}
-	});
-}
-
-if (window.self !== window.top) {
-	document.querySelectorAll('[href]').forEach(link => {
-		link.addEventListener("click", (event) => {
-			event.preventDefault();
-			window.top.postMessage('switch:dialog:' + link.href, '*');
-		});
-	});
-}
-
-document.querySelectorAll('[data-overlay]').forEach(trigger => {
-	trigger.addEventListener("click", (event) => {
-		event.preventDefault();
-		trigger.blur();
-		showDataOverlay(trigger.href);
-	});
-});
-
-document.querySelectorAll('[data-message]').forEach(trigger => {
-	trigger.addEventListener("click", (event) => {
-		event.preventDefault();
-		window.top.postMessage(trigger.dataset.message, '*');
-	});
-});
-
-// Toggle functionality
 document.querySelectorAll('[data-toggle]').forEach(toggle => {
 	toggle.addEventListener("click", () => {
 		// Enable drawer functionality
@@ -428,7 +398,9 @@ document.querySelectorAll('[data-toggle]').forEach(toggle => {
 	});
 });
 
-// Simulate anchor functionality by a data tag.
+// -----------------
+// Simulate Anchors
+
 document.querySelectorAll('[data-href]').forEach(element => {
 	element.setAttribute('tabindex', '0');
 	element.addEventListener('keypress', event => {
@@ -439,25 +411,12 @@ document.querySelectorAll('[data-href]').forEach(element => {
 	});
 });
 
-// Add classes to specific navigation elements.
-document.querySelectorAll('nav-trigger').forEach(trigger => {
-	document.querySelectorAll(trigger.dataset.prefix + trigger.dataset.item).forEach(element => {
-		element.classList.add(trigger.dataset.class);
-	});
-	trigger.remove();
-});
+// -----------------
+// Table Sorting
 
-// Automatic fragment identification
-document.querySelectorAll('h2').forEach(heading => {
-	if (!heading.hasAttribute('id')) {
-		heading.setAttribute('id', slugify(heading.textContent));
-	}
-});
-
-// Sortable Table functionality
-document.querySelectorAll('table.sortable').forEach(table => {
+document.querySelectorAll('[data-sortable]').forEach(table => {
 	let selected_trigger;
-	table.querySelectorAll('[data-sortable]').forEach(trigger => {
+	table.querySelectorAll('.sortable').forEach(trigger => {
 		if (trigger.classList.contains('sorted')) {
 			selected_trigger = trigger;
 		}
@@ -518,7 +477,29 @@ document.querySelectorAll('table.sortable').forEach(table => {
 	});
 });
 
-// Carousel functionality
+
+// -----------------
+// Process Triggers
+
+document.querySelectorAll('nav-trigger').forEach(trigger => {
+	document.querySelectorAll(trigger.dataset.prefix + trigger.dataset.item).forEach(element => {
+		element.classList.add(trigger.dataset.class);
+	});
+	trigger.remove();
+});
+
+// -----------------
+// Fragment Identification
+
+document.querySelectorAll('h2').forEach(heading => {
+	if (!heading.hasAttribute('id')) {
+		heading.setAttribute('id', slugify(heading.textContent));
+	}
+});
+
+// -----------------
+// Carousel Functionality
+
 document.querySelectorAll('carousel').forEach(carousel => {
 
 	let slides = carousel.querySelectorAll('.item');
@@ -580,8 +561,11 @@ document.querySelectorAll('carousel').forEach(carousel => {
 	}
 });
 
-// Automatically trigger the scroll-to-top button
+// -----------------
+// Scroll Location
+
 let scroll_button = document.querySelector('scrollbutton');
+
 if (scroll_button !== null) {
 	let parent = document.querySelector(scroll_button.dataset.parent);
 	parent.onscroll = () => {
@@ -590,18 +574,59 @@ if (scroll_button !== null) {
 	scroll_button.addEventListener('click', () => parent.scrollTop = 0);
 }
 
-// Tab navigation
-let tabs_toggle = document.getElementById('tabs-toggle');
-tabs_toggle?.addEventListener("click", () => {
-	tabs_toggle.classList.toggle('active');
-	document.getElementById('tabs-content').classList.toggle('expanded');
-});
+// -----------------
+// Tabs Expansion
 
+let tabs_toggle = document.getElementById('tabs-toggle');
+
+if (tabs_toggle !== null) {
+	tabs_toggle.addEventListener("click", () => {
+		tabs_toggle.classList.toggle('active');
+		document.getElementById('tabs-content').classList.toggle('expanded');
+	});
+}
+
+// -----------------
 // Standalone Fixes
+
 if (window.matchMedia('(display-mode: standalone)').matches) {
-	// Removes duplicated site name
-	const separator = ' - ';
-	if (document.title.includes(separator)) {
-		document.title = document.title.split(separator)[0].trim();
+	if (document.title.includes(' - ')) {
+		document.title = document.title.split(' - ')[0].trim();
 	}
+}
+
+// -----------------
+// Dialog Interactivity
+
+if (window.self === window.top) {
+	document.querySelectorAll('[data-overlay]').forEach(trigger => {
+		trigger.addEventListener("click", (event) => {
+			event.preventDefault();
+			trigger.blur();
+			showDataOverlay(trigger.href);
+		});
+	});
+
+	window.addEventListener('message', function(event) {
+		if (event.data.startsWith('close:dialog')) {
+			removeDataOverlay();
+		}
+		if (event.data.startsWith('switch:dialog')) {
+			removeDataOverlay();
+			setTimeout(() => showDataOverlay(event.data.split('dialog:')[1]), 150);
+		}
+	});
+}
+
+if (window.self !== window.top) {
+	document.querySelectorAll('[href]').forEach(link => {
+		link.addEventListener("click", (event) => {
+			event.preventDefault();
+			if (link.hasAttribute('data-message')) {
+				window.top.postMessage(link.dataset.message, '*');
+			} else {
+				window.top.postMessage('switch:dialog:' + link.href, '*');
+			}
+		});
+	});
 }

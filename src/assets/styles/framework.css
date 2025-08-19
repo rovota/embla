@@ -477,20 +477,20 @@ table thead th {
 	white-space: nowrap;
 }
 
-table thead th[data-sortable] {
+table thead th.sortable {
 	color: rgba(var(--color-font), var(--opacity-subtext));
 	cursor: pointer;
 }
 
-table thead th[data-sortable]:hover {
+table thead th.sortable:hover {
 	text-decoration: underline;
 }
 
-table thead th[data-sortable].sorted {
+table thead th.sortable.sorted {
 	color: rgba(var(--color-font), 1);
 }
 
-table thead th[data-sortable].sorted::after {
+table thead th.sortable.sorted::after {
 	content: ' •';
 }
 
