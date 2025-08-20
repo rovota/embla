@@ -22,9 +22,9 @@ class ParentTrigger extends Component
 	// -----------------
 	// Starters
 
-	public static function message(string $value): static
+	public static function message(string $action, string|null $value = null): static
 	{
-		return (new static)->attribute('data-message', 'parent:' . $value);
+		return (new static)->attribute('data-message', 'parent:' . $action . ($value ? ':' . $value : ''));
 	}
 
 }

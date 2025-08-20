@@ -24,9 +24,12 @@ trait OverlayFunctions
 		return $this;
 	}
 
-	public function withParent(string $value): static
+	public function withParent(string $action, string|null $value = null): static
 	{
-		Partial::attachVariable('*', 'parent', $value);
+		Partial::attachVariable('*', 'parent', [
+			'action' => $action,
+			'value' => $value,
+		]);
 		return $this;
 	}
 
