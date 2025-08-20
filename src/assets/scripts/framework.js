@@ -651,6 +651,10 @@ if (window.self === window.top) {
 		if (event.data.startsWith('parent:reload')) {
 			window.location.reload();
 		}
+		if (event.data.startsWith('parent:switch')) {
+			console.log('switch')
+			window.location.replace(event.data.split('switch:')[1]);
+		}
 	});
 }
 
