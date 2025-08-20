@@ -64,4 +64,9 @@ class Button extends Component
 		return $this->class('link');
 	}
 
+	public function large(): static
+	{
+		return $this->class('large');
+	}
+
 }

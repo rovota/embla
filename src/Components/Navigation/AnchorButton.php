@@ -38,4 +38,9 @@ class AnchorButton extends Anchor
 		return $this->class('link');
 	}
 
+	public function large(): static
+	{
+		return $this->class('large');
+	}
+
 }
