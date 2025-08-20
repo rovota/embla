@@ -649,10 +649,11 @@ if (window.self === window.top) {
 			setTimeout(() => showDataOverlay(event.data.split('switch:')[1]), 150);
 		}
 		if (event.data.startsWith('parent:reload')) {
+			removeDataOverlay();
 			window.location.reload();
 		}
 		if (event.data.startsWith('parent:switch')) {
-			console.log('switch')
+			removeDataOverlay();
 			window.location.replace(event.data.split('switch:')[1]);
 		}
 	});
