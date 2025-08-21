@@ -1,18 +1,30 @@
 // Created and designed by Rovota
 // ----------------------
 
-function slugify(str) {
-	str = str.trim().toLowerCase().replace(/./g, function (char) {
-		return {
-			'á': 'a', 'ä': 'a', 'â': 'a', 'à': 'a', 'ã': 'a', 'å': 'a', 'č': 'c', 'ç': 'c', 'ć': 'c',
-			'ď': 'd', 'é': 'e', 'ě': 'e', 'ë': 'e', 'è': 'e', 'ê': 'e', 'ẽ': 'e', 'ĕ': 'e', 'ȇ': 'e',
-			'ğ': 'g', 'ħ': 'h', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ı': 'i', 'ň': 'n', 'ñ': 'n',
-			'ó': 'o', 'ö': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ø': 'o', 'ð': 'o', 'ř': 'r', 'ŕ': 'r',
-			'š': 's', 'ş': 's', 'ť': 't', 'ú': 'u', 'ů': 'u', 'ü': 'u', 'ù': 'u', 'û': 'u', 'ý': 'y',
-			'ÿ': 'y', 'ž': 'z', 'þ': 'b', 'đ': 'd', 'ß': 'b', 'æ': 'a',
-		}[char] ?? char;
-	});
-	return str.replace(/([^a-z0-9-]|(-))+/g, '-').replace(/^-|-$/g, '');
+const embla = new class Embla {
+	constructor() {
+		this.helpers = new class Helpers {
+			getRealLength(value) {
+				return value.length + (value.match(/\n/g) || []).length;
+			}
+
+			getNormalizedCharacter(char) {
+				return {
+					'á': 'a', 'ä': 'a', 'â': 'a', 'à': 'a', 'ã': 'a', 'å': 'a', 'č': 'c', 'ç': 'c', 'ć': 'c',
+					'ď': 'd', 'é': 'e', 'ě': 'e', 'ë': 'e', 'è': 'e', 'ê': 'e', 'ẽ': 'e', 'ĕ': 'e', 'ȇ': 'e',
+					'ğ': 'g', 'ħ': 'h', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ı': 'i', 'ň': 'n', 'ñ': 'n',
+					'ó': 'o', 'ö': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ø': 'o', 'ð': 'o', 'ř': 'r', 'ŕ': 'r',
+					'š': 's', 'ş': 's', 'ť': 't', 'ú': 'u', 'ů': 'u', 'ü': 'u', 'ù': 'u', 'û': 'u', 'ý': 'y',
+					'ÿ': 'y', 'ž': 'z', 'þ': 'b', 'đ': 'd', 'ß': 'ss', 'æ': 'ae',
+				}[char] ?? char;
+			}
+
+			slugify(str) {
+				str = str.trim().toLowerCase().replace(/./g, char => this.getNormalizedCharacter(char));
+				return str.replace(/([^a-z0-9-]|(-))+/g, '-').replace(/^-|-$/g, '');
+			}
+		}
+	}
 }
 
 function updateFormElementUsingDirective(form, config, input) {
@@ -338,9 +350,9 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	// Slug input functionality
 	if (input.hasAttribute('slugify')) {
 		let note = input.parentElement.nextElementSibling.querySelector('span');
-		note.innerHTML = slugify(input.value);
+		note.innerHTML = embla.helpers.slugify(input.value);
 		input.addEventListener('input', () => {
-			note.innerHTML = slugify(input.value);
+			note.innerHTML = embla.helpers.slugify(input.value);
 		});
 	}
 
@@ -350,9 +362,9 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		let counter = input.parentElement.nextElementSibling?.querySelector('charcount');
 		if (counter != null) {
 			input.parentElement.nextElementSibling.querySelector('charlimit').innerHTML = limit;
-			counter.innerHTML = input.value.length;
+			counter.innerHTML = embla.helpers.getRealLength(input.value)
 			input.addEventListener('input', () => {
-				counter.innerHTML = input.value.length;
+				counter.innerHTML = embla.helpers.getRealLength(input.value)
 			});
 		}
 	}
@@ -497,7 +509,7 @@ document.querySelectorAll('[data-sortable]').forEach(table => {
 
 document.querySelectorAll('h2').forEach(heading => {
 	if (!heading.hasAttribute('id')) {
-		heading.setAttribute('id', slugify(heading.textContent));
+		heading.setAttribute('id', embla.helpers.slugify(heading.textContent));
 	}
 });
 
@@ -673,7 +685,7 @@ if (window.self !== window.top) {
 		});
 	});
 	document.querySelectorAll('button').forEach(button => {
-		button.addEventListener("click", (event) => {
+		button.addEventListener("click", () => {
 			window.top.postMessage('overlay:hide', '*');
 		});
 	});
