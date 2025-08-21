@@ -48,16 +48,16 @@ final class Embla extends ServiceProvider
 		View::attachScript('*', 'signature', [
 			'source' => self::ASSET_FOLDER . '/scripts/signature.min.js',
 		]);
-		View::attachScript('*', 'framework', [
-			'source' => self::ASSET_FOLDER . '/scripts/framework.js',
+		View::attachScript('*', 'embla', [
+			'source' => self::ASSET_FOLDER . '/scripts/embla.js',
 		]);
 		View::attachScript('*', 'spotlight', [
 			'source' => self::ASSET_FOLDER . '/scripts/spotlight.min.js',
 		]);
 
 		// CSS
-		View::attachLink('*', 'framework', [
-			'style' => self::ASSET_FOLDER . '/styles/framework.css',
+		View::attachLink('*', 'embla', [
+			'style' => self::ASSET_FOLDER . '/styles/embla.css',
 		]);
 		View::attachLink('*', 'spotlight', [
 			'style' => self::ASSET_FOLDER . '/styles/spotlight.min.css',
