@@ -94,6 +94,7 @@ img {
 	margin: 0;
 	padding: 0;
 	max-width: 100%;
+	user-select: none;
 }
 
 /* ---------------------- */
@@ -262,6 +263,7 @@ label, dl dt {
 	font-weight: 500;
 	margin-bottom: 5px;
 	position: relative;
+	user-select: none;
 }
 
 dl {
@@ -475,6 +477,7 @@ table thead th {
 	padding: 0.75rem;
 	text-align: left;
 	white-space: nowrap;
+	user-select: none;
 }
 
 table thead th.sortable {
@@ -910,6 +913,7 @@ input-box > :focus-visible {
 
 input-note {
 	color: rgba(var(--color-font), var(--opacity-subtext));
+	user-select: none;
 	display: block;
 	font-size: 0.875rem;
 	margin-top: 5px;
@@ -921,6 +925,7 @@ input-note > span {
 
 input-errors {
 	color: rgba(var(--color-danger), 1);
+	user-select: none;
 	display: flex;
 	flex-direction: column;
 	font-size: 0.875rem;
@@ -1497,6 +1502,7 @@ notice {
 	display: flex;
 	flex-direction: row;
 	padding: 0.6rem 1rem;
+	user-select: none;
 }
 
 notice > svg {
@@ -1593,6 +1599,7 @@ button, .button {
 	transition: all .12s ease;
 	white-space: nowrap;
 	column-gap: 0.6rem;
+	user-select: none;
 }
 
 button:has(svg:first-child:not(:only-child)), .button:has(svg:first-child:not(:only-child)) {
@@ -1814,6 +1821,7 @@ toast {
 	border-top: 1px solid rgba(var(--color-font), .07);
 	box-shadow: 0 0 10px 0 rgba(var(--color-dark), .02);
 	color: rgba(var(--color-font), 1);
+	pointer-events: none;
 	position: fixed;
 	bottom: 0; left: 0;
 	width: 100%;
@@ -1844,6 +1852,7 @@ pagination {
 	display: flex;
 	flex-direction: row;
 	column-gap: 6px;
+	user-select: none;
 }
 
 pagination a {
@@ -1944,7 +1953,7 @@ pre, code {
 	color: rgba(var(--color-font), 1);
 	font-family: monospace;
 	font-size: 1rem;
-	-webkit-user-select: text;
+	user-select: text;
 }
 
 pre > code {
@@ -2105,6 +2114,7 @@ breadcrumbs {
 	justify-content: center;
 	align-items: center;
 	background: rgba(var(--color-base), 1);
+	user-select: none;
 }
 
 breadcrumbs > container > nav {
@@ -2270,8 +2280,7 @@ span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
 /* ---------------------- */
 /* Helpers */
 
-.throttled
-{
+.throttled {
 	pointer-events: none;
 	opacity: 0.65;
 }
@@ -2317,23 +2326,23 @@ span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
 }
 
 .select-none {
-	-webkit-user-select: none;
+	user-select: none;
 }
 
 .select-all {
-	-webkit-user-select: all;
+	user-select: all;
 }
 
 .select-text {
-	-webkit-user-select: text;
+	user-select: text;
 }
 
 .select-auto {
-	-webkit-user-select: auto;
+	user-select: auto;
 }
 
 .select-contain {
-	-webkit-user-select: contain;
+	user-select: contain;
 }
 
 .mb-0 {
