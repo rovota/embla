@@ -2270,6 +2270,12 @@ span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
 /* ---------------------- */
 /* Helpers */
 
+.throttled
+{
+	pointer-events: none;
+	opacity: 0.65;
+}
+
 .colored {
 	color: rgba(var(--color-accent), 1);
 }

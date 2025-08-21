@@ -431,7 +431,9 @@ document.querySelectorAll('[data-toggle]').forEach(toggle => {
 document.querySelectorAll('[data-href]').forEach(element => {
 	element.setAttribute('tabindex', '0');
 	element.addEventListener('keypress', event => {
-		if (event.key === 'Enter') window.location = element.dataset.href;
+		if (event.key === 'Enter') {
+			window.location = element.dataset.href;
+		}
 	});
 	element.addEventListener('click', () => {
 		window.location = element.dataset.href;
@@ -640,7 +642,13 @@ if (window.self === window.top) {
 	document.querySelectorAll('[data-overlay]').forEach(trigger => {
 		trigger.addEventListener("click", (event) => {
 			event.preventDefault();
-			trigger.blur();
+
+			// TODO: Retain a reference to this trigger so when dialogs are opened and closed, we can remove the throttled class.
+			trigger.classList.add('throttled');
+			setTimeout(function(){
+				trigger.classList.remove('throttled');
+			}, 1000);
+
 			showDataOverlay(trigger.href);
 		});
 	});
