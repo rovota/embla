@@ -19,7 +19,7 @@ trait InputCommons
 
 	public function name(string|int $name, bool $identifier = true): static
 	{
-		if (strlen((string) $name) > 0) {
+		if (strlen((string)$name) > 0) {
 			$this->attribute('name', $name);
 			if ($identifier === true) {
 				$this->attribute('id', $name);

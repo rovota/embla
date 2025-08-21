@@ -24,7 +24,7 @@ class Anchor extends Component
 
 	public static function toUrl(UrlObject $url): static
 	{
-		return (new static)->attribute('href', (string) $url);
+		return (new static)->attribute('href', (string)$url);
 	}
 
 	public static function to(string $path, array $parameters = []): static

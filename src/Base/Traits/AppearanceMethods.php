@@ -30,7 +30,7 @@ trait AppearanceMethods
 			$color = $color->value;
 		}
 
-		$this->replaceClassWithPrefix('accent-', 'accent-'.trim($color));
+		$this->replaceClassWithPrefix('accent-', 'accent-' . trim($color));
 		$this->detectLightness();
 
 		return $this;
@@ -40,7 +40,7 @@ trait AppearanceMethods
 
 	public function selection(string $type): static
 	{
-		$this->replaceClassWithPrefix('select-', 'select-'.trim($type));
+		$this->replaceClassWithPrefix('select-', 'select-' . trim($type));
 		return $this;
 	}
 
@@ -48,25 +48,25 @@ trait AppearanceMethods
 
 	public function marginTop(int $number): static
 	{
-		$this->replaceClassWithPrefix('mt-', 'mt-'.abs($number));
+		$this->replaceClassWithPrefix('mt-', 'mt-' . abs($number));
 		return $this;
 	}
 
 	public function marginBottom(int $number): static
 	{
-		$this->replaceClassWithPrefix('mb-', 'mb-'.abs($number));
+		$this->replaceClassWithPrefix('mb-', 'mb-' . abs($number));
 		return $this;
 	}
 
 	public function paddingTop(int $number): static
 	{
-		$this->replaceClassWithPrefix('pt-', 'pt-'.abs($number));
+		$this->replaceClassWithPrefix('pt-', 'pt-' . abs($number));
 		return $this;
 	}
 
 	public function paddingBottom(int $number): static
 	{
-		$this->replaceClassWithPrefix('pb-', 'pb-'.abs($number));
+		$this->replaceClassWithPrefix('pb-', 'pb-' . abs($number));
 		return $this;
 	}
 

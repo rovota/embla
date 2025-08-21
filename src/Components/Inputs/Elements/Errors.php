@@ -30,7 +30,7 @@ class Errors extends Component
 		}
 
 		return (new static)->withForEach($errors, function (Message $error) {
-			return '<span>'.$error->formatted().'</span>';
+			return '<span>' . $error->formatted() . '</span>';
 		});
 	}
 

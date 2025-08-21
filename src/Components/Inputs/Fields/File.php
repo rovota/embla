@@ -48,7 +48,7 @@ class File extends Base
 
 	public function allowTypes(array|string $types): static
 	{
-		$specifiers = match(true) {
+		$specifiers = match (true) {
 			is_string($types) => text($types)->remove(' ')->explode(','),
 			default => $types,
 		};
@@ -61,7 +61,7 @@ class File extends Base
 
 	public function capture(string $view): static
 	{
-		$view = match($view) {
+		$view = match ($view) {
 			'front' => 'user',
 			'rear' => 'environment',
 			default => trim($view),

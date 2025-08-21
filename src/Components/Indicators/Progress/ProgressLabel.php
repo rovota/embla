@@ -34,7 +34,7 @@ class ProgressLabel extends Component
 		$suffix = $this->variables->string('suffix', '%');
 
 		$value = Number::format(abs($value), $precision);
-		return $this->with(Small::content($value.$suffix));
+		return $this->with(Small::content($value . $suffix));
 	}
 
 	// -----------------
@@ -57,16 +57,16 @@ class ProgressLabel extends Component
 
 	// -----------------
 	// Misc
-	
+
 	protected function prepareRender(): void
 	{
 		$progress = $this->parent->children->first(function (Component $component) {
 			return $component instanceof Progress;
 		});
-		
+
 		if ($progress !== null) {
 			if ($progress->attributes->has('max') && $this->variables->get('suffix') === '/') {
-				$this->suffix(' / '.$progress->attributes->get('max'));
+				$this->suffix(' / ' . $progress->attributes->get('max'));
 			}
 			if ($progress->attributes->has('value')) {
 				$this->percentage($progress->attributes->int('value', 0));

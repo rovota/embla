@@ -29,7 +29,7 @@ class Grid extends Component
 
 	protected function prepareRender(): void
 	{
-		if ($this->classes->contains(fn (string $class) => str_starts_with($class, 'grid-')) === false) {
+		if ($this->classes->contains(fn(string $class) => str_starts_with($class, 'grid-')) === false) {
 			$this->class('grid-auto');
 		}
 	}

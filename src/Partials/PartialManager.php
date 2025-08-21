@@ -96,7 +96,7 @@ final class PartialManager extends ServiceProvider
 
 			foreach ($levels as $level) {
 				if (Str::endsWith($name, $level) === false) {
-					$level = Str::before($name, Str::after($name, $level. '.')) . '*';
+					$level = Str::before($name, Str::after($name, $level . '.')) . '*';
 				} else {
 					$level = $name;
 				}

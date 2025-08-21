@@ -39,7 +39,7 @@ trait ComponentChildren
 	}
 
 	// -----------------
-	
+
 	public function withTranslated(string $content, array|object $data = []): static
 	{
 		return $this->withEscaped(Str::translate($content, $data));

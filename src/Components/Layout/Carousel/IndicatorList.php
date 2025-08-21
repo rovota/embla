@@ -21,7 +21,7 @@ class IndicatorList extends Component
 
 	protected function render(): string
 	{
-		return '<indicators>'.parent::render().'</indicators>';
+		return '<indicators>' . parent::render() . '</indicators>';
 	}
 
 }

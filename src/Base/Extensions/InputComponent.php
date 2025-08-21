@@ -32,7 +32,7 @@ class InputComponent extends Component
 		if ($value !== null) {
 			$value = Cast::toRawAutomatic($value);
 
-			if (strlen((string) $value) > 0) {
+			if (strlen((string)$value) > 0) {
 				$this->attributeEscaped('value', $value);
 			}
 		}

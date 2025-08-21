@@ -30,7 +30,7 @@ class OneTimeCode extends Base
 	public function length(int $number): static
 	{
 		$this->maxLength($number);
-		$this->attribute('pattern', '[0-9]{'.abs($number).'}');
+		$this->attribute('pattern', '[0-9]{' . abs($number) . '}');
 		$this->placeholder(str_repeat('0', $number));
 		return $this;
 	}

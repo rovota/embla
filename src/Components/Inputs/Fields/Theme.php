@@ -86,7 +86,7 @@ class Theme extends Base implements InputCheckable, InputMasked
 
 	public function image(string $name): static
 	{
-		$this->variables->set('image', asset_url('interface/previews/'.$name.'.svg'));
+		$this->variables->set('image', asset_url('interface/previews/' . $name . '.svg'));
 		return $this;
 	}
 
@@ -99,7 +99,7 @@ class Theme extends Base implements InputCheckable, InputMasked
 
 	protected function render(): string
 	{
-		$html = '<label class="input-theme">'.parent::render().'<content>';
+		$html = '<label class="input-theme">' . parent::render() . '<content>';
 
 		if ($this->variables->has('image')) {
 			$html .= Image::source($this->variables->get('image'))->fallback('Preview');
@@ -109,7 +109,7 @@ class Theme extends Base implements InputCheckable, InputMasked
 			$html .= Span::content($this->variables->get('label'));
 		}
 
-		return $html.'</content></label>';
+		return $html . '</content></label>';
 	}
 
 }

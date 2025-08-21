@@ -40,7 +40,7 @@ class Breadcrumbs extends Component
 
 	protected function render(): string
 	{
-		return '<breadcrumbs><container>'.parent::render().'</container></breadcrumbs>';
+		return '<breadcrumbs><container>' . parent::render() . '</container></breadcrumbs>';
 	}
 
 }

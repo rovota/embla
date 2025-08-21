@@ -41,7 +41,7 @@ final class Icon
 	}
 
 	// -----------------
-	
+
 	protected function getFilteredContent(string $content): string
 	{
 		$content = str_replace('<svg', '<svg class="icon" fill="currentColor"', $content);

@@ -67,7 +67,7 @@ class Panel extends Base implements InputCheckable, InputMasked
 
 	protected function render(): string
 	{
-		$html = '<label class="input-panel">'.parent::render().'<indicator></indicator><content>';
+		$html = '<label class="input-panel">' . parent::render() . '<indicator></indicator><content>';
 
 		if ($this->variables->has('label')) {
 			$html .= Span::make()->withEscaped($this->variables->get('label'));
@@ -77,7 +77,7 @@ class Panel extends Base implements InputCheckable, InputMasked
 			$html .= Paragraph::make()->withEscaped($this->variables->get('description'));
 		}
 
-		return $html.'</content></label>';
+		return $html . '</content></label>';
 	}
 
 }

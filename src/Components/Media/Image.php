@@ -19,7 +19,7 @@ class Image extends Component
 	{
 		$this->config->tag = 'img';
 		$this->config->self_closing = true;
-		
+
 		$this->decoding('async');
 	}
 
@@ -28,7 +28,7 @@ class Image extends Component
 
 	public static function file(string $location, string|null $disk = null, int|null $retention = null): static
 	{
-		$target = Cache::remember('image:'.$location, function() use ($location, $disk) {
+		$target = Cache::remember('image:' . $location, function () use ($location, $disk) {
 			return Storage::disk($disk)->file($location)?->url;
 		}, $retention);
 
@@ -44,7 +44,7 @@ class Image extends Component
 
 	public static function source(mixed $location): static
 	{
-		return (new static)->attribute('src', (string) $location);
+		return (new static)->attribute('src', (string)$location);
 	}
 
 	public static function sources(array $sources): static

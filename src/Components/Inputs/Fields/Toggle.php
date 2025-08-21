@@ -64,7 +64,7 @@ class Toggle extends Base implements InputCheckable, InputMasked
 
 	protected function render(): string
 	{
-		$html = '<label class="input-toggle">'.parent::render().'<content>';
+		$html = '<label class="input-toggle">' . parent::render() . '<content>';
 
 		if ($this->variables->has('label')) {
 			$html .= Span::make()->withEscaped($this->variables->get('label'));
@@ -74,7 +74,7 @@ class Toggle extends Base implements InputCheckable, InputMasked
 			$html .= Paragraph::make()->withEscaped($this->variables->get('description'));
 		}
 
-		return $html.'</content><toggle></toggle></label>';
+		return $html . '</content><toggle></toggle></label>';
 	}
 
 }

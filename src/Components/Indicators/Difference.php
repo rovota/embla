@@ -17,7 +17,7 @@ class Difference extends Component
 	protected function configuration(): void
 	{
 		$this->config->tag = 'span';
-		
+
 		$this->class('diff');
 	}
 

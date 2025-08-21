@@ -87,7 +87,7 @@ class Swatch extends Base implements InputCheckable, InputMasked
 		if ($color instanceof BackedEnum) {
 			$color = $color->value;
 		}
-		return $this->variable('accent', 'accent-'.trim($color));
+		return $this->variable('accent', 'accent-' . trim($color));
 	}
 
 	public function triggerPreview(): static
@@ -102,16 +102,16 @@ class Swatch extends Base implements InputCheckable, InputMasked
 		$html = '<label class="input-swatch';
 
 		if ($this->variables->has('accent')) {
-			$html .= ' '.$this->variables->get('accent').' detect-lightness';
+			$html .= ' ' . $this->variables->get('accent') . ' detect-lightness';
 		}
 
 		$html .= '"';
 
 		if ($this->variables->has('label')) {
-			$html .= ' title="'.$this->variables->get('label').'"';
+			$html .= ' title="' . $this->variables->get('label') . '"';
 		}
 
-		return $html.'>'.parent::render().'<checkmark></checkmark></label>';
+		return $html . '>' . parent::render() . '<checkmark></checkmark></label>';
 	}
 
 }

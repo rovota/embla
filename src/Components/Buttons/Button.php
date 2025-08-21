@@ -31,7 +31,7 @@ class Button extends Component
 
 	public function value(mixed $value): static
 	{
-		if (strlen((string) $value) > 0) {
+		if (strlen((string)$value) > 0) {
 			$this->attributeEscaped('value', $value);
 		}
 

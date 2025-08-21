@@ -51,7 +51,7 @@ class Pagination extends Component
 
 			foreach ($pages as $number => $value) {
 				$this->with([
-					Anchor::toUrl($url->withParameter('page', $number))->with($number)->when($current === $number,function (Anchor $anchor) {
+					Anchor::toUrl($url->withParameter('page', $number))->with($number)->when($current === $number, function (Anchor $anchor) {
 						$anchor->class('active');
 					})
 				]);

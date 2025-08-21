@@ -33,7 +33,7 @@ class Option extends Component
 
 	public static function labelFromModel(Model $model): static
 	{
-		return (new static)->withTranslated((string) $model);
+		return (new static)->withTranslated((string)$model);
 	}
 
 	// -----------------
@@ -41,7 +41,7 @@ class Option extends Component
 
 	public function value(mixed $value): static
 	{
-		return $this->attribute('value', (string) $value);
+		return $this->attribute('value', (string)$value);
 	}
 
 	// -----------------

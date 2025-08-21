@@ -107,13 +107,13 @@ abstract class Component implements Stringable
 		}
 
 		if ($this->children->isEmpty()) {
-			return $fragments->append('></'.$this->config->tag.'>')->join(' ', '');
+			return $fragments->append('></' . $this->config->tag . '>')->join(' ', '');
 		}
 
 		$component = Basket::from([
 			$fragments->append('>')->join(' ', ''),
 			implode('', $this->children->toArray()),
-			'</'.$this->config->tag.'>'
+			'</' . $this->config->tag . '>'
 		]);
 
 		return $component->join();

@@ -194,13 +194,13 @@ class Input extends Component
 				$value = $data[$name] ?? $data['defaults'][$name] ?? $data['defaults'][0] ?? null;
 
 				if ($field instanceof InputCheckable) {
-					$field->checkedIf((string) Cast::toRawAutomatic($value) === $field->attributes->string('value'));
+					$field->checkedIf((string)Cast::toRawAutomatic($value) === $field->attributes->string('value'));
 					continue;
 				}
 
 				if ($field instanceof Select) {
 					foreach ($field->children as $option) {
-						$option->selectedIf((string) Cast::toRawAutomatic($value) === $option->attributes->string('value'));
+						$option->selectedIf((string)Cast::toRawAutomatic($value) === $option->attributes->string('value'));
 					}
 				}
 

@@ -68,7 +68,7 @@ trait ComponentData
 
 	public function attributeEscaped(string $name, mixed $value): static
 	{
-		return $this->attribute($name, Str::escape((string) $value));
+		return $this->attribute($name, Str::escape((string)$value));
 	}
 
 	// -----------------
@@ -111,7 +111,7 @@ trait ComponentData
 		}
 
 		if ($value instanceof Stringable) {
-			return (string) $value;
+			return (string)$value;
 		}
 
 		return $value;

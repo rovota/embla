@@ -24,7 +24,7 @@ class TabAction extends Component
 	public static function for(string $name): static
 	{
 		return (new static)->attributes([
-			'class' => 'tab-'.$name,
+			'class' => 'tab-' . $name,
 		]);
 	}
 
@@ -41,7 +41,7 @@ class TabAction extends Component
 
 	public function target(mixed $target): static
 	{
-		return $this->attribute('href', (string) $target);
+		return $this->attribute('href', (string)$target);
 	}
 
 	public function route(string $name, array $context = [], array $parameters = []): static
