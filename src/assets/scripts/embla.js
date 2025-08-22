@@ -654,27 +654,29 @@ if (window.self === window.top) {
 	});
 
 	window.addEventListener('message', function (event) {
-		if (event.data.startsWith('overlay:close')) {
-			removeDataOverlay();
-		}
-		if (event.data.startsWith('overlay:hide')) {
-			hideDataOverlay();
-		}
-		if (event.data.startsWith('overlay:reload')) {
-			removeDataOverlay();
-			setTimeout(() => showDataOverlay(window.location.href), 150);
-		}
-		if (event.data.startsWith('overlay:switch')) {
-			removeDataOverlay();
-			setTimeout(() => showDataOverlay(event.data.split('switch:')[1]), 150);
-		}
-		if (event.data.startsWith('parent:reload')) {
-			removeDataOverlay();
-			window.location.reload();
-		}
-		if (event.data.startsWith('parent:switch')) {
-			removeDataOverlay();
-			window.location.replace(event.data.split('switch:')[1]);
+		if (event.data instanceof String) {
+			if (event.data.startsWith('overlay:close')) {
+				removeDataOverlay();
+			}
+			if (event.data.startsWith('overlay:hide')) {
+				hideDataOverlay();
+			}
+			if (event.data.startsWith('overlay:reload')) {
+				removeDataOverlay();
+				setTimeout(() => showDataOverlay(window.location.href), 150);
+			}
+			if (event.data.startsWith('overlay:switch')) {
+				removeDataOverlay();
+				setTimeout(() => showDataOverlay(event.data.split('switch:')[1]), 150);
+			}
+			if (event.data.startsWith('parent:reload')) {
+				removeDataOverlay();
+				window.location.reload();
+			}
+			if (event.data.startsWith('parent:switch')) {
+				removeDataOverlay();
+				window.location.replace(event.data.split('switch:')[1]);
+			}
 		}
 	});
 }
