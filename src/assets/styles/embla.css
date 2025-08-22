@@ -2441,6 +2441,10 @@ span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
 	padding-top: 40px;
 }
 
+.hidden {
+	display: none !important;
+}
+
 /* ---------------------- */
 /* Corrections */
 
