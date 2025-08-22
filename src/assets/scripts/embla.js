@@ -654,7 +654,7 @@ if (window.self === window.top) {
 	});
 
 	window.addEventListener('message', function (event) {
-		if (event.data instanceof String) {
+		if (typeof event.data === 'string' || event.data instanceof String) {
 			if (event.data.startsWith('overlay:close')) {
 				removeDataOverlay();
 			}
