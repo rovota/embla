@@ -25,6 +25,24 @@ html, body {
 	padding: 0;
 }
 
+shading {
+	background: rgba(0, 0, 0, 0.3);
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	transition: all .3s ease;
+	width: 100%;
+	z-index: 10;
+}
+
+shading.visible {
+	opacity: 1;
+	pointer-events: all;
+}
+
 iframe {
 	border: none;
 }
@@ -34,10 +52,6 @@ iframe.youtube {
 	height: 410px;
 	margin: 1.4em 0;
 	border-radius: var(--radius-standard);
-}
-
-body.disable-scrolling {
-	overflow: hidden;
 }
 
 * {
@@ -135,7 +149,7 @@ h5 {
 }
 
 hr {
-	background: rgba(var(--color-font), .07);
+	background: rgba(var(--color-font), .1);
 	border: none;
 	border-radius: var(--radius-small);
 	height: 1px;
@@ -680,7 +694,7 @@ table-filters + table {
 /* Inputs */
 
 [disabled] {
-	cursor: not-allowed;
+	pointer-events: none;
 	opacity: var(--opacity-subtext);
 }
 
@@ -1409,7 +1423,7 @@ accordion.borderless > details {
 }
 
 accordion > details:not(:first-child) {
-	border-top: 1px solid rgba(var(--color-font), 0.07);
+	border-top: 1px solid rgba(var(--color-font), 0.1);
 }
 
 accordion > details > summary {
@@ -1620,6 +1634,16 @@ button:focus-visible, .button:focus-visible {
 	outline: none;
 }
 
+.below-threshold button, .below-threshold .button {
+	color: rgba(var(--color-light), 1);
+	background: rgba(var(--color-light), .15);
+}
+
+.below-threshold button:hover, .below-threshold .button:hover {
+	color: rgba(var(--color-light), 1);
+	background: rgba(var(--color-light), .25);
+}
+
 button[class*='accent-'], .button[class*='accent-'] {
 	background: rgba(var(--color-accent), 1);
 	color: rgba(var(--color-light), 1);
@@ -1675,7 +1699,7 @@ button.large, .button.large {
 	font-size: 1.1rem;
 }
 
-button.icon, .button.icon {
+button:has(svg), .button:has(svg) {
 	padding: 0 0.45rem;
 }
 
@@ -1684,7 +1708,7 @@ td button.link, td .button.link {
 	padding: 0;
 }
 
-td button.icon, td .button.icon {
+td button:has(svg), td .button:has(svg) {
 	height: auto;
 	padding: 0;
 }
@@ -1723,7 +1747,7 @@ button-group {
 	flex-direction: row;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 1.25rem;
 }
 
 button-group > * {
@@ -2170,7 +2194,7 @@ breadcrumbs > container > nav > a:last-child::after {
 
 placeholder {
 	display: block;
-	border: 1px solid rgba(var(--color-font), .07);
+	border: 1px solid rgba(var(--color-font), .1);
 	background: rgba(var(--color-font), 0.03);
 	border-radius: var(--radius-standard);
 	padding: 2rem 1.25rem;
@@ -2192,27 +2216,223 @@ placeholder > span {
 }
 
 /* ---------------------- */
+/* Cards */
+
+.card {
+	background: rgba(var(--color-card), 1);
+	border: 1px solid rgba(var(--color-font), .1);
+	border-radius: var(--radius-standard);
+	position: relative;
+	display: block;
+	overflow: auto;
+	width: 100%;
+}
+
+.card[href] {
+	color: rgba(var(--color-font), 1);
+	text-decoration: none;
+}
+
+.card[href]:hover {
+	border: 1px solid rgba(var(--color-font), .3);
+}
+
+.card[class*='accent-'] {
+	border: 1px solid rgba(var(--color-font), .2);
+	background: rgba(var(--color-accent), .5);
+}
+
+.card[href][class*='accent-']:hover {
+	border: 1px solid rgba(var(--color-font), 0.8);
+}
+
+.card[class*='accent-'].saturated {
+	background: rgba(var(--color-accent), 1);
+}
+
+.card ::-webkit-scrollbar {
+	height: 5px;
+	width: 5px;
+}
+
+.card ::-webkit-scrollbar-thumb {
+	border: none;
+}
+
+.card > heading {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	overflow: hidden;
+	padding: 1rem 1.25rem;
+	user-select: none;
+}
+
+.card > heading > span {
+	flex-grow: 1;
+	font-weight: 700;
+	line-height: 1.5rem;
+	white-space: nowrap;
+}
+
+.card > heading > a {
+	height: 1.5rem;
+}
+
+.card > heading > a:has(svg) {
+	background: none;
+	width: 24px;
+	padding: 0;
+}
+
+.card > heading > a:has(svg):hover {
+	box-shadow: none;
+	background: rgba(var(--color-font), .05);
+	color: rgba(var(--color-font), 1);
+}
+
+.card > hr {
+	border-radius: 0;
+	margin: 0;
+}
+
+.card > content {
+	display: block;
+	overflow: auto;
+	padding: 1.25rem;
+}
+
+.card > content.minimal {
+	padding: 0;
+}
+
+.card > content.scrollable {
+	padding: 1.25rem 0.5rem;
+}
+
+.card > heading + content {
+	padding-top: 0;
+}
+
+.card > heading + content.scrollable {
+	padding-top: 0;
+}
+
+.card > content > content-scroller {
+	padding: 0 0.75rem;
+	display: block;
+	overflow-y: auto;
+}
+
+.card > content > content-scroller.h100 {
+	max-height: 100px;
+}
+
+.card > content > content-scroller.h150 {
+	max-height: 150px;
+}
+
+.card > content > content-scroller.h200 {
+	max-height: 200px;
+}
+
+.card > content > content-scroller.h250 {
+	max-height: 250px;
+}
+
+.card > content > content-scroller.h300 {
+	max-height: 300px;
+}
+
+.card > content > content-scroller.h350 {
+	max-height: 350px;
+}
+
+.card > content > content-scroller.h400 {
+	max-height: 400px;
+}
+
+.card > content > :first-child {
+	margin-top: 0;
+}
+
+/* ---------------------- */
+/* Identities */
+
+identity {
+	display: flex;
+	flex-direction: row;
+	column-gap: 20px;
+}
+
+identity > avatar {
+	position: relative;
+	flex: 0 0 40px;
+	width: 40px;
+	height: 40px;
+}
+
+identity.online > avatar::after,
+identity.offline > avatar::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	right: -2px;
+	width: 12px;
+	height: 12px;
+	border-radius: var(--radius-infinite);
+	border: 2px solid rgba(var(--color-card), 1);
+}
+
+identity.online > avatar::after {
+	background-color: rgb(80, 184, 60);
+}
+
+identity.offline > avatar::after {
+	background-color: rgb(222, 54, 24);
+}
+
+identity > avatar > img {
+	position: relative;
+	border-radius: var(--radius-infinite);
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+identity > content {
+	display: flex;
+	user-select: none;
+	flex-direction: column;
+	justify-content: center;
+	gap: 3px;
+}
+
+identity > content > span {
+	font-weight: 500;
+}
+
+identity > content > a {
+	color: rgba(var(--color-font), 1);
+	text-decoration: none;
+	font-weight: 500;
+}
+
+identity > content > a:hover {
+	text-decoration: underline;
+}
+
+identity > content > small {
+	color: rgba(var(--color-font), var(--opacity-subtext));
+	display: block;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+/* ---------------------- */
 /* Overlay & Popups */
 
-body > shading {
-	background: rgba(0, 0, 0, 0.3);
-	height: 100%;
-	left: 0;
-	opacity: 0;
-	pointer-events: none;
-	position: fixed;
-	top: 0;
-	transition: all .3s ease;
-	width: 100%;
-	z-index: 10;
-}
-
-body > shading.visible {
-	opacity: 1;
-	pointer-events: all;
-}
-
-body > overlay {
+overlay {
 	max-width: 100%;
 	max-height: 100%;
 	position: fixed;
@@ -2228,19 +2448,19 @@ body > overlay {
 	transition: all .15s ease;
 	pointer-events: none;
 	opacity: 0;
-	z-index: 40;
+	z-index: 20;
 }
 
-body > overlay.visible {
+overlay.visible {
 	pointer-events: auto;
 	opacity: 1;
 }
 
-body > overlay::backdrop {
+overlay::backdrop {
 	display: none;
 }
 
-body > overlay > content {
+overlay > content {
 	display: flex;
 	width: 90%;
 	max-width: 600px;
@@ -2255,10 +2475,10 @@ body > overlay > content {
 	transition: all .15s ease;
 	transform: scale(0.8);
 	opacity: 0;
-	z-index: 41;
+	z-index: 21;
 }
 
-body > overlay > content::after {
+overlay > content::after {
 	position: absolute;
 	content: '';
 	left: calc(50% - 20px);
@@ -2272,13 +2492,13 @@ body > overlay > content::after {
 	animation: spinner .8s linear infinite;
 }
 
-body > overlay.visible > content {
+overlay.visible > content {
 	transform: scale(1);
 	opacity: 1;
 }
 
-body > overlay > content > iframe {
-	z-index: 42;
+overlay > content > iframe {
+	z-index: 22;
 	min-height: 0;
 	flex-grow: 1;
 }
@@ -2305,6 +2525,16 @@ span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
 
 /* ---------------------- */
 /* Helpers */
+
+.sticky-top {
+	position: sticky;
+	top: 0;
+}
+
+.sticky-bottom {
+	position: sticky;
+	bottom: 0;
+}
 
 .throttled {
 	pointer-events: none;
@@ -2493,6 +2723,16 @@ split + split {
 p:first-child, ul:first-child, ol:first-child, blockquote:first-child,
 h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
 	margin-top: 0;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+	padding-left: 1.25rem;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+	padding-right: 1.25rem;
 }
 
 /* ---------------------- */
