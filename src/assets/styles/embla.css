@@ -2166,6 +2166,32 @@ breadcrumbs > container > nav > a:last-child::after {
 }
 
 /* ---------------------- */
+/* Placeholder */
+
+placeholder {
+	display: block;
+	border: 1px solid rgba(var(--color-font), .07);
+	background: rgba(var(--color-font), 0.03);
+	border-radius: var(--radius-standard);
+	padding: 2rem 1.25rem;
+	user-select: none;
+	text-align: center;
+}
+
+placeholder.transparent {
+	background: none;
+}
+
+placeholder.thin {
+	padding: 1.25rem;
+}
+
+placeholder > span {
+	color: rgba(var(--color-font), var(--opacity-subtext));
+	display: block;
+}
+
+/* ---------------------- */
 /* Overlay & Popups */
 
 body > shading {
