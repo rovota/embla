@@ -7,11 +7,11 @@
 
 namespace Rovota\Embla\Components\Media;
 
-use Rovota\Embla\Components\Navigation\Anchor;
+use Rovota\Embla\Components\Navigation\Link;
 use Rovota\Embla\Components\Typography\Span;
 use Rovota\Framework\Support\Str;
 
-class Attachment extends Anchor
+class Attachment extends Link
 {
 
 	protected function configuration(): void

@@ -8,7 +8,7 @@
 namespace Rovota\Embla\Components\Indicators;
 
 use Rovota\Embla\Base\Component;
-use Rovota\Embla\Components\Navigation\Anchor;
+use Rovota\Embla\Components\Navigation\Link;
 
 class Pagination extends Component
 {
@@ -41,7 +41,7 @@ class Pagination extends Component
 
 			if ($current > 1) {
 				$this->with([
-					Anchor::toUrl($url->withParameter('page', $current - 1))->with(icon('arrows.chevron-left'))->class('icon')
+					Link::toUrl($url->withParameter('page', $current - 1))->with(icon('arrows.chevron-left'))->class('icon')
 				]);
 			}
 
@@ -51,7 +51,7 @@ class Pagination extends Component
 
 			foreach ($pages as $number => $value) {
 				$this->with([
-					Anchor::toUrl($url->withParameter('page', $number))->with($number)->when($current === $number, function (Anchor $anchor) {
+					Link::toUrl($url->withParameter('page', $number))->with($number)->when($current === $number, function (Link $anchor) {
 						$anchor->class('active');
 					})
 				]);
@@ -61,7 +61,7 @@ class Pagination extends Component
 
 			if ($current < $page_count) {
 				$this->with([
-					Anchor::toUrl($url->withParameter('page', $current + 1))->with(icon('arrows.chevron-right'))->class('icon')
+					Link::toUrl($url->withParameter('page', $current + 1))->with(icon('arrows.chevron-right'))->class('icon')
 				]);
 			}
 		}

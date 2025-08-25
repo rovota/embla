@@ -8,10 +8,10 @@
 namespace Rovota\Embla\Components\Layout;
 
 use Rovota\Embla\Components\Media\Image;
-use Rovota\Embla\Components\Navigation\Anchor;
+use Rovota\Embla\Components\Navigation\Link;
 use Rovota\Framework\Support\Str;
 
-class GalleryItem extends Anchor
+class GalleryItem extends Link
 {
 
 	protected function configuration(): void

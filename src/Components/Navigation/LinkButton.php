@@ -7,12 +7,12 @@
 
 namespace Rovota\Embla\Components\Navigation;
 
-class AnchorButton extends Anchor
+class LinkButton extends Link
 {
 
 	protected function configuration(): void
 	{
-		$this->config->tag = 'a';
+		parent::configuration();
 
 		$this->class('button');
 	}

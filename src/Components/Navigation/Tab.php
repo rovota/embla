@@ -7,11 +7,10 @@
 
 namespace Rovota\Embla\Components\Navigation;
 
-use Rovota\Embla\Base\Component;
 use Rovota\Embla\Components\Indicators\Badge;
 use Rovota\Framework\Support\Url;
 
-class Tab extends Component
+class Tab extends Anchor
 {
 
 	protected function configuration(): void
@@ -31,11 +30,6 @@ class Tab extends Component
 
 	// -----------------
 	// Content
-
-	public function label(string $text, array|object $data = []): static
-	{
-		return $this->withTranslated($text, $data);
-	}
 
 	public function badge(string $text, array|object $data = [], mixed $accent = null): static
 	{
@@ -57,29 +51,6 @@ class Tab extends Component
 	public function route(string $name, array $context = [], array $parameters = []): static
 	{
 		return $this->target(Url::route($name, $context, $parameters));
-	}
-
-	// -----------------
-	// Interactivity
-
-	public function inNewTab(): static
-	{
-		return $this->attribute('target', '_blank');
-	}
-
-	public function inParent(): static
-	{
-		return $this->attribute('target', '_parent');
-	}
-
-	public function inOverlay(): static
-	{
-		return $this->attribute('data-overlay');
-	}
-
-	public function withoutReferrer(): static
-	{
-		return $this->attribute('rel', 'noreferrer');
 	}
 
 }
