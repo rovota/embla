@@ -7,7 +7,6 @@ const embla = new class Embla {
 			getRealLength(value) {
 				return value.length + (value.match(/\n/g) || []).length;
 			}
-
 			getNormalizedCharacter(char) {
 				return {
 					'á': 'a', 'ä': 'a', 'â': 'a', 'à': 'a', 'ã': 'a', 'å': 'a', 'č': 'c', 'ç': 'c', 'ć': 'c',
@@ -18,10 +17,58 @@ const embla = new class Embla {
 					'ÿ': 'y', 'ž': 'z', 'þ': 'b', 'đ': 'd', 'ß': 'ss', 'æ': 'ae',
 				}[char] ?? char;
 			}
-
 			slugify(str) {
 				str = str.trim().toLowerCase().replace(/./g, char => this.getNormalizedCharacter(char));
 				return str.replace(/([^a-z0-9-]|(-))+/g, '-').replace(/^-|-$/g, '');
+			}
+		}
+		this.overlay = new class Overlay {
+			constructor() {
+				this.allowed = true;
+				this.instance = null;
+			}
+			hide() {
+				if (this.instance !== null) {
+					this.instance.classList.remove('visible');
+				}
+			}
+			remove() {
+				if (this.instance !== null) {
+					this.allowed = true;
+					this.instance.classList.remove('visible');
+					setTimeout(() => this.instance.remove(), 150);
+				}
+			}
+			open(url) {
+				if (this.allowed) {
+					this.allowed = false;
+
+					let overlay = document.createElement('overlay');
+					let content = document.createElement('content');
+					let iframe = document.createElement('iframe');
+
+					overlay.appendChild(content);
+					content.appendChild(iframe);
+
+					document.body.appendChild(overlay);
+					this.instance = overlay;
+
+					let close = (event) => {
+						if (event.key === 'Escape') {
+							document.removeEventListener('keyup', close);
+							this.remove();
+						}
+					}
+
+					if (iframe !== null) {
+						iframe.src = url;
+						iframe.onload = function () {
+							iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
+							document.addEventListener('keyup', close);
+							setTimeout(() => overlay.classList.add('visible'), 20);
+						};
+					}
+				}
 			}
 		}
 	}
@@ -47,50 +94,6 @@ function updateFormElementUsingDirective(form, config, input) {
 		let event = new Event('change');
 		element.dispatchEvent(event);
 	});
-}
-
-function removeDataOverlay() {
-	let overlay = document.querySelector('overlay');
-	if (overlay !== null) {
-		overlay.classList.remove('visible');
-		setTimeout(() => overlay.remove(), 150);
-	}
-}
-
-function hideDataOverlay() {
-	let overlay = document.querySelector('overlay');
-	if (overlay !== null) {
-		overlay.classList.remove('visible');
-	}
-}
-
-function showDataOverlay(url) {
-
-	let overlay = document.createElement('overlay');
-	let content = document.createElement('content');
-	let iframe = document.createElement('iframe');
-
-	let close = (event) => {
-		if (event.key === 'Escape') {
-			removeDataOverlay();
-			document.removeEventListener('keyup', close);
-		}
-	}
-
-	document.body.appendChild(overlay);
-
-	overlay.appendChild(content);
-	content.appendChild(iframe);
-
-	if (iframe !== null) {
-		iframe.src = url;
-
-		iframe.onload = function () {
-			iframe.style.height = (iframe.contentWindow.document.body.scrollHeight) + 'px';
-			document.addEventListener('keyup', close);
-			setTimeout(() => overlay.classList.add('visible'), 20);
-		};
-	}
 }
 
 function fixDrawingCanvas(canvas, drawing) {
@@ -417,26 +420,10 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 document.querySelectorAll('[data-toggle]').forEach(toggle => {
 	toggle.addEventListener("click", () => {
-		// Enable drawer functionality
 		if (toggle.dataset.toggle === 'drawer') {
-			document.querySelector('#drawer').classList.toggle('visible');
-			document.querySelector('#drawer-shading').classList.toggle('visible');
+			document.querySelector('#drawer')?.classList.toggle('visible');
+			document.querySelector('#drawer-shading')?.classList.toggle('visible');
 		}
-	});
-});
-
-// -----------------
-// Simulate Anchors
-
-document.querySelectorAll('[data-href]').forEach(element => {
-	element.setAttribute('tabindex', '0');
-	element.addEventListener('keypress', event => {
-		if (event.key === 'Enter') {
-			window.location = element.dataset.href;
-		}
-	});
-	element.addEventListener('click', () => {
-		window.location = element.dataset.href;
 	});
 });
 
@@ -620,7 +607,7 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 
 document.querySelectorAll('trigger').forEach(trigger => {
 	if (trigger.dataset.type === 'overlay') {
-		showDataOverlay(trigger.dataset.target);
+		embla.overlay.open(trigger.dataset.target);
 		trigger.remove();
 	}
 	if (trigger.dataset.type === 'parent') {
@@ -639,42 +626,54 @@ document.querySelectorAll('trigger').forEach(trigger => {
 // Dialog Interactivity
 
 if (window.self === window.top) {
-	document.querySelectorAll('[data-overlay]').forEach(trigger => {
-		trigger.addEventListener("click", (event) => {
-			event.preventDefault();
-
-			// TODO: Retain a reference to this trigger so when dialogs are opened and closed, we can remove the throttled class.
-			trigger.classList.add('throttled');
-			setTimeout(function(){
-				trigger.classList.remove('throttled');
-			}, 1000);
-
-			showDataOverlay(trigger.href);
+	document.querySelectorAll('[data-href]').forEach(link => {
+		link.setAttribute('tabindex', '0');
+		link.addEventListener('click', () => {
+			if (link.hasAttribute('data-overlay')) {
+				embla.overlay.open(link.dataset.href);
+			} else {
+				window.location = link.dataset.href;
+			}
 		});
+
+		link.addEventListener('keypress', event => {
+			if (event.key === 'Enter') {
+				link.dispatchEvent(new Event('click'))
+			}
+		});
+	});
+
+	document.querySelectorAll('[href]').forEach(link => {
+		if (link.hasAttribute('data-overlay')) {
+			link.addEventListener("click", (event) => {
+				event.preventDefault();
+				embla.overlay.open(link.href);
+			});
+		}
 	});
 
 	window.addEventListener('message', function (event) {
 		if (typeof event.data === 'string' || event.data instanceof String) {
 			if (event.data.startsWith('overlay:close')) {
-				removeDataOverlay();
+				embla.overlay.remove();
 			}
 			if (event.data.startsWith('overlay:hide')) {
-				hideDataOverlay();
+				embla.overlay.hide();
 			}
 			if (event.data.startsWith('overlay:reload')) {
-				removeDataOverlay();
-				setTimeout(() => showDataOverlay(window.location.href), 150);
+				embla.overlay.remove();
+				setTimeout(() => embla.overlay.open(window.location.href), 150);
 			}
 			if (event.data.startsWith('overlay:switch')) {
-				removeDataOverlay();
-				setTimeout(() => showDataOverlay(event.data.split('switch:')[1]), 150);
+				embla.overlay.remove();
+				setTimeout(() => embla.overlay.open(event.data.split('switch:')[1]), 150);
 			}
 			if (event.data.startsWith('parent:reload')) {
-				removeDataOverlay();
+				embla.overlay.remove();
 				window.location.reload();
 			}
 			if (event.data.startsWith('parent:switch')) {
-				removeDataOverlay();
+				embla.overlay.remove();
 				window.location.replace(event.data.split('switch:')[1]);
 			}
 		}
