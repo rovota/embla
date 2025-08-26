@@ -575,40 +575,50 @@ table th.th-actions, table td.td-actions {
 	text-align: right;
 }
 
+table td.td-actions {
+	display: flex;
+	flex-direction: row;
+	column-gap: 0.8rem;
+	justify-content: flex-end;
+}
+
+table td.td-actions:has(.icon) {
+	column-gap: 0.25rem;
+	padding: 0.5rem 0.75rem;
+}
+
 table td.td-actions a {
 	display: inline-block;
-	margin-left: 10px;
 	text-decoration: none;
-	vertical-align: middle;
 }
 
 table td.td-actions a:hover {
 	text-decoration: underline;
 }
 
-table td.td-actions button {
-	margin: 0 0 -2px 10px;
-	vertical-align: middle;
+table td.td-actions a:has(svg) {
+	background: rgba(var(--color-font), 0);
+	border-radius: var(--radius-small);
+	display: inline-flex;
+	padding: 0.5rem;
 }
 
-table td .td-icon {
-	display: inline-block;
-	height: 1.625rem;
-	vertical-align: middle;
-	width: 1.625rem;
+table td.td-actions a:has(svg):hover {
+	background: rgba(var(--color-font), .05);
 }
 
-table td .td-icon svg {
+table td.td-actions a:has(svg) svg {
 	color: rgba(var(--color-font), 1);
 	transition: all .12s ease;
 }
 
-table td .td-icon:hover svg {
+table td.td-actions a:has(svg)[class*='accent-'] svg {
 	color: rgba(var(--color-accent), 1);
 }
 
-table td .td-icon + .td-icon {
-	margin-left: 10px;
+table td.td-actions button {
+	margin: 0 0 -2px 10px;
+	vertical-align: middle;
 }
 
 table td.td-avatar {
