@@ -43,6 +43,15 @@ trait WebFunctions
 		return $this;
 	}
 
+	public function withParent(string $action, string|null $value = null): static
+	{
+		Partial::attachVariable('*', 'parent', [
+			'action' => $action,
+			'value' => $value,
+		]);
+		return $this;
+	}
+
 	// -----------------
 
 	public function withTitle(string $title, array|object $data = []): static
