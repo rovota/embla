@@ -584,15 +584,15 @@ document.querySelectorAll('carousel').forEach(carousel => {
 // -----------------
 // Scroll Location
 
-let scroll_button = document.querySelector('scrollbutton');
-
-if (scroll_button !== null) {
-	let parent = document.querySelector(scroll_button.dataset.parent);
+document.querySelectorAll('scrollbutton').forEach(button => {
+	let parent = document.querySelector(button.dataset.parent);
 	parent.onscroll = () => {
-		parent.scrollTop > 600 ? scroll_button.classList.add(scroll_button.dataset.class) : scroll_button.classList.remove(scroll_button.dataset.class);
+		window.scrollY > 600 ? button.classList.add(button.dataset.class) : button.classList.remove(button.dataset.class);
 	}
-	scroll_button.addEventListener('click', () => parent.scrollTop = 0);
-}
+	button.addEventListener('click', () => window.scrollTo({
+		top: 0, behavior: "smooth"
+	}));
+})
 
 // -----------------
 // Tabs Expansion

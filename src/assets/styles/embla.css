@@ -21,9 +21,13 @@ html, body {
 	background: rgba(var(--color-base), 1);
 	color: rgba(var(--color-font), 1);
 	font-size: var(--font-size-standard);
+	scroll-behavior: smooth;
 	margin: 0;
 	padding: 0;
 }
+
+/* ---------------------- */
+/* Shading */
 
 shading {
 	background: rgba(0, 0, 0, 0.3);
@@ -42,6 +46,43 @@ shading.visible {
 	opacity: 1;
 	pointer-events: all;
 }
+
+/* ---------------------- */
+/* Scrolling */
+
+scrollbutton {
+	position: fixed;
+	display: flex;
+	bottom: 42px;
+	right: 42px;
+	width: 50px;
+	height: 50px;
+	opacity: 0;
+	justify-content: center;
+	align-items: center;
+	background: rgba(var(--color-accent), 1);
+	color: rgba(var(--color-light), 1);
+	transform: translateY(40px);
+	border-radius: var(--radius-medium);
+	transition: all .15s ease;
+	margin-top: -50px;
+	cursor: pointer;
+	z-index: 5;
+	pointer-events: none;
+}
+
+scrollbutton.visible {
+	transform: translateY(0px);
+	pointer-events: auto;
+	opacity: 1;
+}
+
+scrollbutton:hover {
+	box-shadow: 0 3px 6px 0 rgba(var(--color-accent), .2);
+	background: rgba(var(--color-accent-alt), 1);
+}
+
+/* ---------------------- */
 
 iframe {
 	border: none;
