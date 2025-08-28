@@ -8,10 +8,10 @@
 namespace Rovota\Embla\Views;
 
 use Rovota\Embla\Views\Traits\WebFunctions;
-use Rovota\Framework\Views\DefaultView;
+use Rovota\Framework\Views\View;
 use Rovota\Framework\Views\ViewConfig;
 
-class WebView extends DefaultView
+class WebView extends View
 {
 	use WebFunctions;
 

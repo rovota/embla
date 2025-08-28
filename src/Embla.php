@@ -8,7 +8,7 @@
 namespace Rovota\Embla;
 
 use Rovota\Embla\Components\Layout\Icons\IconManager;
-use Rovota\Framework\Facades\View;
+use Rovota\Framework\Facades\Views;
 use Rovota\Framework\Kernel\ServiceProvider;
 
 final class Embla extends ServiceProvider
@@ -45,24 +45,24 @@ final class Embla extends ServiceProvider
 	protected function attachAssets(): void
 	{
 		// JavaScript
-		View::attachScript('*', 'signature', [
+		Views::attachScript('*', 'signature', [
 			'source' => self::ASSET_FOLDER . '/scripts/signature.min.js',
 		]);
-		View::attachScript('*', 'embla', [
+		Views::attachScript('*', 'embla', [
 			'source' => self::ASSET_FOLDER . '/scripts/embla.js',
 		]);
-		View::attachScript('*', 'spotlight', [
+		Views::attachScript('*', 'spotlight', [
 			'source' => self::ASSET_FOLDER . '/scripts/spotlight.min.js',
 		]);
 
 		// CSS
-		View::attachLink('*', 'embla', [
+		Views::attachLink('*', 'embla', [
 			'style' => self::ASSET_FOLDER . '/styles/embla.css',
 		]);
-		View::attachLink('*', 'spotlight', [
+		Views::attachLink('*', 'spotlight', [
 			'style' => self::ASSET_FOLDER . '/styles/spotlight.min.css',
 		]);
-		View::attachLink('*', 'theming', [
+		Views::attachLink('*', 'theming', [
 			'style' => self::ASSET_FOLDER . '/styles/theming.css',
 		]);
 	}

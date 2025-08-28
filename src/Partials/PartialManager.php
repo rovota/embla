@@ -8,10 +8,10 @@
 namespace Rovota\Embla\Partials;
 
 use Rovota\Embla\Partials\Interfaces\PartialInterface;
-use Rovota\Framework\Facades\View;
+use Rovota\Framework\Facades\Views;
 use Rovota\Framework\Kernel\ServiceProvider;
 use Rovota\Framework\Support\Str;
-use Rovota\Framework\Views\Interfaces\ViewInterface;
+use Rovota\Framework\Views\View;
 
 final class PartialManager extends ServiceProvider
 {
@@ -39,8 +39,8 @@ final class PartialManager extends ServiceProvider
 
 		$partial = new DefaultPartial($template, $config);
 
-		if (View::current() instanceof ViewInterface) {
-			$partial->with('view', View::current());
+		if (Views::current() instanceof View) {
+			$partial->with('view', Views::current());
 		}
 
 		return $partial;
