@@ -11,7 +11,7 @@ use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
 use Rovota\Framework\Routing\UrlObject;
-use Rovota\Framework\Structures\Basket;
+use Rovota\Framework\Structures\Bucket;
 use Rovota\Framework\Support\Interfaces\Arrayable;
 use Rovota\Framework\Support\Url;
 
@@ -43,7 +43,7 @@ if (!function_exists('array_to_classes')) {
 			$data = $data->toArray();
 		}
 
-		$classes = new Basket();
+		$classes = new Bucket();
 
 		foreach ($data as $key => $value) {
 			if (is_numeric($key)) {

@@ -24,19 +24,19 @@ use Rovota\Framework\Caching\Enums\Driver;
 use Rovota\Framework\Facades\Cache;
 use Rovota\Framework\Facades\Cast;
 use Rovota\Framework\Facades\Request;
-use Rovota\Framework\Structures\Basket;
+use Rovota\Framework\Structures\Bucket;
 use Rovota\Framework\Support\Str;
 
 class Input extends Component
 {
 
-	protected Basket $fields;
+	protected Bucket $fields;
 
 	// -----------------
 
 	protected function configuration(): void
 	{
-		$this->fields = new Basket();
+		$this->fields = new Bucket();
 
 		$this->config->tag = 'input-group';
 

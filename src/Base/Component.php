@@ -12,7 +12,7 @@ use Rovota\Embla\Base\Traits\AppearanceMethods;
 use Rovota\Embla\Base\Traits\ComponentChildren;
 use Rovota\Embla\Base\Traits\ComponentData;
 use Rovota\Embla\Base\Traits\ComponentMeta;
-use Rovota\Framework\Structures\Basket;
+use Rovota\Framework\Structures\Bucket;
 use Rovota\Framework\Support\Str;
 use Rovota\Framework\Support\Traits\Conditionable;
 use Stringable;
@@ -43,15 +43,15 @@ abstract class Component implements Stringable
 	// -----------------
 
 	/**
-	 * @var Basket<string|int, Component>
+	 * @var Bucket<string|int, Component>
 	 */
-	public Basket $children;
+	public Bucket $children;
 
-	public Basket $variables;
+	public Bucket $variables;
 
-	public Basket $attributes;
+	public Bucket $attributes;
 
-	public Basket $classes;
+	public Bucket $classes;
 
 	// -----------------
 
@@ -60,10 +60,10 @@ abstract class Component implements Stringable
 		$this->parent = $parent;
 		$this->config = new ComponentConfig();
 
-		$this->children = new Basket();
-		$this->variables = new Basket();
-		$this->attributes = new Basket();
-		$this->classes = new Basket();
+		$this->children = new Bucket();
+		$this->variables = new Bucket();
+		$this->attributes = new Bucket();
+		$this->classes = new Bucket();
 
 		$this->configuration();
 	}
@@ -94,7 +94,7 @@ abstract class Component implements Stringable
 	{
 		$this->prepareRender();
 
-		$fragments = Basket::from([
+		$fragments = Bucket::from([
 			sprintf('<%s', $this->config->tag),
 			$this->getFormattedAttributes(),
 			$this->getFormattedClasses(),
@@ -110,7 +110,7 @@ abstract class Component implements Stringable
 			return $fragments->append('></' . $this->config->tag . '>')->join(' ', '');
 		}
 
-		$component = Basket::from([
+		$component = Bucket::from([
 			$fragments->append('>')->join(' ', ''),
 			implode('', $this->children->toArray()),
 			'</' . $this->config->tag . '>'
@@ -135,7 +135,7 @@ abstract class Component implements Stringable
 
 	private function getFormattedAttributes(): string
 	{
-		$attributes = new Basket();
+		$attributes = new Bucket();
 
 		foreach ($this->attributes as $name => $value) {
 			if (is_int($name)) {
