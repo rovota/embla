@@ -9,15 +9,16 @@ namespace Rovota\Embla\Views;
 
 use Rovota\Embla\Views\Traits\WebFunctions;
 use Rovota\Framework\Views\View;
-use Rovota\Framework\Views\ViewConfig;
 
 class WebView extends View
 {
 	use WebFunctions;
 
-	public function __construct(string|null $template, ViewConfig $config)
+	// -----------------
+
+	protected function prepareData(): void
 	{
-		parent::__construct($template, $config);
+		parent::prepareData();
 
 		$this->withMeta('format-detection', [
 			'name' => 'format-detection',
@@ -28,8 +29,6 @@ class WebView extends View
 			'name' => 'viewport',
 			'content' => 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1',
 		]);
-
-		// -----------------
 
 		$this->withMeta('color-scheme', [
 			'name' => 'color-scheme',

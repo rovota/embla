@@ -45,24 +45,24 @@ final class Embla extends ServiceProvider
 	protected function attachAssets(): void
 	{
 		// JavaScript
-		Views::attachScript('*', 'signature', [
+		Views::attachScript('signature', [
 			'source' => self::ASSET_FOLDER . '/scripts/signature.min.js',
 		]);
-		Views::attachScript('*', 'embla', [
+		Views::attachScript('embla', [
 			'source' => self::ASSET_FOLDER . '/scripts/embla.js',
 		]);
-		Views::attachScript('*', 'spotlight', [
+		Views::attachScript('spotlight', [
 			'source' => self::ASSET_FOLDER . '/scripts/spotlight.min.js',
 		]);
 
 		// CSS
-		Views::attachLink('*', 'embla', [
+		Views::attachLink('embla', [
 			'style' => self::ASSET_FOLDER . '/styles/embla.css',
 		]);
-		Views::attachLink('*', 'spotlight', [
+		Views::attachLink('spotlight', [
 			'style' => self::ASSET_FOLDER . '/styles/spotlight.min.css',
 		]);
-		Views::attachLink('*', 'theming', [
+		Views::attachLink('theming', [
 			'style' => self::ASSET_FOLDER . '/styles/theming.css',
 		]);
 	}
