@@ -2266,6 +2266,10 @@ placeholder > span {
 	display: block;
 }
 
+.card > content > placeholder {
+	border-radius: var(--radius-medium);
+}
+
 /* ---------------------- */
 /* Cards */
 
