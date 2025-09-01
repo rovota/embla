@@ -7,8 +7,6 @@
 
 namespace Rovota\Embla\Partials\Interfaces;
 
-use Rovota\Embla\Partials\PartialConfig;
-
 interface PartialInterface
 {
 

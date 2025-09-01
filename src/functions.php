@@ -7,7 +7,7 @@
 
 use Rovota\Embla\Components\Layout\Icons\Icon;
 use Rovota\Embla\Embla;
-use Rovota\Embla\Partials\Interfaces\PartialInterface;
+use Rovota\Embla\Partials\Partial;
 use Rovota\Embla\Partials\PartialManager;
 use Rovota\Framework\Facades\Language;
 use Rovota\Framework\Routing\UrlObject;
@@ -30,7 +30,7 @@ if (!function_exists('parse_objects')) {
 }
 
 if (!function_exists('partial')) {
-	function partial(string $template, string|null $class = null): PartialInterface
+	function partial(string $template, string|null $class = null): Partial
 	{
 		return PartialManager::instance()->createPartial($template, $class);
 	}

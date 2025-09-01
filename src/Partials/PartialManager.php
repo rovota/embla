@@ -7,7 +7,6 @@
 
 namespace Rovota\Embla\Partials;
 
-use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Framework\Facades\Views;
 use Rovota\Framework\Kernel\ServiceProvider;
 use Rovota\Framework\Support\Str;
@@ -27,7 +26,7 @@ final class PartialManager extends ServiceProvider
 
 	// -----------------
 
-	public function createPartial(string|null $template, string|null $class = null): PartialInterface
+	public function createPartial(string|null $template, string|null $class = null): Partial
 	{
 		$config = new PartialConfig([
 			'variables' => $this->getDataForType('variables', $template),
@@ -37,7 +36,7 @@ final class PartialManager extends ServiceProvider
 			return new $class(null, $config);
 		}
 
-		$partial = new DefaultPartial($template, $config);
+		$partial = new Partial($template, $config);
 
 		if (Views::current() instanceof View) {
 			$partial->with('view', Views::current());

@@ -9,15 +9,11 @@ namespace Rovota\Embla\Partials;
 
 use Rovota\Framework\Support\Config;
 
-/**
- * @property-read array $variables
- */
 class PartialConfig extends Config
 {
 
-	protected function getVariables(): array
-	{
-		return $this->array('variables');
+	public array $variables {
+		get => $this->array('variables');
 	}
 
 }

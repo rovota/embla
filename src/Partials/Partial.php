@@ -7,13 +7,12 @@
 
 namespace Rovota\Embla\Partials;
 
-use Rovota\Embla\Partials\Interfaces\PartialInterface;
 use Rovota\Embla\Partials\Traits\PartialFunctions;
 use Rovota\Framework\Support\Path;
 use Rovota\Framework\Support\Str;
 use Stringable;
 
-class DefaultPartial implements Stringable, PartialInterface
+class Partial implements Stringable
 {
 	use PartialFunctions;
 
@@ -48,13 +47,13 @@ class DefaultPartial implements Stringable, PartialInterface
 
 	public static function make(array $variables = []): static
 	{
-		$view = PartialManager::instance()->createPartial(null, static::class);
+		$partial = PartialManager::instance()->createPartial(null, static::class);
 
 		foreach ($variables as $name => $value) {
-			$view->with($name, $value);
+			$partial->with($name, $value);
 		}
 
-		return $view;
+		return $partial;
 	}
 
 	// -----------------

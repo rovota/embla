@@ -7,7 +7,7 @@
 
 namespace Rovota\Embla\Views\Traits;
 
-use Rovota\Embla\Facades\Partial;
+use Rovota\Embla\Facades\Partials;
 use Rovota\Framework\Support\Str;
 
 trait WebFunctions
@@ -17,7 +17,7 @@ trait WebFunctions
 	{
 		$this->with('page.slug', trim($value));
 
-		Partial::updateVariable('*', 'page', [
+		Partials::updateVariable('*', 'page', [
 			'slug' => $value,
 		]);
 
@@ -28,7 +28,7 @@ trait WebFunctions
 	{
 		$this->with('page.tab', trim($value));
 
-		Partial::updateVariable('*', 'page', [
+		Partials::updateVariable('*', 'page', [
 			'tab' => $value,
 		]);
 
@@ -37,7 +37,7 @@ trait WebFunctions
 
 	public function withOverlay(string $target): static
 	{
-		Partial::attachVariable('*', 'overlay', [
+		Partials::attachVariable('*', 'overlay', [
 			'target' => $target,
 		]);
 		return $this;
@@ -45,7 +45,7 @@ trait WebFunctions
 
 	public function withParent(string $action, string|null $value = null): static
 	{
-		Partial::attachVariable('*', 'parent', [
+		Partials::attachVariable('*', 'parent', [
 			'action' => $action,
 			'value' => $value,
 		]);
@@ -61,7 +61,7 @@ trait WebFunctions
 		$this->with('page.title', $title);
 		$this->withMeta('og:title', ['name' => 'og:title', 'content' => $title]);
 
-		Partial::updateVariable('*', 'page', [
+		Partials::updateVariable('*', 'page', [
 			'title' => $title,
 		]);
 
@@ -76,7 +76,7 @@ trait WebFunctions
 		$this->withMeta('description', ['name' => 'description', 'content' => $description]);
 		$this->withMeta('og:description', ['name' => 'og:description', 'content' => Str::translate($description)]);
 
-		Partial::updateVariable('*', 'page', [
+		Partials::updateVariable('*', 'page', [
 			'description' => $description,
 		]);
 
@@ -92,7 +92,7 @@ trait WebFunctions
 		$this->with('page.keywords', $keywords);
 		$this->withMeta('keywords', ['name' => 'keywords', 'content' => $keywords]);
 
-		Partial::updateVariable('*', 'page', [
+		Partials::updateVariable('*', 'page', [
 			'keywords' => $keywords,
 		]);
 
@@ -104,7 +104,7 @@ trait WebFunctions
 		$this->with('page.author', $author);
 		$this->withMeta('author', ['name' => 'author', 'content' => $author], true);
 
-		Partial::updateVariable('*', 'page', [
+		Partials::updateVariable('*', 'page', [
 			'author' => $author,
 		]);
 
