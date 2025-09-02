@@ -1498,6 +1498,14 @@ accordion > details > details-content :first-child {
 	margin-top: 0;
 }
 
+content.minimal > accordion > details > summary {
+	padding: 0.8rem 1.25rem;
+}
+
+content.minimal > accordion > details > details-content {
+	padding: 1rem 1.25rem;
+}
+
 /* ---------------------- */
 /* Info Panels */
 
