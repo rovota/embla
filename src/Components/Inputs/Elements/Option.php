@@ -19,25 +19,22 @@ class Option extends Component
 	}
 
 	// -----------------
-	// Starters
-
-	public static function default(string|null $label = null, array|object $data = []): static
-	{
-		return self::label($label ?? '---', $data)->selected();
-	}
-
-	public static function label(string $text, array|object $data = []): static
-	{
-		return (new static)->withTranslated($text, $data);
-	}
-
-	public static function labelFromModel(Model $model): static
-	{
-		return (new static)->withTranslated((string)$model);
-	}
-
-	// -----------------
 	// Content
+
+	public function default(string|null $label = null, array|object $data = []): static
+	{
+		return $this->label($label ?? '---', $data)->selected();
+	}
+
+	public function label(string $text, array|object $data = []): static
+	{
+		return $this->withTranslated($text, $data);
+	}
+
+	public function labelFromModel(Model $model): static
+	{
+		return $this->withTranslated((string)$model);
+	}
 
 	public function value(mixed $value): static
 	{
@@ -55,11 +52,6 @@ class Option extends Component
 	public function selected(): static
 	{
 		return $this->attribute('selected');
-	}
-
-	public function disabled(): static
-	{
-		return $this->attribute('disabled');
 	}
 
 }

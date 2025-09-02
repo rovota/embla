@@ -18,11 +18,11 @@ class Prefix extends Component
 	}
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function text(string $text, array|object $data = []): static
+	public function text(string $text, array|object $data = []): static
 	{
-		return (new static)->withTranslated($text, $data);
+		return $this->withTranslated($text, $data);
 	}
 
 	// -----------------

@@ -62,12 +62,4 @@ class Button extends Component
 		return $this->class('large');
 	}
 
-	// -----------------
-	// Interactivity
-
-	public function disabled(): static
-	{
-		return $this->attribute('disabled');
-	}
-
 }

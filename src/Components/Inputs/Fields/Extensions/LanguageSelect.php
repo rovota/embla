@@ -25,7 +25,7 @@ class LanguageSelect extends Select
 		$this->autocomplete(Autocomplete::Off);
 
 		$this->withForEach(Language::all(), function (LanguageObject $language) {
-			return LanguageOption::from($language);
+			return new LanguageOption()->using($language);
 		});
 	}
 

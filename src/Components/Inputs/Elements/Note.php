@@ -19,21 +19,21 @@ class Note extends Component
 	}
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function text(string $text, array|object $data = []): static
+	public function text(string $text, array|object $data = []): static
 	{
-		return (new static)->withTranslated($text, $data);
+		return $this->withTranslated($text, $data);
 	}
 
-	public static function characterCount(): static
+	public function characterCount(): static
 	{
-		return (new static)->with(Str::translate('Characters:') . ' <charcount></charcount> / <charlimit></charlimit>');
+		return $this->with(Str::translate('Characters:') . ' <charcount></charcount> / <charlimit></charlimit>');
 	}
 
-	public static function slugPreview(string $prefix = '/'): static
+	public function slugPreview(string $prefix = '/'): static
 	{
-		return (new static)->with(Str::translate('Slug:') . sprintf('%s<span></span>', Str::finish($prefix, $prefix)));
+		return $this->with(Str::translate('Slug:') . sprintf('%s<span></span>', Str::finish($prefix, $prefix)));
 	}
 
 }

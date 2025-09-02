@@ -70,4 +70,11 @@ trait AppearanceMethods
 		return $this;
 	}
 
+	// -----------------
+
+	public function disabled(): static
+	{
+		return $this->attribute('disabled');
+	}
+
 }

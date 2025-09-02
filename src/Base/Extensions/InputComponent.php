@@ -42,12 +42,7 @@ class InputComponent extends Component
 	}
 
 	// -----------------
-	// Interactivity`
-
-	public function disabled(): static
-	{
-		return $this->attribute('disabled');
-	}
+	// Interactivity
 
 	public function autoFocus(): static
 	{

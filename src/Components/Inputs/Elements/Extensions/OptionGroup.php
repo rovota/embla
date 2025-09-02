@@ -18,11 +18,11 @@ class OptionGroup extends Group
 	}
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function label(string $text, array|object $data = []): static
+	public function label(string $text, array|object $data = []): static
 	{
-		return (new static)->withTranslated($text, $data);
+		return $this->withTranslated($text, $data);
 	}
 
 }

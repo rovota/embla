@@ -62,12 +62,4 @@ class Anchor extends Component
 		return $this->attribute('rel', 'noreferrer');
 	}
 
-	// -----------------
-	// Interactivity
-
-	public function disabled(): static
-	{
-		return $this->attribute('disabled');
-	}
-
 }

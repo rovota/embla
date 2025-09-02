@@ -23,13 +23,13 @@ class Errors extends Component
 	// -----------------
 	// Starters
 
-	public static function using(Validator|MessageBag|array $errors): static
+	public function using(Validator|MessageBag|array $errors): static
 	{
 		if ($errors instanceof Validator) {
 			$errors = $errors->errors;
 		}
 
-		return (new static)->withForEach($errors, function (Message $error) {
+		return $this->withForEach($errors, function (Message $error) {
 			return '<span>' . $error->formatted() . '</span>';
 		});
 	}

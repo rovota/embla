@@ -15,15 +15,13 @@ class LanguageOption extends Option
 {
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function from(LanguageObject $language): static
+	public function using(LanguageObject $language): static
 	{
-		return self::label($language->label())
-			->value($language->locale)
-			->when($language->locale === Language::active()->locale, function (Option $option) {
-				return $option->selected();
-			});
+		return $this->label($language->label())->value($language->locale)->when($language->locale === Language::active()->locale, function (Option $option) {
+			return $option->selected();
+		});
 	}
 
 }

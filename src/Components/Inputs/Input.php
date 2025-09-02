@@ -110,17 +110,17 @@ class Input extends Component
 		if ($text instanceof Component) {
 			return $this->with(new Note()->with($text), 'note');
 		}
-		return $this->with(Note::text($text, $data), 'note');
+		return $this->with(new Note()->text($text, $data), 'note');
 	}
 
 	public function withCharacterCount(): static
 	{
-		return $this->with(Note::characterCount(), 'note');
+		return $this->with(new Note()->characterCount(), 'note');
 	}
 
 	public function withSlugPreview(string $prefix = '/'): static
 	{
-		$this->with(Note::slugPreview($prefix), 'note');
+		$this->with(new Note()->slugPreview($prefix), 'note');
 
 		if ($this->fields->count() === 1) {
 			$this->fields->first()->slugify();
@@ -153,7 +153,7 @@ class Input extends Component
 			$errors = request()->errors->get($field) ?? [];
 
 			if (empty($errors) === false) {
-				$this->with(Errors::using($errors), 'errors');
+				$this->with(new Errors()->using($errors), 'errors');
 			}
 		}
 

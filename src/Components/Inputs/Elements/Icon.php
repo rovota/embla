@@ -22,17 +22,14 @@ class Icon extends Component
 	// -----------------
 	// Content
 
-	public static function use(string $icon): static
+	public function use(string $icon): static
 	{
-		return (new static)->with(icon($icon));
+		return $this->with(icon($icon));
 	}
 
-	public static function capslock(): static
+	public function capslock(): static
 	{
-		$component = self::use('arrows.upload');
-		$component->class('capslock');
-		$component->attribute('title', Str::translate('Capslock is enabled.'));
-		return $component;
+		return $this->use('arrows.upload')->class('capslock')->attribute('title', Str::translate('Capslock is enabled.'));
 	}
 
 }
