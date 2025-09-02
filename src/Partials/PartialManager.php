@@ -9,34 +9,25 @@ namespace Rovota\Embla\Partials;
 
 use Rovota\Framework\Facades\Views;
 use Rovota\Framework\Kernel\ServiceProvider;
-use Rovota\Framework\Support\Str;
+use Rovota\Framework\Structures\Bucket;
 use Rovota\Framework\Views\View;
 
 final class PartialManager extends ServiceProvider
 {
-
-	protected PartialConfig $config;
+	protected Bucket $variables;
 
 	// -----------------
 
 	public function __construct()
 	{
-		$this->config = new PartialConfig();
+		$this->variables = new Bucket();
 	}
 
 	// -----------------
 
 	public function createPartial(string|null $template, string|null $class = null): Partial
 	{
-		$config = new PartialConfig([
-			'variables' => $this->getDataForType('variables', $template),
-		]);
-
-		if ($class !== null) {
-			return new $class(null, $config);
-		}
-
-		$partial = new Partial($template, $config);
+		$partial = $class !== null ? new $class() : new Partial($template);
 
 		if (Views::current() instanceof View) {
 			$partial->with('view', Views::current());
@@ -47,66 +38,29 @@ final class PartialManager extends ServiceProvider
 
 	// -----------------
 
-	public function hasVariable(string $template, string $identifier): bool
+	public function retrieveData(): array
 	{
-		return $this->config->has(sprintf('variables.%s.%s', $template, $identifier));
-	}
-
-	public function attachVariable(array|string $templates, string $identifier, mixed $value): void
-	{
-		if (is_string($templates)) {
-			$templates = [$templates];
-		}
-
-		foreach ($templates as $template) {
-			$key = sprintf('variables.%s.%s', $template, $identifier);
-			$this->config->set($key, $value);
-		}
-	}
-
-	public function updateVariable(array|string $templates, string $identifier, mixed $value): void
-	{
-		if (is_string($templates)) {
-			$templates = [$templates];
-		}
-
-		foreach ($templates as $template) {
-			$key = sprintf('variables.%s.%s', $template, $identifier);
-			if (is_array($value)) {
-				foreach ($value as $k => $v) {
-					$this->config->set($key . '.' . $k, $v);
-				}
-			} else {
-				$this->config->set($key, $value);
-			}
-		}
+		return [
+			'variables' => $this->variables->toArray(),
+		];
 	}
 
 	// -----------------
 
-	protected function getDataForType(string $type, string|null $name): array
+	public function attachVariable(string $identifier, mixed $value): void
 	{
-		$items = array_map(function ($value) {
-			return $value;
-		}, $this->config->array($type . '.*'));
+		$this->variables->set($identifier, $value);
+	}
 
-		if ($name !== null) {
-			$levels = explode('.', $name);
-
-			foreach ($levels as $level) {
-				if (Str::endsWith($name, $level) === false) {
-					$level = Str::before($name, Str::after($name, $level . '.')) . '*';
-				} else {
-					$level = $name;
-				}
-
-				foreach ($this->config->array($type . '.' . $level) as $key => $value) {
-					$items[$key] = $value;
-				}
+	public function updateVariable(string $identifier, mixed $value): void
+	{
+		if (is_array($value)) {
+			foreach ($value as $k => $v) {
+				$this->variables->set($identifier . '.' . $k, $v);
 			}
+		} else {
+			$this->variables->set($identifier, $value);
 		}
-
-		return $items;
 	}
 
 }

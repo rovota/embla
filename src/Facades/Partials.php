@@ -15,9 +15,8 @@ use Rovota\Framework\Support\Facade;
 /**
  * @method static Partial create(string $template, string|null $class = null)
  *
- * @method static bool hasVariable(string $template, string $identifier)
- * @method static void attachVariable(array|string $templates, string $identifier, mixed $value)
- * @method static void updateVariable(array|string $templates, string $identifier, mixed $value)
+ * @method static void attachVariable(string $identifier, mixed $value)
+ * @method static void updateVariable(string $identifier, mixed $value)
  */
 final class Partials extends Facade
 {

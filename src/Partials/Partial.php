@@ -24,9 +24,9 @@ class Partial implements Stringable
 
 	// -----------------
 
-	public function __construct(string|null $template, PartialConfig $config)
+	public function __construct(string|null $template = null)
 	{
-		$this->config = $config;
+		$this->config = new PartialConfig();
 
 		if ($template !== null) {
 			$this->template = $template;
@@ -37,42 +37,35 @@ class Partial implements Stringable
 
 	public function __toString(): string
 	{
-		$this->prepareForPrinting();
-		$this->printContent();
+		$this->prepareData();
+		$this->prepareRendering();
+		$this->render();
 
 		return '';
 	}
 
 	// -----------------
 
-	public static function make(array $variables = []): static
+	protected function prepareData(): void
 	{
-		$partial = PartialManager::instance()->createPartial(null, static::class);
+		$this->config->merge(PartialManager::instance()->retrieveData());
+	}
 
-		foreach ($variables as $name => $value) {
-			$partial->with($name, $value);
-		}
+	protected function prepareRendering(): void
+	{
 
-		return $partial;
+	}
+
+	protected function configuration(): void
+	{
+
 	}
 
 	// -----------------
 
-	protected function getTemplatePath(): string
-	{
-		$file = Str::replace($this->template, '.', '/');
-		$file = Str::finish($file, '.php');
-		$file = Str::start($file, 'resources/templates/partials/');
-
-		return Path::toProjectFile($file);
-	}
-
-	// -----------------
-
-	protected function printContent(): void
+	protected function render(): void
 	{
 		extract($this->config->array('variables'));
-		$this->config->remove('variables');
 
 		$template = $this->getTemplatePath();
 
@@ -81,14 +74,13 @@ class Partial implements Stringable
 		}
 	}
 
-	protected function prepareForPrinting(): void
+	protected function getTemplatePath(): string
 	{
+		$file = Str::replace($this->template, '.', '/');
+		$file = Str::finish($file, '.php');
+		$file = Str::start($file, 'resources/templates/partials/');
 
-	}
-
-	protected function configuration(): void
-	{
-
+		return Path::toProjectFile($file);
 	}
 
 }
