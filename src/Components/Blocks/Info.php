@@ -22,7 +22,7 @@ class Info extends Component
 	// -----------------
 	// Content
 
-	public function text(string $text, array|object $data = []): static
+	public function paragraph(string $text, array|object $data = []): static
 	{
 		return $this->with(new Paragraph()->text($text, $data), 'text');
 	}
