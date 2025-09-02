@@ -8,7 +8,6 @@
 namespace Rovota\Embla\Base\Traits;
 
 use BackedEnum;
-use Rovota\Framework\Support\Str;
 use Stringable;
 
 trait ComponentData
@@ -61,18 +60,6 @@ trait ComponentData
 
 	// -----------------
 
-	public function attributeTranslated(string $name, string $value, array $data = []): static
-	{
-		return $this->attributeEscaped($name, Str::translate($value, $data));
-	}
-
-	public function attributeEscaped(string $name, mixed $value): static
-	{
-		return $this->attribute($name, Str::escape((string)$value));
-	}
-
-	// -----------------
-
 	public function class(string|array $name): static
 	{
 		foreach (convert_to_array($name) as $key => $value) {
@@ -85,6 +72,11 @@ trait ComponentData
 		}
 
 		return $this;
+	}
+
+	public function id(string|int $id): static
+	{
+		return $this->attribute('id', $id);
 	}
 
 	// -----------------

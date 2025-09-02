@@ -32,6 +32,7 @@ class Panel extends Base implements InputCheckable, InputMasked
 		$text = Str::translate($text, $data);
 		$this->variables->set('label', $text);
 		$this->ariaLabel($text);
+
 		return $this;
 	}
 
@@ -70,11 +71,11 @@ class Panel extends Base implements InputCheckable, InputMasked
 		$html = '<label class="input-panel">' . parent::render() . '<indicator></indicator><content>';
 
 		if ($this->variables->has('label')) {
-			$html .= Span::make()->withEscaped($this->variables->get('label'));
+			$html .= new Span()->withEscaped($this->variables->get('label'));
 		}
 
 		if ($this->variables->has('description')) {
-			$html .= Paragraph::make()->withEscaped($this->variables->get('description'));
+			$html .= new Paragraph()->withEscaped($this->variables->get('description'));
 		}
 
 		return $html . '</content></label>';

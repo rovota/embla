@@ -10,6 +10,7 @@ namespace Rovota\Embla\Base\Extensions;
 use Rovota\Embla\Base\Component;
 use Rovota\Embla\Utilities\Attributes\InputType;
 use Rovota\Framework\Facades\Cast;
+use Rovota\Framework\Support\Str;
 
 class InputComponent extends Component
 {
@@ -17,11 +18,6 @@ class InputComponent extends Component
 	public function type(InputType|string $type): static
 	{
 		return $this->attribute('type', $type);
-	}
-
-	public function id(string|int $id): static
-	{
-		return $this->attribute('id', $id);
 	}
 
 	// -----------------
@@ -33,7 +29,7 @@ class InputComponent extends Component
 			$value = Cast::toRawAutomatic($value);
 
 			if (strlen((string)$value) > 0) {
-				$this->attributeEscaped('value', $value);
+				$this->attribute('value', $value);
 			}
 		}
 
@@ -42,7 +38,7 @@ class InputComponent extends Component
 
 	public function placeholder(string $value, array $data = []): static
 	{
-		return $this->attributeTranslated('placeholder', $value, $data);
+		return $this->attribute('placeholder', Str::translate($value, $data));
 	}
 
 	// -----------------

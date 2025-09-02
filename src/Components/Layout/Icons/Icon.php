@@ -34,7 +34,7 @@ final class Icon
 		return $this;
 	}
 
-	public function className(string $name): Icon
+	public function class(string $name): Icon
 	{
 		$this->content = str_replace('icon', 'icon ' . trim($name), $this->content);
 		return $this;

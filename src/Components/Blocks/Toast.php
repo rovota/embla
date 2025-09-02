@@ -39,7 +39,7 @@ class Toast extends Component
 	}
 
 	// -----------------
-	// Content
+	// Appearance
 
 	public function type(mixed $type = 'auto'): static
 	{

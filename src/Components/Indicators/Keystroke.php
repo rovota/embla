@@ -20,21 +20,20 @@ class Keystroke extends Component
 	// -----------------
 	// Starters
 
-	public static function value(string $value): static
+	public function label(string $label): static
 	{
-		return (new static)->withEscaped($value);
+		return $this->withEscaped($label);
 	}
 
-	public static function sequence(array $keystrokes): static
+	public function sequence(array $keystrokes): static
 	{
-		$component = new static;
-		$component->config->tag = 'span';
+		$this->config->tag = 'span';
 
-		foreach ($keystrokes as $value) {
-			$component->with(Keystroke::value($value));
+		foreach ($keystrokes as $key) {
+			$this->with(new Keystroke()->label($key));
 		}
 
-		return $component;
+		return $this;
 	}
 
 }

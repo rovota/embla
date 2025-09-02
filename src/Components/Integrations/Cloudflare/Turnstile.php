@@ -8,7 +8,6 @@
 namespace Rovota\Embla\Components\Integrations\Cloudflare;
 
 use Rovota\Embla\Base\Component;
-use Rovota\Embla\Components\Typography\Paragraph;
 use Rovota\Framework\Facades\Language;
 
 class Turnstile extends Component
@@ -20,21 +19,13 @@ class Turnstile extends Component
 
 		$this->class('cf-turnstile');
 
-		$this->attribute('data-language', Language::active()->locale);
+		$this->attribute('data-language', strtolower(str_replace('_', '-', Language::active()->locale)));
 		$this->attribute('data-size', 'flexible');
 		$this->attribute('data-appearance', 'interaction-only');
 	}
 
 	// -----------------
-	// Starters
-
-	public static function content(string $text, array|object $data = []): static
-	{
-		return (new static)->with(Paragraph::content($text, $data));
-	}
-
-	// -----------------
-	// Content
+	// Data
 
 	public function key(string $key): static
 	{

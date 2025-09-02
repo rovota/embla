@@ -9,20 +9,20 @@ namespace Rovota\Embla\Components\Typography;
 
 use Rovota\Embla\Base\Component;
 
-class UnorderedList extends Component
+class Marked extends Component
 {
 
 	protected function configuration(): void
 	{
-		$this->config->tag = 'ul';
+		$this->config->tag = 'mark';
 	}
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function withItems(array $items): static
+	public function text(string $text, array|object $data = []): static
 	{
-		return (new static)->with($items);
+		return $this->withTranslated($text, $data);
 	}
 
 }

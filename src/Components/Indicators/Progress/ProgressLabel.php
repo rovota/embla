@@ -8,25 +8,15 @@
 namespace Rovota\Embla\Components\Indicators\Progress;
 
 use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Typography\Label;
 use Rovota\Embla\Components\Typography\Small;
-use Rovota\Embla\Components\Typography\Span;
 use Rovota\Framework\Support\Number;
 
-class ProgressLabel extends Component
+class ProgressLabel extends Label
 {
-
-	protected function configuration(): void
-	{
-		$this->config->tag = 'label';
-	}
 
 	// -----------------
 	// Content
-
-	public static function text(string $text, array|object $data = []): static
-	{
-		return (new static)->with(Span::content($text, $data));
-	}
 
 	public function percentage(int $value): static
 	{
@@ -34,7 +24,7 @@ class ProgressLabel extends Component
 		$suffix = $this->variables->string('suffix', '%');
 
 		$value = Number::format(abs($value), $precision);
-		return $this->with(Small::content($value . $suffix));
+		return $this->with(new Small()->text($value . $suffix));
 	}
 
 	// -----------------

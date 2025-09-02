@@ -19,15 +19,12 @@ class Blockquote extends Component
 	}
 
 	// -----------------
-	// Starters
-
-	public static function content(string $text, array|object $data = []): static
-	{
-		return (new static)->with(Paragraph::content($text, $data));
-	}
-
-	// -----------------
 	// Content
+
+	public function paragraph(string $text, array|object $data = []): static
+	{
+		return $this->with(new Paragraph()->text($text, $data));
+	}
 
 	public function source(string $text, array|object $data = []): static
 	{

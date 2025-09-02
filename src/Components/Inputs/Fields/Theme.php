@@ -106,7 +106,7 @@ class Theme extends Base implements InputCheckable, InputMasked
 		}
 
 		if ($this->variables->has('label')) {
-			$html .= Span::content($this->variables->get('label'));
+			$html .= new Span()->text($this->variables->get('label'));
 		}
 
 		return $html . '</content></label>';

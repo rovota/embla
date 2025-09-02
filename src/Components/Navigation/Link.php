@@ -12,58 +12,58 @@ use Rovota\Framework\Support\Url;
 class Link extends Anchor
 {
 
-	public static function to(string $path, array $parameters = []): static
+	public function toPath(string $path, array $parameters = []): static
 	{
-		return self::toUrl(Url::local($path, $parameters));
+		return $this->to(Url::local($path, $parameters));
 	}
 
-	public static function toCurrent(): static
+	public function toCurrent(): static
 	{
-		return self::toUrl(Url::current());
+		return $this->to(Url::current());
 	}
 
-	public static function toForeign(string $location, array $parameters = []): static
+	public function toForeign(string $location, array $parameters = []): static
 	{
-		return self::toUrl(Url::foreign($location, $parameters));
+		return $this->to(Url::foreign($location, $parameters));
 	}
 
-	public static function toFile(string $location, array $parameters = [], string|null $disk = null): static
+	public function toFile(string $location, array $parameters = [], string|null $disk = null): static
 	{
-		return self::toUrl(Url::file($location, $parameters, $disk));
+		return $this->to(Url::file($location, $parameters, $disk));
 	}
 
-	public static function toRoute(string $name, array $context = [], array $parameters = []): static
+	public function toRoute(string $name, array $context = [], array $parameters = []): static
 	{
-		return self::toUrl(Url::route($name, $context, $parameters));
-	}
-
-	/**
-	 * This method requires the presence of a cache store using the `session` driver.
-	 */
-	public static function toPrevious(string $default = '/'): static
-	{
-		return self::toUrl(Url::previous($default));
+		return $this->to(Url::route($name, $context, $parameters));
 	}
 
 	/**
 	 * This method requires the presence of a cache store using the `session` driver.
 	 */
-	public static function toNext(string $default = '/'): static
+	public function toPrevious(string $default = '/'): static
 	{
-		return self::toUrl(Url::next($default));
+		return $this->to(Url::previous($default));
 	}
 
 	/**
 	 * This method requires the presence of a cache store using the `session` driver.
 	 */
-	public static function toIntended(string $default = '/'): static
+	public function toNext(string $default = '/'): static
 	{
-		return self::toUrl(Url::intended($default));
+		return $this->to(Url::next($default));
+	}
+
+	/**
+	 * This method requires the presence of a cache store using the `session` driver.
+	 */
+	public function toIntended(string $default = '/'): static
+	{
+		return $this->to(Url::intended($default));
 	}
 
 	// -----------------
 
-	public static function sendMessage(string $message): static
+	public function message(string $message): static
 	{
 		return (new static)->attributes([
 			'href' => request()->url(), 'data-message' => $message

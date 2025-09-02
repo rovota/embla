@@ -19,25 +19,25 @@ class Anchor extends Component
 	}
 
 	// -----------------
-	// Starters
+	// Target
 
-	public static function toUrl(UrlObject $url): static
+	public function to(UrlObject $url): static
 	{
-		return (new static)->attribute('href', (string)$url);
+		return $this->attribute('href', (string)$url);
 	}
 
 	// -----------------
 	// Content
 
-	public function label(string $text, array|object $data = []): static
+	public function text(string $text, array|object $data = []): static
 	{
 		return $this->withTranslated($text, $data);
 	}
 
 	// -----------------
-	// Interactivity
+	// Behavior
 
-	public function asDownload(string|null $name = null): static
+	public function download(string|null $name = null): static
 	{
 		return $this->attribute('download', $name);
 	}
@@ -61,6 +61,9 @@ class Anchor extends Component
 	{
 		return $this->attribute('rel', 'noreferrer');
 	}
+
+	// -----------------
+	// Interactivity
 
 	public function disabled(): static
 	{

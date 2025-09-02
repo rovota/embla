@@ -61,7 +61,7 @@ class Checkbox extends Base implements InputCheckable, InputMasked
 		$html = '<label class="input-choice">' . parent::render() . '<indicator></indicator>';
 
 		if ($this->variables->has('label')) {
-			$html .= Content::make()->withEscaped($this->variables->get('label'));
+			$html .= new Content()->withEscaped($this->variables->get('label'));
 		}
 
 		return $html . '</label>';

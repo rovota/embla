@@ -20,15 +20,12 @@ class Info extends Component
 	}
 
 	// -----------------
-	// Starters
-
-	public static function content(string $text, array|object $data = []): static
-	{
-		return (new static)->with(Paragraph::content($text, $data));
-	}
-
-	// -----------------
 	// Content
+
+	public function text(string $text, array|object $data = []): static
+	{
+		return $this->with(new Paragraph()->text($text, $data), 'text');
+	}
 
 	public function caption(string $text, array|object $data = []): static
 	{

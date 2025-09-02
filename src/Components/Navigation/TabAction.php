@@ -7,10 +7,7 @@
 
 namespace Rovota\Embla\Components\Navigation;
 
-use Rovota\Embla\Base\Component;
-use Rovota\Framework\Support\Url;
-
-class TabAction extends Component
+class TabAction extends Link
 {
 
 	protected function configuration(): void
@@ -19,13 +16,11 @@ class TabAction extends Component
 	}
 
 	// -----------------
-	// Starters
+	// Data
 
-	public static function for(string $name): static
+	public function for(string $name): static
 	{
-		return (new static)->attributes([
-			'class' => 'tab-' . $name,
-		]);
+		return $this->class('tab-' . $name);
 	}
 
 	// -----------------
@@ -34,32 +29,6 @@ class TabAction extends Component
 	public function icon(string $name): static
 	{
 		return $this->with(icon($name))->class('icon');
-	}
-
-	// -----------------
-	// Targets
-
-	public function target(mixed $target): static
-	{
-		return $this->attribute('href', (string)$target);
-	}
-
-	public function route(string $name, array $context = [], array $parameters = []): static
-	{
-		return $this->target(Url::route($name, $context, $parameters));
-	}
-
-	// -----------------
-	// Interactivity
-
-	public function inNewTab(): static
-	{
-		return $this->attribute('target', '_blank');
-	}
-
-	public function withoutReferrer(): static
-	{
-		return $this->attribute('rel', 'noreferrer');
 	}
 
 }

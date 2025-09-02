@@ -83,6 +83,9 @@ abstract class Component implements Stringable
 
 	// -----------------
 
+	/**
+	 * @deprecated You should use ``new class()`` instead. This method will be removed in a future revision.
+	 */
 	public static function make(): static
 	{
 		return new static;

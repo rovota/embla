@@ -122,7 +122,7 @@ trait WebFunctions
 //			default => $location,
 //		};
 //
-//		PartialManager::addOrUpdateVariable'page', [
+//		PartialManager::addOrUpdateVariable('page', [
 //			'image' => $public_url,
 //		]);
 //

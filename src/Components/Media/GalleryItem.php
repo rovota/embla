@@ -5,9 +5,8 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Components\Layout;
+namespace Rovota\Embla\Components\Media;
 
-use Rovota\Embla\Components\Media\Image;
 use Rovota\Embla\Components\Navigation\Link;
 use Rovota\Framework\Support\Str;
 

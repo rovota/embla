@@ -19,11 +19,11 @@ class Placeholder extends Component
 	}
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function text(string $text, array|object $data = []): static
+	public function text(string $text, array|object $data = []): static
 	{
-		return (new static)->with(Span::content($text, $data), 'text');
+		return $this->with(new Span()->text($text, $data), 'text');
 	}
 
 	// -----------------
@@ -44,7 +44,7 @@ class Placeholder extends Component
 	protected function prepareRender(): void
 	{
 		if ($this->children->missing('text')) {
-			$this->with(Span::content('There is nothing to show here.'), 'text');
+			$this->with(new Span()->text('There is nothing to show here.'), 'text');
 		}
 	}
 

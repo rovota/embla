@@ -5,7 +5,9 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Components\Layout;
+namespace Rovota\Embla\Components\Media;
+
+use Rovota\Embla\Components\Layout\Grid;
 
 class Gallery extends Grid
 {

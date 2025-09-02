@@ -15,15 +15,16 @@ class Button extends Component
 	protected function configuration(): void
 	{
 		$this->config->tag = 'button';
+
 		$this->attribute('type', 'submit');
 	}
 
 	// -----------------
-	// Starters
+	// Data
 
-	public static function name(string $name): static
+	public function name(string $name): static
 	{
-		return (new static)->attribute('name', $name);
+		return $this->attribute('name', $name);
 	}
 
 	// -----------------
@@ -32,23 +33,15 @@ class Button extends Component
 	public function value(mixed $value): static
 	{
 		if (strlen((string)$value) > 0) {
-			$this->attributeEscaped('value', $value);
+			$this->attribute('value', $value);
 		}
 
 		return $this;
 	}
 
-	public function label(string $text, array|object $data = []): static
+	public function text(string $text, array|object $data = []): static
 	{
 		return $this->withTranslated($text, $data);
-	}
-
-	// -----------------
-	// Interactivity
-
-	public function disabled(): static
-	{
-		return $this->attribute('disabled');
 	}
 
 	// -----------------
@@ -59,7 +52,7 @@ class Button extends Component
 		return $this->class('outlined');
 	}
 
-	public function link(): static
+	public function minimal(): static
 	{
 		return $this->class('link');
 	}
@@ -67,6 +60,14 @@ class Button extends Component
 	public function large(): static
 	{
 		return $this->class('large');
+	}
+
+	// -----------------
+	// Interactivity
+
+	public function disabled(): static
+	{
+		return $this->attribute('disabled');
 	}
 
 }

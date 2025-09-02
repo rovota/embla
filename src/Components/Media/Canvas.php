@@ -18,14 +18,6 @@ class Canvas extends Component
 	}
 
 	// -----------------
-	// Starters
-
-	public static function id(string $identifier): static
-	{
-		return (new static)->attribute('id', $identifier);
-	}
-
-	// -----------------
 	// Appearance
 
 	public function width(int $number): static

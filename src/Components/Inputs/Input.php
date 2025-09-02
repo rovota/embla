@@ -57,7 +57,7 @@ class Input extends Component
 
 	public function label(string $text, array|object $data = []): static
 	{
-		$label = Label::text($text, $data);
+		$label = new Label()->text($text, $data);
 		if ($this->variables->has('name')) {
 			$label->for($this->variables->string('name'));
 		}
@@ -108,7 +108,7 @@ class Input extends Component
 	public function withNote(string|Component $text, array|object $data = []): static
 	{
 		if ($text instanceof Component) {
-			return $this->with(Note::make()->with($text), 'note');
+			return $this->with(new Note()->with($text), 'note');
 		}
 		return $this->with(Note::text($text, $data), 'note');
 	}
@@ -227,15 +227,15 @@ class Input extends Component
 			}
 
 			if ($field instanceof Range) {
-				return Slider::make();
+				return new Slider();
 			}
 
 			if ($field instanceof InputMasked) {
-				return MaskedGroup::make();
+				return new MaskedGroup();
 			}
 		}
 
-		return Group::make();
+		return new Group();
 	}
 
 }

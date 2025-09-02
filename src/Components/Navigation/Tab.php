@@ -8,9 +8,8 @@
 namespace Rovota\Embla\Components\Navigation;
 
 use Rovota\Embla\Components\Indicators\Badge;
-use Rovota\Framework\Support\Url;
 
-class Tab extends Anchor
+class Tab extends Link
 {
 
 	protected function configuration(): void
@@ -19,13 +18,11 @@ class Tab extends Anchor
 	}
 
 	// -----------------
-	// Starters
+	// Data
 
-	public static function for(string $name): static
+	public function for(string $name): static
 	{
-		return (new static)->attributes([
-			'class' => 'tab-' . $name,
-		]);
+		return $this->class('tab-' . $name);
 	}
 
 	// -----------------
@@ -33,24 +30,11 @@ class Tab extends Anchor
 
 	public function badge(string $text, array|object $data = [], mixed $accent = null): static
 	{
-		$badge = Badge::label($text, $data)->when($accent !== null, function ($badge) use ($accent) {
+		$badge = new Badge()->text($text, $data)->when($accent !== null, function ($badge) use ($accent) {
 			$badge->accent($accent);
 		});
 
 		return $this->with($badge);
-	}
-
-	// -----------------
-	// Targets
-
-	public function target(mixed $target): static
-	{
-		return $this->attribute('href', (string)$target);
-	}
-
-	public function route(string $name, array $context = [], array $parameters = []): static
-	{
-		return $this->target(Url::route($name, $context, $parameters));
 	}
 
 }

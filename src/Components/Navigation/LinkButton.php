@@ -33,7 +33,7 @@ class LinkButton extends Link
 		return $this->class('outlined');
 	}
 
-	public function link(): static
+	public function minimal(): static
 	{
 		return $this->class('link');
 	}

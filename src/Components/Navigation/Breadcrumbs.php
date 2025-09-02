@@ -17,7 +17,7 @@ class Breadcrumbs extends Component
 	{
 		$this->config->tag = 'nav';
 
-		$this->addChild(Link::toRoute('homepage')->label('Home'));
+		$this->addChild(new Link()->toRoute('homepage')->text('Home'));
 	}
 
 	// -----------------
@@ -32,7 +32,7 @@ class Breadcrumbs extends Component
 	protected function prepareRender(): void
 	{
 		if ($this->variables->has('current')) {
-			$this->addChild(Link::toUrl(request()->url())->label($this->variables->get('current')));
+			$this->addChild(new Link()->to(request()->url())->text($this->variables->get('current')));
 		}
 	}
 

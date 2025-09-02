@@ -17,12 +17,27 @@ class Notice extends Component
 	protected function configuration(): void
 	{
 		$this->config->tag = 'notice';
+
+		$this->with('', 'icon');
 	}
 
 	// -----------------
-	// Starters
+	// Content
 
-	public static function status(Status|string $status = Status::Info): static
+	public function content(string $text, array|object $data = []): static
+	{
+		return $this->with(new Content()->withTranslated($text, $data));
+	}
+
+	public function icon(string $name): static
+	{
+		return $this->with(icon($name), 'icon');
+	}
+
+	// -----------------
+	// Appearance
+
+	public function status(Status|string $status = Status::Info): static
 	{
 		if (is_string($status)) {
 			$status = Status::tryFrom($status) ?? Status::Info;
@@ -35,33 +50,7 @@ class Notice extends Component
 			Status::Danger => 'symbols.alert-octagon',
 		};
 
-		$component = new static;
-		$component->icon($icon);
-		$component->accent($status);
-
-		return $component;
-	}
-
-	public static function simple(string $text, array|object $data = []): static
-	{
-		$component = new static;
-		$component->with('', 'icon');
-		$component->content($text, $data);
-
-		return $component;
-	}
-
-	// -----------------
-	// Content
-
-	public function content(string $text, array|object $data = []): static
-	{
-		return $this->with(Content::make()->withTranslated($text, $data));
-	}
-
-	public function icon(string $name): static
-	{
-		return $this->with(icon($name), 'icon');
+		return $this->icon($icon)->accent($status);
 	}
 
 }
