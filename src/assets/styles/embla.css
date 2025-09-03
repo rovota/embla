@@ -2270,10 +2270,6 @@ placeholder > span {
 	display: block;
 }
 
-.card > content > placeholder {
-	border-radius: var(--radius-medium);
-}
-
 /* ---------------------- */
 /* Cards */
 
@@ -2413,6 +2409,20 @@ placeholder > span {
 
 .card > content > :first-child {
 	margin-top: 0;
+}
+
+.card > content > placeholder {
+	border-radius: var(--radius-medium);
+}
+
+.card > actions {
+	background: rgba(var(--color-font), .025);
+	border-top: 1px solid rgba(var(--color-font), 0.045);
+	border-bottom: 1px solid rgba(var(--color-font), 0.045);
+	padding: 0.8rem 1.25rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
 }
 
 /* ---------------------- */
