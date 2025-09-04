@@ -54,7 +54,7 @@ final class IconManager extends ServiceProvider
 			return null;
 		}
 
-		[$set, $name] = Str::explode($name, '.', 2);
+		[$set, $name] = explode($name, '.', 2);
 
 		if (isset($this->sources[$set]) === false || $this->sources[$set]->missing($name)) {
 			return new Icon("[$set.$name]");
