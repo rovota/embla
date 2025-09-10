@@ -53,17 +53,17 @@ shading.visible {
 scrollbutton {
 	position: fixed;
 	display: flex;
-	bottom: 42px;
-	right: 42px;
-	width: 50px;
-	height: 50px;
+	bottom: 2rem;
+	right: 2rem;
+	width: 3.2rem;
+	height: 3.2rem;
 	opacity: 0;
 	justify-content: center;
 	align-items: center;
 	background: rgba(var(--color-accent), 1);
 	color: rgba(var(--color-light), 1);
 	transform: translateY(40px);
-	border-radius: var(--radius-medium);
+	border-radius: var(--radius-infinite);
 	transition: all .15s ease;
 	margin-top: -50px;
 	cursor: pointer;
@@ -2880,6 +2880,11 @@ table tr td:last-child {
 }
 
 @media screen and (max-width: 800px) {
+	scrollbutton {
+		bottom: 25px;
+		right: 25px;
+	}
+
 	iframe.youtube {
 		height: 250px;
 	}
