@@ -1,36 +1,32 @@
 {
    "name": "rovota/embla",
    "version": "1.0.0",
-   "type": "library",
    "description": "A lightweight component library, helping you to build modern interfaces more efficiently.",
    "keywords": ["components", "interface", "php", "rovota", "modern", "web"],
-   "homepage": "https://github.com/Rovota/Embla",
-   "license": "MIT",
+   "homepage": "https://github.com/rovota/embla",
    "authors": [
       {
-         "name": "Software Department",
-         "email": "developers@rovota.com"
+         "name": "Léandro Tijink"
       }
    ],
-   "support": {
-      "email": "support@rovota.com",
-      "docs": "https://rovota.gitbook.io/embla"
-   },
-   "repositories": [
-      {
-         "type": "path",
-         "url": "../../Rovota/Framework"
-      }
-   ],
+   "type": "library",
+   "license": "MIT",
    "require": {
-      "php-64bit": "^8.3.0",
-      "rovota/framework": "*"
+      "php-64bit": "^8.4",
+      "illuminate/support": "^12.0"
    },
    "autoload": {
       "psr-4": {
          "Rovota\\Embla\\": "src/"
       },
-      "files": ["src/functions.php"]
+      "files": ["src/helpers.php"]
+   },
+   "extra": {
+      "laravel": {
+         "providers": [
+            "Rovota\\Embla\\Providers\\EmblaServiceProvider"
+         ]
+      }
    },
    "config": {
       "sort-packages": true,

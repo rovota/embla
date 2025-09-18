@@ -1,5 +1,5 @@
-// Created and designed by Rovota
-// ----------------------
+import "./dependencies/spotlight.min"
+import "./dependencies/signature.min"
 
 const embla = new class Embla {
 	constructor() {

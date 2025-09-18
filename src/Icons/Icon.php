@@ -1,11 +1,10 @@
 <?php
-
 /**
  * @copyright   Léandro Tijink
  * @license     MIT
  */
 
-namespace Rovota\Embla\Components\Layout\Icons;
+namespace Rovota\Embla\Icons;
 
 final class Icon
 {

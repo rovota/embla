@@ -1,4 +1,6 @@
-/* Created and designed by Rovota */
+@import "dependencies/spotlight.min.css";
+
+@import "theming.css";
 
 :root {
 	-webkit-print-color-adjust: exact !important;
