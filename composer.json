@@ -30,7 +30,7 @@
    "extra": {
       "laravel": {
          "providers": [
-            "Rovota\\Embla\\Providers\\EmblaServiceProvider"
+            "Rovota\\Embla\\EmblaServiceProvider"
          ]
       }
    },
