@@ -11,8 +11,14 @@
    ],
    "type": "library",
    "license": "MIT",
+   "repositories": [
+      {
+         "type": "composer",
+         "url": "https://rovota.repo.repman.io"
+      }
+   ],
    "require": {
-      "php-64bit": "^8.4",
+      "php-64bit": "^8.4||^8.5",
       "illuminate/support": "^12.0"
    },
    "autoload": {
