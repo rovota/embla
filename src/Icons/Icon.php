@@ -18,8 +18,6 @@ final class Icon
 		$this->content = $this->getFilteredContent($content);
 	}
 
-	// -----------------
-
 	public function __toString(): string
 	{
 		return $this->content;

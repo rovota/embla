@@ -7,24 +7,19 @@
 namespace Rovota\Embla\Icons;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+
 final class IconManager
 {
-
 	/**
 	 * @var array<string, Collection>
 	 */
-	protected Collection $sources;
+	protected array $sources;
 
 	public function __construct(array $sources)
 	{
-		$this->sources = new Collection();
-	}
+		$this->sources = [];
 
-	// -----------------
-
-
-	public function consddtruct()
-	{
 		foreach ($sources as $name => $path) {
 			if (file_exists($path)) {
 				$data = include $path;
@@ -36,34 +31,23 @@ final class IconManager
 					return true;
 				});
 
-				$this->sources[$name] = Bucket::from($data);
+				$this->sources[$name] = Collection::make($data);
 			}
 		}
 	}
 
-	// -----------------
-
-	public function getSource(string $name): Bucket|null
+	public function get(string $name): Icon|null|string
 	{
-		return $this->sources[$name] ?? null;
+		if (Str::contains($name, '.') === false) {
+			return null;
+		}
+
+		[$set, $name] = explode('.', $name, 2);
+
+		if (isset($this->sources[$set]) === false || $this->sources[$set]->has($name) === false) {
+			return new Icon("[$set.$name]");
+		}
+
+		return new Icon($this->sources[$set]->get($name));
 	}
-
-	// -----------------
-
-	public function getIcon(string $name): Icon|null|string
-	{
-		return 'icon: '.$name;
-//		if (Str::contains($name, '.') === false) {
-//			return null;
-//		}
-//
-//		[$set, $name] = explode('.', $name, 2);
-//
-//		if (isset($this->sources[$set]) === false || $this->sources[$set]->missing($name)) {
-//			return new Icon("[$set.$name]");
-//		}
-//
-//		return new Icon($this->sources[$set]->get($name));
-	}
-
 }
