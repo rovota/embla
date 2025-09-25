@@ -6,38 +6,15 @@
 
 namespace Rovota\Embla\Facades;
 
-use Closure;
-use Rovota\Embla\Tabs\TabsManager;
-use Rovota\Framework\Support\Facade;
+use Illuminate\Support\Facades\Facade;
+use Rovota\Embla\Tabs\TabsFacadeProxy;
 
-/**
- * @method static void title(string $label, mixed $target = null): void
- * @method static void register(array $tabs): void
- * @method static void actions(array $actions): void
- */
 final class Tabs extends Facade
 {
 
-	public static function service(): TabsManager
+	protected static function getFacadeAccessor(): string
 	{
-		return parent::service();
-	}
-
-	// -----------------
-
-	protected static function getFacadeTarget(): string
-	{
-		return TabsManager::class;
-	}
-
-	protected static function getMethodTarget(string $method): Closure|string
-	{
-		return match ($method) {
-			'title' => 'setTitle',
-			'register' => 'addTabs',
-			'actions' => 'addActions',
-			default => $method,
-		};
+		return TabsFacadeProxy::class;
 	}
 
 }

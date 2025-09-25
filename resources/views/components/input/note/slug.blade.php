@@ -1,0 +1,1 @@
+<input-note {{ $attributes }}>{{ __('Slug') }}: {{ $slot }}<span></span></input-note>

@@ -6,8 +6,10 @@
 
 namespace Rovota\Embla\Views;
 
+use Illuminate\Support\Str;
+use Illuminate\View\Factory;
+use Illuminate\View\View;
 use Rovota\Embla\Views\Traits\WebFunctions;
-use Rovota\Framework\Views\View;
 
 class WebView extends View
 {
@@ -15,34 +17,28 @@ class WebView extends View
 
 	// -----------------
 
-	protected function prepareData(): void
+	protected string $template = 'public.entrance.index';
+
+	// -----------------
+
+	public function __construct()
 	{
-		parent::prepareData();
+		$path = resource_path(sprintf('views/%s.blade.php', Str::replace('.', '/', $this->template)));
 
-		$this->withMeta('format-detection', [
-			'name' => 'format-detection',
-			'content' => 'telephone=no',
-		]);
+		parent::__construct(
+			app('view'),
+			app(Factory::class)->getEngineFromPath($path),
+			$this->template,
+			$path,
 
-		$this->withMeta('viewport', [
-			'name' => 'viewport',
-			'content' => 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1',
-		]);
+		);
 
-		$this->withMeta('color-scheme', [
-			'name' => 'color-scheme',
-			'content' => 'light dark',
-		]);
+		$this->configuration();
+	}
 
-		$this->withMeta('theme-color-light', [
-			'name' => 'theme-color',
-			'content' => '#F2F2F2', 'media' => '(prefers-color-scheme: light)',
-		]);
+	protected function configuration(): void
+	{
 
-		$this->withMeta('theme-color-dark', [
-			'name' => 'theme-color',
-			'content' => '#0F0F0F', 'media' => '(prefers-color-scheme: dark)',
-		]);
 	}
 
 }

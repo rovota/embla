@@ -8,13 +8,10 @@ namespace Rovota\Embla\Components\Navigation;
 
 use Rovota\Embla\Components\Indicators\Badge;
 
-class Tab extends Link
+class Tab extends Anchor
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'a';
-	}
+	public string $tag = 'a';
 
 	// -----------------
 	// Data

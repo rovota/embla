@@ -1,0 +1,1 @@
+<input-prefix {{ $attributes }}>{{ $slot }}</input-prefix>

@@ -1,0 +1,1 @@
+<spinner {{ $attributes->merge(['class' => 'double']) }}></spinner>

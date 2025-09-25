@@ -6,13 +6,10 @@
 
 namespace Rovota\Embla\Components\Navigation;
 
-class TabAction extends Link
+class TabAction extends Anchor
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'a';
-	}
+	public string $tag = 'a';
 
 	// -----------------
 	// Data

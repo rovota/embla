@@ -6,23 +6,60 @@
 
 namespace Rovota\Embla\Components\Navigation;
 
-use Rovota\Embla\Base\Component;
-use Rovota\Framework\Routing\UrlObject;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Rovota\Embla\Components\Component;
 
 class Anchor extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'a';
-	}
+	public string $tag = 'a';
 
 	// -----------------
 	// Target
 
-	public function to(UrlObject $url): static
+	public function target(string $target): static
 	{
-		return $this->attribute('href', (string)$url);
+		return $this->attribute('href', $target);
+	}
+
+	public function to(string $path, array $parameters = []): static
+	{
+		return $this->target(url()->query($path, $parameters));
+	}
+
+	public function toCurrent(): static
+	{
+		return $this->target(url()->current());
+	}
+
+	public function toPrevious(string $default = '/'): static
+	{
+		return $this->target(url()->previous($default));
+	}
+
+	public function toRoute(string $name, $parameters = []): static
+	{
+		return $this->target(route($name, $parameters));
+	}
+
+	public function toIntended(string $default = '/'): static
+	{
+		return $this->to(Session::get('url.intended', $default));
+	}
+
+	public function toFile(string $location, string|null $disk = null): static
+	{
+		return $this->target(Storage::disk($disk)->url($location));
+	}
+
+	// -----------------
+
+	public function message(string $message): static
+	{
+		return (new static)->attributes([
+			'href' => request()->url(), 'data-message' => $message
+		]);
 	}
 
 	// -----------------

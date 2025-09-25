@@ -6,17 +6,17 @@
 
 namespace Rovota\Embla\Components\Indicators;
 
-use Rovota\Embla\Base\Component;
-use Rovota\Embla\Utilities\Colors\Status;
-use Rovota\Framework\Support\Number;
+use Illuminate\Support\Number;
+use Rovota\Embla\Components\Component;
+use Rovota\Embla\Data\Colors\Status;
 
 class Difference extends Component
 {
 
+	public string $tag = 'span';
+
 	protected function configuration(): void
 	{
-		$this->config->tag = 'span';
-
 		$this->class('diff');
 	}
 

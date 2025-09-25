@@ -6,109 +6,86 @@
 
 namespace Rovota\Embla\Views\Traits;
 
-use Rovota\Embla\Facades\Partials;
-use Rovota\Framework\Support\Str;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Fluent;
 
 trait WebFunctions
 {
 
 	public function withSlug(string $value): static
 	{
-		$this->with('page.slug', trim($value));
-
-		Partials::updateVariable('page', [
-			'slug' => $value,
-		]);
-
-		return $this;
+		return $this->with('highlight_slug', $value);
 	}
 
 	public function withTab(string $value): static
 	{
-		$this->with('page.tab', trim($value));
-
-		Partials::updateVariable('page', [
-			'tab' => $value,
-		]);
-
-		return $this;
+		return $this->with('highlight_tab', $value);
 	}
 
 	public function withOverlay(string $target): static
 	{
-		Partials::attachVariable('overlay', [
+		return $this->with('trigger_overlay', new Fluent([
 			'target' => $target,
-		]);
-		return $this;
+		]));
 	}
 
 	public function withParent(string $action, string|null $value = null): static
 	{
-		Partials::attachVariable('parent', [
+		return $this->with('trigger_parent', new Fluent([
 			'action' => $action,
 			'value' => $value,
-		]);
-		return $this;
+		]));
 	}
 
 	// -----------------
 
 	public function withTitle(string $title, array|object $data = []): static
 	{
-		$title = Str::translate(trim($title), $data);
-
-		$this->with('page.title', $title);
-		$this->withMeta('og:title', ['name' => 'og:title', 'content' => $title]);
-
-		Partials::updateVariable('page', [
-			'title' => $title,
-		]);
-
-		return $this;
+		return $this->with('title', Lang::get(trim($title), $data));
 	}
 
-	public function withDescription(string $description): static
-	{
-		$description = Str::translate(trim($description));
-
-		$this->with('page.description', $description);
-		$this->withMeta('description', ['name' => 'description', 'content' => $description]);
-		$this->withMeta('og:description', ['name' => 'og:description', 'content' => Str::translate($description)]);
-
-		Partials::updateVariable('page', [
-			'description' => $description,
-		]);
-
-		return $this;
-	}
+//	public function withDescription(string $description): static
+//	{
+//		$description = Lang::get(trim($description));
+//
+//		$this->with('page.description', $description);
+//		$this->withMeta('description', ['name' => 'description', 'content' => $description]);
+//		$this->withMeta('og:description', ['name' => 'og:description', 'content' => Lang::get($description)]);
+//
+//		Partials::updateVariable('page', [
+//			'description' => $description,
+//		]);
+//
+//		return $this;
+//	}
 
 	// -----------------
 
-	public function withKeywords(array $keywords): static
-	{
-		$keywords = implode(',', $keywords);
+//	public function withKeywords(array $keywords): static
+//	{
+//		$keywords = implode(',', $keywords);
+//
+//		$this->with('page.keywords', $keywords);
+//		$this->withMeta('keywords', ['name' => 'keywords', 'content' => $keywords]);
+//
+//		Partials::updateVariable('page', [
+//			'keywords' => $keywords,
+//		]);
+//
+//		return $this;
+//	}
 
-		$this->with('page.keywords', $keywords);
-		$this->withMeta('keywords', ['name' => 'keywords', 'content' => $keywords]);
-
-		Partials::updateVariable('page', [
-			'keywords' => $keywords,
-		]);
-
-		return $this;
-	}
-
-	public function withAuthor(string $author): static
-	{
-		$this->with('page.author', $author);
-		$this->withMeta('author', ['name' => 'author', 'content' => $author], true);
-
-		Partials::updateVariable('page', [
-			'author' => $author,
-		]);
-
-		return $this;
-	}
+//	public function withAuthor(string $author): static
+//	{
+//		$this->with('page.author', $author);
+//		$this->withMeta('author', ['name' => 'author', 'content' => $author], true);
+//
+//		Partials::updateVariable('page', [
+//			'author' => $author,
+//		]);
+//
+//		return $this;
+//	}
 
 	// -----------------
 

@@ -6,15 +6,12 @@
 
 namespace Rovota\Embla\Components\Layout\Carousel;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 
 class IndicatorList extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'container';
-	}
+	public string $tag = 'container';
 
 	// -----------------
 

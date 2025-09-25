@@ -1,0 +1,1 @@
+<input-icon {{ $attributes }}>{{ $slot }}</input-icon>

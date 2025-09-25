@@ -6,10 +6,10 @@
 
 namespace Rovota\Embla\Components\Indicators\Progress;
 
-use Rovota\Embla\Base\Component;
+use Illuminate\Support\Number;
+use Rovota\Embla\Components\Component;
 use Rovota\Embla\Components\Typography\Label;
 use Rovota\Embla\Components\Typography\Small;
-use Rovota\Framework\Support\Number;
 
 class ProgressLabel extends Label
 {
@@ -19,8 +19,8 @@ class ProgressLabel extends Label
 
 	public function percentage(int $value): static
 	{
-		$precision = $this->variables->int('precision');
-		$suffix = $this->variables->string('suffix', '%');
+		$precision = $this->variables->get('precision');
+		$suffix = $this->variables->get('suffix', '%');
 
 		$value = Number::format(abs($value), $precision);
 		return $this->with(new Small()->text($value . $suffix));
@@ -49,6 +49,7 @@ class ProgressLabel extends Label
 
 	protected function prepareRender(): void
 	{
+		/** @var Progress $progress */
 		$progress = $this->parent->children->first(function (Component $component) {
 			return $component instanceof Progress;
 		});
@@ -58,7 +59,7 @@ class ProgressLabel extends Label
 				$this->suffix(' / ' . $progress->attributes->get('max'));
 			}
 			if ($progress->attributes->has('value')) {
-				$this->percentage($progress->attributes->int('value', 0));
+				$this->percentage($progress->attributes->get('value', 0));
 			}
 		}
 	}

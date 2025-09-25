@@ -6,14 +6,11 @@
 
 namespace Rovota\Embla\Components\Layout\Carousel;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 
 class Carousel extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'carousel';
-	}
+	public string $tag = 'carousel';
 
 }

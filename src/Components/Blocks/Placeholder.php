@@ -6,16 +6,13 @@
 
 namespace Rovota\Embla\Components\Blocks;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 use Rovota\Embla\Components\Typography\Span;
 
 class Placeholder extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'placeholder';
-	}
+	public string $tag = 'placeholder';
 
 	// -----------------
 	// Content
@@ -42,7 +39,7 @@ class Placeholder extends Component
 
 	protected function prepareRender(): void
 	{
-		if ($this->children->missing('text')) {
+		if ($this->children->has('text') === false) {
 			$this->with(new Span()->text('There is nothing to show here.'), 'text');
 		}
 	}

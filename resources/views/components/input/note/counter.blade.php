@@ -1,0 +1,1 @@
+<input-note {{ $attributes }}>{{ __('Characters') }}: <charcount></charcount> / <charlimit></charlimit></input-note>

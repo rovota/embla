@@ -6,14 +6,11 @@
 
 namespace Rovota\Embla\Components\Indicators\Progress;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 
 class ProgressGroup extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'progress-group';
-	}
+	public string $tag = 'progress-group';
 
 }

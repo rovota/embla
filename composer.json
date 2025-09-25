@@ -2,7 +2,7 @@
    "name": "rovota/embla",
    "version": "1.0.0",
    "description": "A lightweight component library, helping you to build modern interfaces more efficiently.",
-   "keywords": ["components", "interface", "php", "rovota", "modern", "web"],
+   "keywords": ["components", "interface", "php", "laravel", "modern", "web"],
    "homepage": "https://github.com/rovota/embla",
    "authors": [
       {
@@ -19,7 +19,7 @@
    ],
    "require": {
       "php-64bit": "^8.4||^8.5",
-      "illuminate/support": "^12.0"
+      "laravel/laravel": "^12.0"
    },
    "autoload": {
       "psr-4": {
@@ -31,7 +31,10 @@
       "laravel": {
          "providers": [
             "Rovota\\Embla\\EmblaServiceProvider"
-         ]
+         ],
+         "aliases": {
+            "Tabs": "Rovota\\Embla\\Facades\\Tabs"
+         }
       }
    },
    "config": {

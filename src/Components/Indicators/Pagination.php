@@ -6,16 +6,13 @@
 
 namespace Rovota\Embla\Components\Indicators;
 
-use Rovota\Embla\Base\Component;
-use Rovota\Embla\Components\Navigation\Link;
+use Rovota\Embla\Components\Component;
+use Rovota\Embla\Components\Navigation\Anchor;
 
 class Pagination extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'pagination';
-	}
+	public string $tag = 'pagination';
 
 	// -----------------
 	// Content
@@ -29,18 +26,17 @@ class Pagination extends Component
 
 	protected function prepareRender(): void
 	{
-		$page_count = $this->variables->int('page_count');
+		$page_count = $this->variables->get('page_count', 0);
 
 		if ($page_count > 0) {
 
-			$current = request()->int('page', 1);
-			$url = request()->url();
+			$current = request()->query('page', 1);
 
 			// -----------------
 
 			if ($current > 1) {
 				$this->with([
-					new Link()->to($url->withParameter('page', $current - 1))->with(icon('arrows.chevron-left'))->class('icon')
+					new Anchor()->to(request()->fullUrlWithQuery(['page' => $current - 1]))->with(icon('arrows.chevron-left'))->class('icon')
 				]);
 			}
 
@@ -50,7 +46,7 @@ class Pagination extends Component
 
 			foreach ($pages as $number => $value) {
 				$this->with([
-					new Link()->to($url->withParameter('page', $number))->with($number)->when($current === $number, function (Link $anchor) {
+					new Anchor()->to(request()->fullUrlWithQuery(['page' => $number]))->with($number)->when($current === $number, function (Anchor $anchor) {
 						$anchor->class('active');
 					})
 				]);
@@ -60,7 +56,7 @@ class Pagination extends Component
 
 			if ($current < $page_count) {
 				$this->with([
-					new Link()->to($url->withParameter('page', $current + 1))->with(icon('arrows.chevron-right'))->class('icon')
+					new Anchor()->to(request()->fullUrlWithQuery(['page' => $current + 1]))->with(icon('arrows.chevron-right'))->class('icon')
 				]);
 			}
 		}

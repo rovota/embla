@@ -1,0 +1,1 @@
+<input-note {{ $attributes }}>{{ $slot }}</input-note>

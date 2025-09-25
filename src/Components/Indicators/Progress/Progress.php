@@ -6,16 +6,13 @@
 
 namespace Rovota\Embla\Components\Indicators\Progress;
 
-use Rovota\Embla\Base\Component;
-use Rovota\Embla\Utilities\Colors\Status;
+use Rovota\Embla\Components\Component;
+use Rovota\Embla\Data\Colors\Status;
 
 class Progress extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'progress';
-	}
+	public string $tag = 'progress';
 
 	// -----------------
 	// Appearance

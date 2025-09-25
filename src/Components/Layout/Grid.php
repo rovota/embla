@@ -6,15 +6,12 @@
 
 namespace Rovota\Embla\Components\Layout;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 
 class Grid extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'grid';
-	}
+	public string $tag = 'grid';
 
 	// -----------------
 

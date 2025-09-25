@@ -6,14 +6,11 @@
 
 namespace Rovota\Embla\Components\Layout;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 
 class Container extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'container';
-	}
+	public string $tag = 'container';
 
 }

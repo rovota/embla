@@ -866,7 +866,7 @@ input-group > label > small {
 	margin-left: 4px;
 }
 
-input-box {
+input-box:not(:has(> .masked)) {
 	background: rgba(var(--color-input), 1);
 	border: 1px solid rgba(var(--color-font), .1);
 	border-radius: var(--radius-medium);
@@ -877,19 +877,19 @@ input-box {
 	transition: all .12s ease;
 }
 
-input-box:hover {
+input-box:not(:has(> .masked)):hover {
 	border: 1px solid rgba(var(--color-font), .3);
 }
 
-input-box:has([disabled]):hover {
+input-box:not(:has(> .masked)):has([disabled]):hover {
 	border: 1px solid rgba(var(--color-font), .1);
 }
 
-input-box.has-error {
+input-box:not(:has(> .masked)).has-error {
 	border: 1px solid rgba(var(--color-danger), 1);
 }
 
-input-box:focus-within {
+input-box:not(:has(> .masked)):focus-within {
 	background: rgba(var(--color-card), 1);
 	border: 1px solid rgba(var(--color-accent), 1);
 	box-shadow: 0 3px 6px 0 rgba(var(--color-accent), .2);
@@ -1004,15 +1004,15 @@ input-errors > span:not(:only-child)::before {
 	content: '• ';
 }
 
-input-masked + input-note, input-masked + input-errors {
+input-box:has(> .masked) + input-note, input-box:has(> .masked) + input-errors {
 	margin-top: 1rem;
 }
 
-input-masked > label {
+input-box:has(> .masked) > label {
 	margin-bottom: 0;
 }
 
-input-masked > label > input {
+input-box:has(> .masked) > label > input {
 	position: absolute;
 	opacity: 0 !important;
 	width: 2px;
@@ -1091,10 +1091,6 @@ input[type="radio"]:checked:focus-visible + indicator {
 .input-toggle:has(:disabled) {
 	cursor: not-allowed;
 	opacity: var(--opacity-subtext);
-}
-
-label + input-masked .input-toggle:first-child {
-	margin-top: 0.8rem;
 }
 
 .input-toggle + .input-toggle {
@@ -1192,7 +1188,7 @@ label + input-masked .input-toggle:first-child {
 	opacity: var(--opacity-subtext);
 }
 
-label + input-masked .input-choice:first-child {
+label + input-box:has(> .masked) .input-choice:first-child {
 	margin-top: 0.8rem;
 }
 
@@ -1243,7 +1239,7 @@ label + input-masked .input-choice:first-child {
 	opacity: var(--opacity-subtext);
 }
 
-label + input-masked .input-panel:first-child {
+label + input-box:has(> .masked) .input-panel:first-child {
 	margin-top: 0.8rem;
 }
 
@@ -1267,7 +1263,7 @@ label + input-masked .input-panel:first-child {
 	margin-top: 0.6rem;
 }
 
-.input-swatches > input-masked {
+input-box:has(> .input-swatch) {
 	display: grid;
 	grid-gap: 0.6rem;
 	grid-template-columns: repeat(auto-fit, minmax(2.5rem, 1fr));
@@ -1322,7 +1318,7 @@ label + input-masked .input-panel:first-child {
 	opacity: 1;
 }
 
-.input-themes > input-masked {
+input-box:has(> .input-theme) {
 	display: grid;
 	grid-gap: 0.5rem;
 	grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
@@ -1374,24 +1370,31 @@ label + input-masked .input-panel:first-child {
 /* ---------------------- */
 /* Range */
 
-input-slider {
+input-box:has(> .input-range) {
 	align-items: center;
 	display: flex;
 	flex-direction: row;
 	height: 2.75rem;
 }
 
-input-slider > input-prefix {
-	color: rgba(var(--color-font), var(--opacity-subtext));
-	font-weight: 400;
-	width: 2.6rem;
+input-box:has(> .input-range.minimal) {
+	height: 1.5rem;
 }
 
-input-slider > input-prefix + input {
+input-box:has(> .input-range) > input-prefix {
+	color: rgba(var(--color-font), var(--opacity-subtext));
+	border: none;
+	font-weight: 400;
+	width: 2.6rem;
+	height: 100%;
+	padding: 0;
+}
+
+input-box:has(> .input-range) > input-prefix + input {
 	margin-left: 0.5rem;
 }
 
-input-slider > input {
+input-box:has(> .input-range) > input {
 	flex-grow: 1;
 }
 

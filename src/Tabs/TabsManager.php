@@ -6,12 +6,11 @@
 
 namespace Rovota\Embla\Tabs;
 
+use Illuminate\Support\Collection;
 use Rovota\Embla\Components\Navigation\Tab;
 use Rovota\Embla\Components\Navigation\TabAction;
-use Rovota\Framework\Kernel\ServiceProvider;
-use Rovota\Framework\Structures\Bucket;
 
-final class TabsManager extends ServiceProvider
+final class TabsManager
 {
 
 	/**
@@ -20,16 +19,16 @@ final class TabsManager extends ServiceProvider
 	public array|null $title = null;
 
 	/**
-	 * @var Bucket<string, Tab>
+	 * @var Collection<string, Tab>
 	 */
-	public Bucket $tabs {
+	public Collection $tabs {
 		get => $this->tabs;
 	}
 
 	/**
-	 * @var Bucket<string, TabAction>
+	 * @var Collection<string, TabAction>
 	 */
-	public Bucket $actions {
+	public Collection $actions {
 		get => $this->actions;
 	}
 
@@ -37,8 +36,8 @@ final class TabsManager extends ServiceProvider
 
 	public function __construct()
 	{
-		$this->tabs = new Bucket();
-		$this->actions = new Bucket();
+		$this->tabs = new Collection();
+		$this->actions = new Collection();
 	}
 
 	// -----------------
@@ -56,14 +55,14 @@ final class TabsManager extends ServiceProvider
 	public function addTabs(array $tabs): void
 	{
 		foreach ($tabs as $tab) {
-			$this->tabs->append($tab);
+			$this->tabs->add($tab);
 		}
 	}
 
 	public function addActions(array $actions): void
 	{
 		foreach ($actions as $action) {
-			$this->actions->append($action);
+			$this->actions->add($action);
 		}
 	}
 

@@ -6,15 +6,12 @@
 
 namespace Rovota\Embla\Components\Indicators;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 
 class Keystroke extends Component
 {
 
-	protected function configuration(): void
-	{
-		$this->config->tag = 'kbd';
-	}
+	public string $tag = 'kbd';
 
 	// -----------------
 	// Starters
@@ -26,7 +23,7 @@ class Keystroke extends Component
 
 	public function sequence(array $keystrokes): static
 	{
-		$this->config->tag = 'span';
+		$this->tag = 'span';
 
 		foreach ($keystrokes as $key) {
 			$this->with(new Keystroke()->label($key));

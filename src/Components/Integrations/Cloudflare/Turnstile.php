@@ -6,19 +6,19 @@
 
 namespace Rovota\Embla\Components\Integrations\Cloudflare;
 
-use Rovota\Embla\Base\Component;
-use Rovota\Framework\Facades\Language;
+use Illuminate\Support\Facades\Lang;
+use Rovota\Embla\Components\Component;
 
 class Turnstile extends Component
 {
 
 	protected function configuration(): void
 	{
-		$this->config->tag = 'div';
+		$this->tag = 'div';
 
 		$this->class('cf-turnstile');
 
-		$this->attribute('data-language', strtolower(str_replace('_', '-', Language::active()->locale)));
+		$this->attribute('data-language', strtolower(str_replace('_', '-', Lang::locale())));
 		$this->attribute('data-size', 'flexible');
 		$this->attribute('data-appearance', 'interaction-only');
 	}
@@ -43,7 +43,7 @@ class Turnstile extends Component
 
 	protected function prepareRender(): void
 	{
-		if ($this->attributes->missing('data-sitekey')) {
+		if ($this->attributes->has('data-sitekey') === false) {
 			$this->attribute('data-sitekey', getenv('TURNSTILE_PUBLIC_KEY'));
 		}
 	}

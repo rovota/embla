@@ -6,17 +6,19 @@
 
 namespace Rovota\Embla\Components\Blocks;
 
-use Rovota\Embla\Base\Component;
+use Rovota\Embla\Components\Component;
 use Rovota\Embla\Components\Layout\Content;
-use Rovota\Embla\Utilities\Colors\Status;
+use Rovota\Embla\Data\Colors\Status;
 
 class Notice extends Component
 {
 
+	public string $tag = 'notice';
+
+	// -----------------
+
 	protected function configuration(): void
 	{
-		$this->config->tag = 'notice';
-
 		$this->with('', 'icon');
 	}
 
