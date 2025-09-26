@@ -7,16 +7,12 @@
 namespace Rovota\Embla\Tabs;
 
 use Illuminate\Support\Collection;
-use Rovota\Embla\Components\Navigation\Tab;
-use Rovota\Embla\Components\Navigation\TabAction;
+use Illuminate\Support\Fluent;
 
 final class TabsManager
 {
 
-	/**
-	 * @var null|array<string, array{label: string, target: mixed}>
-	 */
-	public array|null $title = null;
+	public Fluent|null $title = null;
 
 	/**
 	 * @var Collection<string, Tab>
@@ -44,10 +40,10 @@ final class TabsManager
 
 	public function setTitle(string $label, mixed $target = null): void
 	{
-		$this->title = [
+		$this->title = new Fluent([
 			'label' => trim($label),
 			'target' => $target,
-		];
+		]);
 	}
 
 	// -----------------

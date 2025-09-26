@@ -99,7 +99,6 @@ iframe.youtube {
 
 * {
 	box-sizing: border-box;
-	font-family: var(--font-family-standard), sans-serif !important;
 	outline: rgba(var(--color-accent), 0) solid 0.18rem;
 	-webkit-tap-highlight-color: transparent;
 }
@@ -1740,19 +1739,19 @@ button.outlined[class*='accent-']:hover, .button[class*='accent-'].outlined:hove
 	box-shadow: 0 3px 6px 0 rgba(var(--color-accent), .2);
 }
 
-button.link, .button.link {
+button.minimal, .button.minimal {
 	background: transparent;
 	color: rgba(var(--color-font), 1);
 	padding: 0;
 }
 
-button.link:hover, .button.link:hover {
+button.minimal:hover, .button.minimal:hover {
 	box-shadow: none;
 	color: rgba(var(--color-accent), 1);
 	text-decoration: underline;
 }
 
-button.link[class*='accent-'], .button.link[class*='accent-'] {
+button.minimal[class*='accent-'], .button.minimal[class*='accent-'] {
 	background: transparent;
 	color: rgba(var(--color-accent), 1);
 }
@@ -1767,7 +1766,7 @@ button:has(svg), .button:has(svg) {
 	padding: 0 0.45rem;
 }
 
-td button.link, td .button.link {
+td button.minimal, td .button.minimal {
 	height: auto;
 	padding: 0;
 }
@@ -1802,7 +1801,7 @@ button:disabled, .button[disabled] {
 	box-shadow: 0 3px 6px 0 rgba(var(--color-dark), .05);
 }
 
-[class*='accent-'] > button.link, [class*='accent-'] > .button.link {
+[class*='accent-'] > button.minimal, [class*='accent-'] > .button.minimal {
 	background: transparent;
 }
 
@@ -2266,12 +2265,9 @@ placeholder {
 	text-align: center;
 }
 
-placeholder.transparent {
-	background: none;
-}
-
-placeholder.thin {
+placeholder.subtle {
 	padding: 1.25rem;
+	background: none;
 }
 
 placeholder > span {

@@ -1,0 +1,1 @@
+<a {{ $attributes->merge(['href' => url()->current()]) }}>{{ $slot }}</a>
