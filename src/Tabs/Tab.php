@@ -30,6 +30,13 @@ class Tab extends Fluent
 
 	// -----------------
 
-	// TODO: Implement ability to add a badge (Fluent class)
+	public function badge($text = null, $args = [], string|null $style = null): static
+	{
+		return $this->set('badge', new Fluent([
+			'text' => $text,
+			'args' => $args,
+			'style' => $style
+		]));
+	}
 
 }
