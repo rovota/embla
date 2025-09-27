@@ -1831,17 +1831,23 @@ progress-group + progress-group, progress-group + split, split + progress-group 
 	margin-top: 1.25rem;
 }
 
-progress-group label {
+progress-group span {
 	align-items: flex-end;
 	display: flex;
 	justify-content: space-between;
+	color: rgba(var(--color-font), 1);
+	font-size: 0.94rem;
+	font-weight: 500;
+	margin-bottom: 5px;
+	position: relative;
+	user-select: none;
 }
 
-progress-group label small {
+progress-group span small {
 	opacity: var(--opacity-subtext);
 }
 
-progress + label {
+progress + span {
 	margin-top: 5px;
 	margin-bottom: 0;
 }
@@ -1851,6 +1857,7 @@ progress {
 	background: rgba(var(--color-font), .1);
 	border: none;
 	border-radius: var(--radius-medium);
+	overflow: hidden;
 	display: block;
 	height: 0.5rem;
 	margin: 0;
@@ -1862,7 +1869,6 @@ progress:not([value]):after {
 	animation: progress-bar 2.5s cubic-bezier(.56, 0, .56, 1) infinite;
 	background: rgba(var(--color-accent), 1);
 	border-radius: var(--radius-medium);
-	box-shadow: 0 3px 6px 0 rgba(var(--color-accent), .2);
 	content: '';
 	display: block;
 	height: 100%;
@@ -2583,26 +2589,6 @@ overlay > content > iframe {
 	z-index: 22;
 	min-height: 0;
 	flex-grow: 1;
-}
-
-/* ---------------------- */
-/* Misc */
-
-span.diff, small.diff {
-	color: rgba(var(--color-font), var(--opacity-subtext));
-	font-weight: 500;
-}
-
-span.diff[class*='accent-'], small.diff[class*='accent-'] {
-	color: rgba(var(--color-accent), 1);
-}
-
-span.diff[class*='-success']::before, small.diff[class*='-success']::before {
-	content: '+ ';
-}
-
-span.diff[class*='-danger']::before, small.diff[class*='-danger']::before {
-	content: '- ';
 }
 
 /* ---------------------- */

@@ -23,9 +23,9 @@ class Tab extends Fluent
 		return $this->set('route', $name);
 	}
 
-	public function title(string $title): static
+	public function label(string $label): static
 	{
-		return $this->set('title', $title);
+		return $this->set('label', $label);
 	}
 
 	// -----------------
