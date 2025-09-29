@@ -1,1 +1,1 @@
-<span {{ $attributes }}>&copy; {{ date('Y') }} - {{ config('app.author') }}</span>
+<span {{ $attributes }}>&copy; {{ date('Y') }} - {{ $slot }}</span>
