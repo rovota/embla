@@ -4,12 +4,12 @@
  * @license     MIT
  */
 
-namespace Rovota\Embla\Tabs;
+namespace Rovota\Embla\Toolbar;
 
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Traits\Conditionable;
 
-class Tab extends Fluent
+class ToolbarAction extends Fluent
 {
 	use Conditionable;
 
@@ -27,18 +27,21 @@ class Tab extends Fluent
 		return $this->set('route', $name);
 	}
 
-	public function label(string $label): static
+	public function icon(string $icon): static
 	{
-		return $this->set('label', $label);
+		return $this->set('icon', $icon);
+	}
+
+	public function title(string $title): static
+	{
+		return $this->set('title', $title);
 	}
 
 	// -----------------
 
-	public function badge($text = null, $args = [], string|null $style = null): static
+	public function dot(string|null $style = null): static
 	{
-		return $this->set('badge', new Fluent([
-			'text' => $text,
-			'args' => $args,
+		return $this->set('dot', new Fluent([
 			'style' => $style
 		]));
 	}

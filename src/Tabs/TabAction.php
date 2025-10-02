@@ -7,9 +7,13 @@
 namespace Rovota\Embla\Tabs;
 
 use Illuminate\Support\Fluent;
+use Illuminate\Support\Traits\Conditionable;
 
 class TabAction extends Fluent
 {
+	use Conditionable;
+
+	// -----------------
 
 	public static function name(string $name): static
 	{
