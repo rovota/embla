@@ -2259,6 +2259,90 @@ breadcrumbs > container > nav > a:last-child::after {
 }
 
 /* ---------------------- */
+/* Toolbar */
+
+toolbar {
+	box-shadow: 0 1px 0 0 rgba(var(--color-light), .08);
+	background: rgba(var(--color-dark), 1);
+	display: flex;
+	position: sticky;
+	top: 0;
+	width: 100%;
+	z-index: 4;
+	justify-content: center;
+	-webkit-user-select: none;
+}
+
+toolbar > container > header {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	gap: 20px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+toolbar > container > header > .title {
+	display: flex;
+	height: 44px;
+	align-items: center;
+	flex-grow: 1;
+}
+
+toolbar > container > header > .title > span {
+	color: rgba(var(--color-light), 1);
+	font-weight: 400;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+toolbar > container > header > .title > badge {
+	background: rgba(var(--color-accent), 1);
+	color: rgba(var(--color-dark), 1);
+	margin-right: 0.5rem;
+}
+
+toolbar > container > header > actions {
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 20px;
+}
+
+toolbar > container > header > actions > a {
+	position: relative;
+	display: flex;
+	width: 24px;
+	height: 24px;
+	justify-content: center;
+	align-items: center;
+	color: rgba(var(--color-light), 1);
+	flex: 0 0 24px;
+	cursor: pointer;
+}
+
+toolbar > container > header > actions > a.selected {
+	color: rgba(var(--color-accent), 1);
+	opacity: 1;
+}
+
+toolbar > container > header > actions > a > svg {
+	transition: opacity .1s ease;
+	opacity: var(--opacity-subtext);
+}
+
+toolbar > container > header > actions > a:hover > svg {
+	opacity: 1;
+}
+
+toolbar > container > header > actions > a > dot {
+	position: absolute;
+	left: -4px; top: -4px;
+	height: 1rem;
+	width: 1rem;
+	border: 3px solid rgba(var(--color-dark), 1);
+}
+
+/* ---------------------- */
 /* Placeholder */
 
 placeholder {
