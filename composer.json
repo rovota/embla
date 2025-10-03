@@ -19,7 +19,7 @@
    ],
    "require": {
       "php-64bit": "^8.4||^8.5",
-      "laravel/laravel": "^12.0"
+      "laravel/framework": "^12.0"
    },
    "autoload": {
       "psr-4": {
