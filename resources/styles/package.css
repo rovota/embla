@@ -1910,25 +1910,40 @@ spinner.double {
 /* Toasts */
 
 toast {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
 	background: rgba(var(--color-card), 1);
-	border-top: 1px solid rgba(var(--color-font), .07);
-	box-shadow: 0 0 10px 0 rgba(var(--color-dark), .02);
+	border: 1px solid rgba(var(--color-font), .1);
+	box-shadow: 0 4px 20px 0 rgba(var(--color-dark), .1);
+	border-radius: var(--radius-standard);
 	color: rgba(var(--color-font), 1);
 	pointer-events: none;
 	position: fixed;
-	bottom: 0; left: 0;
-	width: 100%;
-	transform: translateY(100%);
+	top: 30px;
+	left: 10px;
+	right: 10px;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	transform: translateY(-100%);
 	opacity: 0;
-	text-align: center;
 	transition: all .3s ease;
-	padding: 1rem 1.5rem;
-	line-height: 1.4;
+	padding: 0.8rem 1.5rem;
 	z-index: 14;
 }
 
+toast > svg {
+	flex-shrink: 0;
+}
+
+toast > span {
+	line-height: 1.4;
+}
+
 toast[class*='accent-'] {
-	border-top: 1px solid rgba(var(--color-font), .2);
 	background: rgba(var(--color-accent), 1);
 	color: rgba(var(--color-light), 1);
 }
@@ -3014,24 +3029,6 @@ table tr td:last-child {
 @media screen and (max-width: 400px) {
 	iframe.youtube {
 		height: 200px;
-	}
-}
-
-/* ---------------------- */
-/* Installed App */
-
-@media (display-mode: standalone) {
-	toast {
-		border: 1px solid rgba(var(--color-font), .07);
-		box-shadow: 0 4px 10px 0 rgba(var(--color-dark), .02);
-		border-radius: var(--radius-medium);
-		bottom: 0; left: 0;
-		margin: 0 10px 10px 10px;
-		width: calc(100% - 20px);
-	}
-
-	toast[class*='accent-'] {
-		border: 1px solid rgba(var(--color-font), .2);
 	}
 }
 

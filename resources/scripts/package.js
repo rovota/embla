@@ -142,10 +142,8 @@ function dataUrlToFile(data, filename) {
 // Toast Messages
 
 document.querySelectorAll('toast').forEach(toast => {
-	const message = document.createTextNode(toast.dataset.message);
-	toast.appendChild(message);
+	toast.classList.add('accent-' + (toast.dataset.type ?? 'auto'));
 
-	toast.classList.add('accent-' + toast.dataset.type);
 	setTimeout(() => toast.classList.add('visible'), 100);
 	setTimeout(() => toast.classList.remove('visible'), 3200);
 	setTimeout(() => toast.remove(), 5000);
