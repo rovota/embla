@@ -1,3 +1,3 @@
-@props(['message'])
+@props(['directive'])
 
-<a {{ $attributes->merge(['data-message' => $message]) }}>{{ $slot }}</a>
+<a href="/" {{ $attributes->merge(['data-message' => $directive]) }}>{{ $slot }}</a>

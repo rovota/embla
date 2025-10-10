@@ -1,5 +1,4 @@
-@aware(['name' => null])
-@props(['default' => null])
+@props(['name' => null, 'default' => null])
 
 <input type="hidden" {{ $attributes->merge([
 	'id' => $name,
