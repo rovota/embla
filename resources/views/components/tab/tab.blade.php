@@ -1,3 +1,3 @@
-@props(['name'])
+@props(['name' => null])
 
-<x-embla::anchor {{ $attributes->class(['tab-' . $name]) }}>{{ $slot }}</x-embla::anchor>
+<x-embla::anchor {{ $attributes->class(['tab-' . ($name ?? 'unknown')]) }}>{{ $slot }}</x-embla::anchor>
