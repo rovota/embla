@@ -2,6 +2,7 @@
 @props(['label', 'description', 'value' => '1'])
 
 <label {{ $attributes->class(['input-toggle', 'masked'])->only(['class'])->merge(['aria-label' => __($label)]) }}>
+	<input type="hidden" name="{{ $name }}" value="0">
 	<input type="{{ $type }}" {{ $attributes->merge(['name' => $name, 'value' => $value])->except('class') }} @checked(old($name, $default) === $value)>
 	<content>
 		<span>{{ __($label) }}</span>
