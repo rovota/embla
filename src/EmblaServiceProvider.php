@@ -7,7 +7,9 @@
 namespace Rovota\Embla;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Fluent;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 use Rovota\Embla\Icons\IconManager;
 use Rovota\Embla\Tabs\TabsFacadeProxy;
 use Rovota\Embla\Tabs\TabsManager;
@@ -25,12 +27,7 @@ class EmblaServiceProvider extends ServiceProvider
 			__DIR__.'/../config/embla.php', 'embla'
 		);
 
-		$this->app->singleton(IconManager::class, function ($app) {
-			return new IconManager(
-				$app->make('config')->get('embla.icons')
-			);
-		});
-
+		$this->bindIconFunctionality();
 		$this->bindTabsFunctionality();
 		$this->bindToolbarFunctionality();
 	}
@@ -40,6 +37,18 @@ class EmblaServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
+		View::macro('withOverlay', function (string $target) {
+			\Illuminate\Support\Facades\View::share('trigger_parent', new Fluent(compact('target')));
+			return $this;
+		});
+
+		View::macro('withParent', function (string $action, string|null $value = null) {
+			\Illuminate\Support\Facades\View::share('trigger_parent', new Fluent(compact('action', 'value')));
+			return $this;
+		});
+
+		// -----------------
+
 		$this->publishes([
 			__DIR__.'/../config/embla.php' => $this->app->configPath('embla.php'),
 		], 'embla-config');
@@ -52,10 +61,21 @@ class EmblaServiceProvider extends ServiceProvider
 			__DIR__.'/../resources/scripts' => $this->app->publicPath('vendor/embla/scripts'),
 		], 'embla-scripts');
 
+		// -----------------
+
 		Blade::anonymousComponentPath(__DIR__.'/../resources/views/components', 'embla');
 	}
 
 	// -----------------
+
+	protected function bindIconFunctionality(): void
+	{
+		$this->app->singleton(IconManager::class, function ($app) {
+			return new IconManager(
+				$app->make('config')->get('embla.icons')
+			);
+		});
+	}
 
 	protected function bindTabsFunctionality(): void
 	{
