@@ -374,7 +374,7 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	if (input.hasAttribute('data-switch')) {
 		input.addEventListener('change', () => {
 			if (input.dataset.switch === 'locale') {
-				window.location.href = window.location.href.replace(/\?locale=[a-z]{2}_[A-Z]{2}/g, '') + '?locale=' + input.value;
+				window.location.href = window.location.href.replace(/\?locale=[a-z]{2}(_[A-Z]{2})?/g, '') + '?locale=' + input.value;
 			}
 		});
 	}
