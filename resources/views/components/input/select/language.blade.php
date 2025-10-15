@@ -6,7 +6,7 @@
 	'data-switch' => 'locale',
 	'autocomplete' => 'off'
 ]) }}>
-	@foreach(config('localization.locales') as $locale => $data)
+	@foreach(config('app.locales') as $locale => $data)
 		<option value="{{ $locale }}" @selected($locale === Lang::locale())>{{ $data['label']['native'] }}</option>
 	@endforeach
 </select>
