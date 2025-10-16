@@ -32,6 +32,11 @@ const embla = new class Embla {
 					this.instance.classList.remove('visible');
 				}
 			}
+			show() {
+				if (this.instance !== null) {
+					this.instance.classList.add('visible');
+				}
+			}
 			remove() {
 				if (this.instance !== null) {
 					this.allowed = true;
@@ -605,10 +610,6 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 
 document.querySelectorAll('trigger').forEach(trigger => {
 	if (trigger.dataset.type === 'overlay') {
-		embla.overlay.open(trigger.dataset.target);
-		trigger.remove();
-	}
-	if (trigger.dataset.type === 'parent') {
 		window.top.postMessage(trigger.dataset.message, '*');
 		trigger.remove();
 	}
@@ -658,6 +659,9 @@ if (window.self === window.top) {
 			if (event.data.startsWith('overlay:hide')) {
 				embla.overlay.hide();
 			}
+			if (event.data.startsWith('overlay:show')) {
+				embla.overlay.show();
+			}
 			if (event.data.startsWith('overlay:reload')) {
 				embla.overlay.remove();
 				setTimeout(() => embla.overlay.open(window.location.href), 150);
@@ -691,9 +695,11 @@ if (window.self !== window.top) {
 			}
 		});
 	});
-	document.querySelectorAll('button').forEach(button => {
-		button.addEventListener("click", () => {
-			window.top.postMessage('overlay:hide', '*');
+	document.querySelectorAll('form').forEach(form => {
+		form.addEventListener("submit", () => {
+			if (form.checkValidity()) {
+				window.top.postMessage('overlay:hide', '*');
+			}
 		});
 	});
 }

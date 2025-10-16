@@ -37,8 +37,8 @@ class EmblaServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-		View::macro('withOverlay', function (string $target) {
-			\Illuminate\Support\Facades\View::share('trigger_parent', new Fluent(compact('target')));
+		View::macro('withOverlay', function (string $action, string|null $value = null) {
+			\Illuminate\Support\Facades\View::share('trigger_overlay', new Fluent(compact('action', 'value')));
 			return $this;
 		});
 
