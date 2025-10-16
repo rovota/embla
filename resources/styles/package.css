@@ -1994,6 +1994,10 @@ pagination a:not([tabindex='-1']).active {
 	color: rgba(var(--color-light), 1);
 }
 
+pagination a[disabled] {
+	background: transparent;
+}
+
 /* ---------------------- */
 /* Attachments */
 
