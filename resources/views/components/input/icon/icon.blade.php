@@ -1,1 +1,2 @@
-<input-icon {{ $attributes }}>{{ $slot }}</input-icon>
+@props(['use'])
+<input-icon {{ $attributes }}>{!! icon($use) !!}</input-icon>
