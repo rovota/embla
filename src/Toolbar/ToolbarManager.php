@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright   Léandro Tijink
  * @license     MIT
