@@ -4,6 +4,6 @@
 	'data-size' => $size,
 	'data-appearance' => $style,
 	'data-language' => $language,
-	'data-sitekey' => getenv('TURNSTILE_PUBLIC_KEY')
+	'data-sitekey' => config('app.turnstile.public_key')
 	]) }}>
 </div>
