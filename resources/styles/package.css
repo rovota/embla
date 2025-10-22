@@ -1267,6 +1267,9 @@ input-box:has(> .input-swatch) {
 	grid-gap: 0.6rem;
 	grid-template-columns: repeat(auto-fit, minmax(2.5rem, 1fr));
 	width: 100%;
+}
+
+label + input-box:has(> .input-swatch) {
 	margin-top: 0.8rem;
 }
 
