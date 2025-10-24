@@ -977,6 +977,16 @@ input-box > :focus-visible {
 	outline: none;
 }
 
+.split > input-box {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-column-gap: 1.25rem;
+}
+
+.split > label + input-box:has(> .masked) .input-choice:first-child {
+	margin-top: 0.6rem;
+}
+
 input-note {
 	color: rgba(var(--color-font), var(--opacity-subtext));
 	user-select: none;
