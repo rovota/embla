@@ -2,7 +2,11 @@
 @props(['label', 'value' => '1'])
 
 @php
-	$defaults = old($value, str_contains($default, '|') ? old($name, explode('|', $default)) : [$default]);
+	$defaults = old(trim($name, '[]'), str_contains($default, '|') ? explode('|', $default) : $default);
+	if (is_array($defaults) === false) {
+		$defaults = [$defaults];
+	}
+
 	$checked = in_array($value, $defaults);
 @endphp
 
