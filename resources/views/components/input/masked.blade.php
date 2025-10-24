@@ -1,8 +1,24 @@
-@aware(['type' => 'radio', 'name' => null, 'default' => null])
-@props(['label'])
+@aware(['type' => 'radio', 'name' => null, 'default' => null, 'fallback' => 'on'])
+@props(['label', 'value' => '1'])
+
+@php
+	$defaults = old(trim($name, '[]'), str_contains($default, '|') ? explode('|', $default) : $default);
+	if (is_array($defaults) === false) {
+		$defaults = [$defaults];
+	}
+
+	if ($type === 'radio') {
+		$fallback = 'off';
+	}
+
+	$checked = in_array($value, $defaults);
+@endphp
 
 <label {{ $attributes->class(['masked'])->only(['class'])->merge(['aria-label' => __($label)]) }}>
-	<input type="{{ $type }}" {{ $attributes->merge(['name' => $name])->except('class') }} @checked(old($name, $default) === $attributes->get('value'))>
+	@if($fallback === 'on')
+		<input type="hidden" name="{{ $name }}" value="0">
+	@endif
+	<input type="{{ $type }}" {{ $attributes->merge(['name' => $name, 'value' => $value])->except('class') }} @checked($value)>
 	<indicator></indicator>
 	<content>
 		{{ $slot }}

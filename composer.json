@@ -1,6 +1,6 @@
 {
    "name": "rovota/embla",
-   "version": "1.0.3",
+   "version": "1.0.4",
    "description": "A lightweight component library, helping you to build modern interfaces more efficiently.",
    "keywords": ["components", "interface", "php", "laravel", "modern", "web"],
    "homepage": "https://github.com/rovota/embla",
