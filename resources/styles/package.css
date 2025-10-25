@@ -2458,6 +2458,15 @@ placeholder > span {
 	user-select: none;
 }
 
+.card > heading > h2 {
+	flex-grow: 1;
+	font-weight: 700;
+	line-height: 2rem;
+	white-space: nowrap;
+	font-size: initial;
+	margin: 0;
+}
+
 .card > heading > span {
 	flex-grow: 1;
 	font-weight: 700;
