@@ -2571,6 +2571,10 @@ placeholder > span {
 	border-radius: var(--radius-medium);
 }
 
+.card > content > content-scroller > placeholder {
+	border-radius: var(--radius-medium);
+}
+
 .card > actions {
 	background: rgba(var(--color-font), .025);
 	border-top: 1px solid rgba(var(--color-font), 0.045);
