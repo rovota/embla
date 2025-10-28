@@ -12,5 +12,5 @@
 <input type="datetime-local" {{ $attributes->merge([
 	'id' => $name,
 	'name' => $name,
-	'value' => moment(old($name, $default))->format('Y-m-d H:i')
+	'value' => old($name, $default) !== null ? moment(old($name, $default))->format('Y-m-d H:i') : ''
 ]) }}>

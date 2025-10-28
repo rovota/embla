@@ -12,5 +12,5 @@
 <input type="month" {{ $attributes->merge([
 	'id' => $name,
 	'name' => $name,
-	'value' => moment(old($name, $default))->format('Y-m')
+	'value' => old($name, $default) !== null ? moment(old($name, $default))->format('Y-m') : ''
 ]) }}>
