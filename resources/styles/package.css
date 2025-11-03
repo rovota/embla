@@ -1037,6 +1037,11 @@ input-box:has(> .masked) > label > input {
 	height: 2px;
 }
 
+input:disabled, input:read-only, .masked:has(:disabled) {
+	cursor: not-allowed;
+	opacity: var(--opacity-subtext);
+}
+
 /* ---------------------- */
 /* Checkbox & Radio */
 
@@ -1104,11 +1109,6 @@ input[type="radio"]:checked:focus-visible + indicator {
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
-}
-
-.input-toggle:has(:disabled) {
-	cursor: not-allowed;
-	opacity: var(--opacity-subtext);
 }
 
 .input-toggle + .input-toggle {
@@ -1201,11 +1201,6 @@ input[type="radio"]:checked:focus-visible + indicator {
 	flex-direction: row;
 }
 
-.input-choice:has(:disabled) {
-	cursor: not-allowed;
-	opacity: var(--opacity-subtext);
-}
-
 label + input-box:has(> .masked) .input-choice:first-child {
 	margin-top: 0.8rem;
 }
@@ -1218,10 +1213,6 @@ label + input-box:has(> .masked) .input-choice:first-child {
 	user-select: none;
 	display: block;
 	flex-grow: 1;
-}
-
-.input-choice:has(:disabled) > indicator {
-	filter: grayscale(100%);
 }
 
 /* ---------------------- */
@@ -1250,11 +1241,6 @@ label + input-box:has(> .masked) .input-choice:first-child {
 
 .input-panel[type='radio']:has(:checked) {
 	pointer-events: none;
-}
-
-.input-panel:has(:disabled) {
-	cursor: not-allowed;
-	opacity: var(--opacity-subtext);
 }
 
 label + input-box:has(> .masked) .input-panel:first-child {
