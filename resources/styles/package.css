@@ -1780,8 +1780,7 @@ button.minimal[class*='accent-'], .button.minimal[class*='accent-'] {
 
 button.large, .button.large {
 	border-radius: var(--radius-standard);
-	height: 3rem;
-	font-size: 1.1rem;
+	height: 2.75rem;
 }
 
 button:has(svg), .button:has(svg) {
@@ -2260,7 +2259,7 @@ breadcrumbs > container > nav {
 }
 
 breadcrumbs > container > nav > a {
-	color: rgba(var(--color-font), var(--opacity-standard));
+	color: rgba(var(--color-font), 1);
 	display: inline-flex;
 	white-space: nowrap;
 	align-items: center;
@@ -2268,10 +2267,10 @@ breadcrumbs > container > nav > a {
 	position: relative;
 	font-size: 14px;
 	text-decoration: none;
+	opacity: var(--opacity-subtext);
 }
 
 breadcrumbs > container > nav > a:hover {
-	color: rgba(var(--color-font), 1);
 	text-decoration: underline;
 }
 
