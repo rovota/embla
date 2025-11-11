@@ -1,1 +1,0 @@
-<span {{ $attributes }}>&copy; {{ date('Y') }} - {{ $slot }}</span>

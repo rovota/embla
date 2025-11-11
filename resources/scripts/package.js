@@ -1,6 +1,3 @@
-import "./dependencies/spotlight.min"
-import "./dependencies/signature.min"
-
 const embla = new class Embla {
 	constructor() {
 		this.helpers = new class Helpers {
@@ -384,18 +381,6 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		});
 	}
 
-	// Preview functionality
-	if (input.hasAttribute('data-preview')) {
-		input.addEventListener('change', () => {
-			document.body.classList.forEach(item => {
-				if (item.startsWith(input.dataset.preview + '-')) {
-					document.body.classList.remove(item);
-				}
-			});
-			document.body.classList.add(input.dataset.preview + '-' + input.value);
-		});
-	}
-
 	// Cross-Input Synchronization
 	if (input.hasAttribute('data-sync')) {
 		input.addEventListener('change', () => {
@@ -416,18 +401,6 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 		});
 	}
 
-});
-
-// -----------------
-// Toggles
-
-document.querySelectorAll('[data-toggle]').forEach(toggle => {
-	toggle.addEventListener("click", () => {
-		if (toggle.dataset.toggle === 'drawer') {
-			document.querySelector('#drawer')?.classList.toggle('visible');
-			document.querySelector('#drawer-shading')?.classList.toggle('visible');
-		}
-	});
 });
 
 // -----------------
@@ -570,19 +543,6 @@ document.querySelectorAll('carousel').forEach(carousel => {
 		});
 	}
 });
-
-// -----------------
-// Scroll Location
-
-document.querySelectorAll('scrollbutton').forEach(button => {
-	let parent = document.querySelector(button.dataset.parent);
-	parent.onscroll = () => {
-		window.scrollY > 600 ? button.classList.add(button.dataset.class) : button.classList.remove(button.dataset.class);
-	}
-	button.addEventListener('click', () => window.scrollTo({
-		top: 0, behavior: "smooth"
-	}));
-})
 
 // -----------------
 // Tabs Expansion
