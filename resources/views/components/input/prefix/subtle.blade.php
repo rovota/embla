@@ -1,1 +1,0 @@
-<input-prefix {{ $attributes->merge(['class' => 'subtle']) }}>{{ $slot }}</input-prefix>

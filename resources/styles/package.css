@@ -1,47 +1,5 @@
-@layer base {
-	:root {
-		-webkit-print-color-adjust: exact !important;
-		-webkit-tap-highlight-color: transparent;
-	}
+@import "./theme.css";
 
-	html, body {
-		@apply scroll-smooth;
-	}
-
-	[disabled] {
-		@apply opacity-50 cursor-not-allowed;
-	}
-
-	::selection {
-		@apply bg-neutral-500 text-neutral-100;
-	}
-
-	* {
-		@apply select-none;
-	}
-
-	a {
-		transition: color .15s ease, background-color .15s ease, opacity .15s ease, box-shadow .15s ease;
-	}
-}
-
-@layer components {
-	svg.icon {
-		height: 1.625rem;
-		width: 1.625rem;
-	}
-
-	.button {
-		@apply inline-flex items-center gap-x-2.5 px-4 py-2 rounded-md md:rounded-lg font-medium;
-		@apply focus-visible:outline-2 focus-visible:outline-offset-2;
-
-		& > svg.icon {
-			height: 1.2rem;
-			width: 1.2rem;
-		}
-
-		&.large {
-			@apply px-6 py-3 rounded-lg md:rounded-xl;
-		}
-	}
-}
+@import "./layers/base.css";
+@import "./layers/components.css";
+@import "./layers/utlities.css";

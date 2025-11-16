@@ -1,1 +1,1 @@
-<input-note {{ $attributes }}>{{ __('Slug') }}: {{ $slot }}<span></span></input-note>
+<div class="text-sm mt-0.5"><span class="opacity-65">{{ __('Slug') }}: /</span><span class="slug"></span></div>

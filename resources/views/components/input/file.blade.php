@@ -1,5 +1,4 @@
-@props(['missing' => 'Select file(s)', 'selected' => '%1$s selected'])
-@aware(['name' => null])
+@aware(['name' => null, 'missing' => 'Select file(s)', 'selected' => '%1$s selected'])
 
 <input type="file" {{ $attributes->merge([
 	'id' => $name,

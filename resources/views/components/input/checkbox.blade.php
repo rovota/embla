@@ -1,5 +1,5 @@
-@aware(['type' => 'checkbox', 'name' => null, 'default' => null, 'fallback' => 'on'])
-@props(['label', 'value' => '1'])
+@aware(['default' => null])
+@props(['name', 'value' => '1', 'fallback' => 'on'])
 
 @php
 	$defaults = old(trim($name, '[]'), str_contains($default, '|') ? explode('|', $default) : $default);
@@ -10,13 +10,8 @@
 	$checked = in_array($value, $defaults);
 @endphp
 
-<label {{ $attributes->class(['input-choice', 'masked'])->only(['class'])->merge(['aria-label' => __($label)]) }}>
-	@if($fallback === 'on')
-		<input type="hidden" name="{{ $name }}" value="0">
-	@endif
-	<input type="{{ $type }}" {{ $attributes->merge(['name' => $name, 'value' => $value])->except('class') }} @checked($checked)>
-	<indicator></indicator>
-	<content>
-		{{ __($label) }}
-	</content>
-</label>
+@if($fallback === 'on')
+	<input type="hidden" name="{{ $name }}" value="0">
+@endif
+
+<input type="checkbox" name="{{ $name }}" value="{{ $value }}" {{ $attributes->class('checkbox') }} @checked($checked)>

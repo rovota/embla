@@ -1,8 +1,3 @@
-@aware(['name' => null, 'slugify'])
-@props(['default' => null])
+@props(['name', 'default' => null])
 
-<input type="text" {{ $attributes->merge([
-	'id' => $name,
-	'name' => $name,
-	'value' => old($name, $default),
-]) }} @isset($slugify) slugify @endisset>
+<input type="text" {{ $attributes->merge(['id' => $name, 'name' => $name, 'value' => old($name, $default)]) }}>

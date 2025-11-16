@@ -1,1 +1,1 @@
-<input-icon {{ $attributes->merge(['class' => 'capslock', 'title' => __('Capslock is enabled.')]) }}>{!! icon('arrows.upload') !!}</input-icon>
+<span {{ $attributes->merge(['class' => 'px-2.5 *:scale-90 hidden [.visible]:block capslock', 'title' => __('Capslock is enabled.')]) }}>{!! icon('arrows.upload') !!}</span>

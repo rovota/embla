@@ -1,10 +1,13 @@
-@aware(['type' => 'radio', 'name' => null, 'default' => null])
-@props(['label', 'value' => '1'])
+@aware(['default' => null])
+@props(['name', 'value' => '1'])
 
-<label {{ $attributes->class(['input-choice', 'masked'])->only(['class'])->merge(['aria-label' => __($label)]) }}>
-	<input type="{{ $type }}" {{ $attributes->merge(['name' => $name])->except('class') }} @checked(old($name, $default) === $attributes->get('value'))>
-	<indicator></indicator>
-	<content>
-		{{ __($label) }}
-	</content>
-</label>
+@php
+	$defaults = old(trim($name, '[]'), str_contains($default, '|') ? explode('|', $default) : $default);
+	if (is_array($defaults) === false) {
+		$defaults = [$defaults];
+	}
+
+	$checked = in_array($value, $defaults);
+@endphp
+
+<input type="radio" name="{{ $name }}" value="{{ $value }}" {{ $attributes->class('radio') }} @checked($checked)>

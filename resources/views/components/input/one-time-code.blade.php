@@ -1,5 +1,4 @@
-@aware(['name' => null])
-@props(['default' => null, 'length' => 6])
+@props(['name' => null, 'default' => null, 'length' => 6])
 
 <input type="number" {{ $attributes->merge([
 	'id' => $name,

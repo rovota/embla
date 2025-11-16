@@ -14,8 +14,6 @@ use Illuminate\View\View;
 use Rovota\Embla\Icons\IconManager;
 use Rovota\Embla\Tabs\TabsFacadeProxy;
 use Rovota\Embla\Tabs\TabsManager;
-use Rovota\Embla\Toolbar\ToolbarFacadeProxy;
-use Rovota\Embla\Toolbar\ToolbarManager;
 
 class EmblaServiceProvider extends ServiceProvider
 {
@@ -30,7 +28,6 @@ class EmblaServiceProvider extends ServiceProvider
 
 		$this->bindIconFunctionality();
 		$this->bindTabsFunctionality();
-		$this->bindToolbarFunctionality();
 	}
 
 	/**
@@ -86,17 +83,6 @@ class EmblaServiceProvider extends ServiceProvider
 
 		$this->app->singleton(TabsFacadeProxy::class, function ($app) {
 			return new TabsFacadeProxy($app->make(TabsManager::class));
-		});
-	}
-
-	protected function bindToolbarFunctionality(): void
-	{
-		$this->app->singleton(ToolbarManager::class, function ($app) {
-			return new ToolbarManager();
-		});
-
-		$this->app->singleton(ToolbarFacadeProxy::class, function ($app) {
-			return new ToolbarFacadeProxy($app->make(ToolbarManager::class));
 		});
 	}
 }

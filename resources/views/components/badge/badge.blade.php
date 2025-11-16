@@ -1,1 +1,0 @@
-<badge {{ $attributes }}>{{ $slot }}</badge>

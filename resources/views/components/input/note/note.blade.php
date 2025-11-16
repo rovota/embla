@@ -1,1 +1,1 @@
-<input-note {{ $attributes }}>{{ $slot }}</input-note>
+<div class="opacity-65 text-sm mt-0.5">{{ $slot }}</div>

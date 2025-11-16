@@ -1,5 +1,4 @@
-@aware(['name' => null])
-@props(['default' => null])
+@props(['name', 'default' => null])
 
 <input type="tel" {{ $attributes->merge([
 	'id' => $name,

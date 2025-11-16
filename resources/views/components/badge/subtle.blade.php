@@ -1,1 +1,0 @@
-<badge {{ $attributes->merge(['class' => 'subtle']) }}>{{ $slot }}</badge>

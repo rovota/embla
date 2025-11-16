@@ -152,24 +152,6 @@ document.querySelectorAll('toast').forEach(toast => {
 });
 
 // -----------------
-// Lightness Detection
-
-document.querySelectorAll('.detect-lightness').forEach(element => {
-	const raw = window.getComputedStyle(element).backgroundColor;
-	const rgb = raw.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-
-	if (rgb !== null) {
-		const red = parseInt(rgb[1]) * 299;
-		const green = parseInt(rgb[2]) * 587;
-		const blue = parseInt(rgb[3]) * 114;
-
-		const lightness = Math.round((red + green + blue) / 1000);
-		element.setAttribute('lightness', lightness.toString());
-		element.classList.add((lightness > 180) ? 'above-threshold' : 'below-threshold');
-	}
-});
-
-// -----------------
 // Drawing
 
 document.querySelectorAll('#drawing').forEach(element => {
@@ -270,19 +252,19 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 	// Automatically add a required indicator
 	if (input.hasAttribute('required')) {
-		let group = input.closest('input-group, input-slider');
+		let group = input.closest('input-group');
 		if (group !== null) {
 			let label = group.querySelector('label');
 			if (label !== null && label.hasAttribute('for')) {
 				if (label.innerHTML.includes('*') === false) {
-					label.innerHTML = label.innerHTML + '<small>*</small>';
+					label.innerHTML = label.innerHTML + '<small class="text-red-500 dark:text-red-400 ml-1">*</small>';
 				}
 			}
 		}
 	}
 
 	// Focus when the icon is clicked
-	let icon = input.parentElement.querySelector('input-icon');
+	let icon = input.parentElement.querySelector('.input-icon');
 	icon?.addEventListener('click', () => {
 		input.focus();
 	});
@@ -352,7 +334,7 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 	// Slug input functionality
 	if (input.hasAttribute('slugify')) {
-		let note = input.parentElement.nextElementSibling.querySelector('span');
+		let note = input.parentElement.nextElementSibling.querySelector('.slug');
 		note.innerHTML = embla.helpers.slugify(input.value);
 		input.addEventListener('input', () => {
 			note.innerHTML = embla.helpers.slugify(input.value);
@@ -362,9 +344,9 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 	// Input length limit on input
 	if (input.hasAttribute('maxlength')) {
 		let limit = input.getAttribute('maxlength');
-		let counter = input.parentElement.nextElementSibling?.querySelector('charcount');
+		let counter = input.parentElement.nextElementSibling?.querySelector('.count');
 		if (counter != null) {
-			input.parentElement.nextElementSibling.querySelector('charlimit').innerHTML = limit;
+			input.parentElement.nextElementSibling.querySelector('.limit').innerHTML = limit;
 			counter.innerHTML = embla.helpers.getRealLength(input.value)
 			input.addEventListener('input', () => {
 				counter.innerHTML = embla.helpers.getRealLength(input.value)
@@ -481,7 +463,7 @@ document.querySelectorAll('h2').forEach(heading => {
 // -----------------
 // Carousel Functionality
 
-document.querySelectorAll('carousel').forEach(carousel => {
+document.querySelectorAll('.carousel').forEach(carousel => {
 
 	let slides = carousel.querySelectorAll('.item');
 	slides[0].classList.add('visible');
@@ -492,7 +474,7 @@ document.querySelectorAll('carousel').forEach(carousel => {
 		let lock_duration = 10000;
 		let current_slide = 0;
 
-		let indicators = carousel.nextElementSibling.querySelectorAll('indicator');
+		let indicators = carousel.nextElementSibling.querySelectorAll('.indicator');
 		indicators[current_slide].classList.add('active');
 
 		const getNextSlideId = () => {
@@ -543,18 +525,6 @@ document.querySelectorAll('carousel').forEach(carousel => {
 		});
 	}
 });
-
-// -----------------
-// Tabs Expansion
-
-let tabs_toggle = document.getElementById('tabs-toggle');
-
-if (tabs_toggle !== null) {
-	tabs_toggle.addEventListener("click", () => {
-		tabs_toggle.classList.toggle('active');
-		document.getElementById('tabs-content').classList.toggle('expanded');
-	});
-}
 
 // -----------------
 // Standalone Fixes
