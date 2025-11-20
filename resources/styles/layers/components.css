@@ -80,7 +80,7 @@
 		}
 
 		&.outlined {
-			@apply bg-transparent inset-ring-2;
+			@apply bg-transparent inset-ring-1;
 		}
 	}
 
