@@ -9,15 +9,6 @@ iframe.youtube {
 	border-radius: var(--radius-standard);
 }
 
-[type]:-webkit-autofill::first-line {
-	font-family: var(--font-family-standard), sans-serif !important;
-	font-size: 16px;
-}
-
-[type]:-webkit-autofill {
-	-webkit-text-fill-color: rgba(var(--color-autofill), 1);
-}
-
 /* ---------------------- */
 /* Typography */
 

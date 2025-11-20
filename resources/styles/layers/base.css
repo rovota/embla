@@ -8,6 +8,20 @@
 		@apply scroll-smooth;
 	}
 
+	[type]:-webkit-autofill::first-line {
+		@apply font-sans text-base;
+	}
+
+	[type]:-webkit-autofill {
+		-webkit-box-shadow:0 0 0 50px var(--color-sky-100) inset;
+		-webkit-text-fill-color: var(--color-sky-600);
+
+		@media (prefers-color-scheme: dark) {
+			-webkit-box-shadow:0 0 0 50px var(--color-sky-950) inset;
+			-webkit-text-fill-color: var(--color-sky-300);
+		}
+	}
+
 	[disabled] {
 		@apply opacity-50 pointer-events-none;
 	}
@@ -135,6 +149,10 @@
 
 			&.has-error {
 				@apply inset-ring-red-500 dark:inset-ring-red-400;
+			}
+
+			&:has(:-webkit-autofill, :autofill) {
+				@apply text-sky-600 bg-sky-100 dark:text-sky-300 dark:bg-sky-950;
 			}
 
 			&:not([disabled]):hover {
