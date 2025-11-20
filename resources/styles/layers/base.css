@@ -177,7 +177,9 @@
 
 	input, select, textarea {
 
-		-webkit-background-clip: text !important;
+		&:not([type="checkbox"], [type="radio"], [type="range"]) {
+			-webkit-background-clip: text !important;
+		}
 
 		&:-webkit-autofill::first-line {
 			@apply font-sans text-base;
