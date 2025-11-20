@@ -12,13 +12,15 @@
 		@apply font-sans text-base;
 	}
 
-	[type]:-webkit-autofill {
-		-webkit-box-shadow:0 0 0 50px var(--color-sky-100) inset;
-		-webkit-text-fill-color: var(--color-sky-600);
+	[type] {
+		-webkit-background-clip: text !important;
 
-		@media (prefers-color-scheme: dark) {
-			-webkit-box-shadow:0 0 0 50px var(--color-sky-950) inset;
-			-webkit-text-fill-color: var(--color-sky-300);
+		&:-webkit-autofill {
+			-webkit-text-fill-color: var(--color-sky-600);
+
+			@media (prefers-color-scheme: dark) {
+				-webkit-text-fill-color: var(--color-sky-300);
+			}
 		}
 	}
 
