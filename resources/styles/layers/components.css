@@ -105,7 +105,7 @@
 	}
 
 	.context {
-		@apply relative block px-4 py-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-black/20 dark:border-white/20;
+		@apply grow w-full relative block px-4 py-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-black/20 dark:border-white/20;
 
 		&[caption] {
 			@apply before:block;
