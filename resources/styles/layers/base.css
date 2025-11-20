@@ -29,7 +29,50 @@
 	}
 
 	table {
-		@apply w-full
+		@apply w-full;
+
+		& thead {
+			@apply border-b border-black/10 dark:border-white/10;;
+		}
+		& tfoot {
+			@apply border-t border-black/10 dark:border-white/10;;
+		}
+
+		& th, & td {
+			@apply py-2 px-1.5;
+		}
+
+		& > thead > tr > th {
+			@apply text-left font-medium text-neutral-700 dark:text-neutral-300 text-sm;
+			transition: all .12s ease;
+
+			&.sortable {
+				@apply cursor-pointer;
+
+				&.sorted::after {
+					content: ' •';
+				}
+
+				&:hover, &.sorted {
+					@apply text-neutral-900 dark:text-neutral-100;
+				}
+			}
+		}
+
+		& > tbody tr {
+			&:nth-child(2n + 1) {
+				@apply bg-black/2 dark:bg-white/2;
+			}
+
+			&[data-href] {
+				cursor: pointer;
+				transition: all .12s ease;
+			}
+
+			&[data-href]:hover {
+				@apply bg-black/5 dark:bg-white/5;
+			}
+		}
 	}
 
 	overlay {
@@ -54,11 +97,41 @@
 		}
 	}
 
+	toast {
+		@apply mx-auto w-fit fixed inset-x-1 top-4 z-50 flex gap-4 justify-center items-center py-3 px-5 rounded-lg text-white dark:text-black font-medium shadow-lg;
+		@apply before:absolute after:absolute overflow-hidden;
+		transform: translateY(-100%);
+		transition: all .3s ease;
+		opacity: 0;
+
+		&.visible {
+			transform: translateY(0);
+			opacity: 1;
+		}
+
+		&:before {
+			@apply absolute top-0 left-0 h-full w-full bg-neutral-900 dark:bg-neutral-100 z-50 rounded-[inherit];
+		}
+
+		&:after {
+			@apply absolute top-0 left-0 h-full w-full bg-neutral-700 dark:bg-neutral-200 z-51 rounded-[inherit];
+			animation: 3.2s fill-w linear;
+		}
+
+		& > * {
+			@apply z-52;
+		}
+
+		&.success > svg {
+			@apply text-green-400 dark:text-green-700;
+		}
+	}
+
 	input-group {
 		@apply flex flex-col justify-center grow w-full relative;
 
 		& > input-box {
-			@apply items-center relative flex overflow-hidden rounded-md transition duration-100 inset-ring inset-ring-black/10 dark:inset-ring-neutral-100/10 bg-neutral-100 dark:bg-neutral-800;
+			@apply items-center relative flex overflow-hidden rounded-md transition duration-100 inset-ring inset-ring-black/10 dark:inset-ring-neutral-100/10 bg-neutral-100/40 dark:bg-neutral-800/40;
 
 			&.has-error {
 				@apply inset-ring-red-500 dark:inset-ring-red-400;
@@ -140,13 +213,15 @@
 		}
 
 		&.toggle {
-			@apply h-4.5 w-9 rounded-full border border-neutral-300 dark:border-neutral-700 transition duration-300;
+			@apply h-4.5 w-9 rounded-full border border-neutral-300 dark:border-neutral-700;
+			transition: all .15s ease;
 
 			&:checked {
 				@apply border-neutral-600 dark:border-neutral-300 bg-neutral-600 dark:bg-neutral-300;
 			}
 			&:before {
-				@apply top-1/2 left-0.5 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-300 dark:bg-neutral-700 transition-all duration-300;
+				@apply top-1/2 left-0.5 -translate-y-1/2 w-3 h-3 rounded-full bg-neutral-300 dark:bg-neutral-700;
+				transition: all .15s ease;
 			}
 			&:active:before {
 				@apply w-4.5 h-2.5;
@@ -192,6 +267,10 @@
 			}
 		}
 
+		&[type="search"] {
+			@apply appearance-none;
+		}
+
 		&[disabled], &[readonly] {
 			@apply opacity-65;
 		}
@@ -222,7 +301,7 @@
 		}
 	}
 
-	article, comment {
+	article, comment, note {
 		& > h2, & > h3, & > h4, & > h5, & p, & blockquote, & ul, & ol, & > div, & > hr {
 			&:not(:last-child) {
 				@apply mb-3.5;
@@ -230,7 +309,7 @@
 		}
 
 		& > h2, & > h3, & > h4, & > h5 {
-			@apply font-semibold mt-5;
+			@apply font-semibold;
 		}
 
 		& > h2 {
@@ -259,6 +338,10 @@
 
 		& ol {
 			@apply pl-4.5 list-decimal;
+		}
+
+		& table {
+			@apply table ring ring-black/10 dark:ring-white/10 rounded-lg md:rounded-xl;
 		}
 	}
 

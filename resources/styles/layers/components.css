@@ -26,7 +26,7 @@
 	}
 
 	.image {
-		@apply relative inline-block rounded-lg overflow-hidden;
+		@apply relative inline-block rounded-lg overflow-hidden after:absolute;
 
 		&.left {
 			@apply float-right mr-4 max-w-1/3;
@@ -48,8 +48,18 @@
 			@apply outline-2 outline-offset-2 outline-transparent hover:outline-neutral-500;
 		}
 
-		&[caption] {
+		&[caption]::after {
+			@apply bottom-0 left-0 w-full text-center text-sm bg-black/50 text-white p-2 rounded-b-[inherit];
+			content: attr(caption);
+		}
 
+		&[caption]:not(.revealed)::after {
+			@apply translate-y-full bg-black/80;
+			transition: all .15s ease;
+		}
+
+		&[caption]:not(.revealed):hover::after {
+			@apply translate-y-0;
 		}
 	}
 
@@ -95,15 +105,15 @@
 	}
 
 	.context {
-		@apply relative block px-4 py-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-black/10 dark:border-white/10 before:block after:absolute;
+		@apply relative block px-4 py-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-black/10 dark:border-white/10;
 
-		&:before {
-			@apply font-bold mb-1.5 text-sm;
-			content: attr(caption);
+		&[caption] {
+			@apply before:block;
 		}
 
-		&:after {
-			@apply w-1 left-0 top-1/2 h-3/5 -translate-y-1/2 bg-neutral-400 dark:bg-neutral-500 rounded-tr-md rounded-br-md;
+		&[caption]:before {
+			@apply font-bold mb-1.5 text-sm;
+			content: attr(caption);
 		}
 	}
 

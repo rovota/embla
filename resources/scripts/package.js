@@ -1,3 +1,6 @@
+import './dependencies/spotlight.min.js';
+import './dependencies/signature.min.js';
+
 const embla = new class Embla {
 	constructor() {
 		this.helpers = new class Helpers {
@@ -144,8 +147,6 @@ function dataUrlToFile(data, filename) {
 // Toast Messages
 
 document.querySelectorAll('toast').forEach(toast => {
-	toast.classList.add('accent-' + (toast.dataset.type ?? 'auto'));
-
 	setTimeout(() => toast.classList.add('visible'), 100);
 	setTimeout(() => toast.classList.remove('visible'), 3200);
 	setTimeout(() => toast.remove(), 5000);
