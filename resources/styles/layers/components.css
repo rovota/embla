@@ -68,7 +68,7 @@
 	}
 
 	.button {
-		@apply inline-flex cursor-pointer justify-center items-center gap-x-2.5 px-4 py-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-offset-2;
+		@apply inline-flex cursor-pointer justify-center items-center text-center gap-x-2.5 px-4 py-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-offset-2;
 
 		& > svg.icon {
 			height: 1.2rem;
@@ -114,6 +114,13 @@
 		&[caption]:before {
 			@apply font-bold mb-1.5 text-sm;
 			content: attr(caption);
+		}
+	}
+
+	.placeholder {
+		@apply flex justify-center text-center p-2 py-3.5 rounded-md border border-black/10 dark:border-white/10 text-black/50 dark:text-white/50 text-sm sm:text-base;
+		&.darkened {
+			@apply bg-neutral-500/5 dark:bg-neutral-900;
 		}
 	}
 
