@@ -306,14 +306,6 @@ identity.offline > avatar::after {
 }
 
 /* ---------------------- */
-/* Helpers */
-
-.throttled {
-	pointer-events: none;
-	opacity: 0.65;
-}
-
-/* ---------------------- */
 /* Keyframes */
 
 @keyframes progress-bar {
