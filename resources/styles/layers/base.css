@@ -150,11 +150,11 @@
 			}
 
 			& > textarea {
-				@apply min-h-10;
+				@apply min-h-10 w-full;
 			}
 
 			& > input, & > select {
-				@apply h-10;
+				@apply h-10 w-full;
 			}
 
 			& > input, & > textarea, & > select {
