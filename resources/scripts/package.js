@@ -293,33 +293,38 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 	// File input functionality
 	if (input.getAttribute('type') === 'file') {
-		let label = input.nextElementSibling;
+		let label = input.parentElement;
+		let fallback = label.querySelector('.fallback');
+		let details = label.querySelector('.details');
 
-		if (label !== null) {
-			label.innerHTML = input.dataset.missingcaption;
+		input.addEventListener('change', event => {
+			let fileName;
 
-			input.addEventListener('change', event => {
-				let fileName;
-
-				if (input.files) {
-					if (input.files.length > 1) {
-						fileName = (input.dataset.selectedcaption || '').replace('%1$s', input.files.length.toString);
-					}
-					if (input.files.length === 1) {
-						fileName = event.target.value.split('\\').pop();
-					}
-					if (input.files.length === 0) {
-						fileName = input.dataset.missingcaption;
-					}
+			if (input.files) {
+				if (input.files.length > 1) {
+					fileName = details.innerHTML.replace('%1$s', input.files.length.toString);
 				}
-
-				if (fileName) {
-					label.innerHTML = fileName;
-				} else {
-					label.innerHTML = input.dataset.missingcaption;
+				if (input.files.length === 1) {
+					fileName = event.target.value.split('\\').pop();
 				}
-			});
-		}
+				if (input.files.length === 0) {
+					fileName = null;
+				}
+			}
+
+			if (fileName) {
+				fallback.classList.remove('flex');
+				fallback.classList.add('hidden');
+				details.classList.remove('hidden');
+				details.classList.add('flex');
+				details.innerHTML = fileName;
+			} else {
+				fallback.classList.add('flex');
+				fallback.classList.remove('hidden');
+				details.classList.add('hidden');
+				details.classList.remove('flex');
+			}
+		});
 	}
 
 	// Range input functionality
