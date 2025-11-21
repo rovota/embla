@@ -299,7 +299,7 @@
 			@apply opacity-65;
 		}
 
-		&:invalid:not(:focus) {
+		&:user-invalid:not(:focus) {
 			@apply text-red-500 dark:text-red-400;
 		}
 
