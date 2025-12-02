@@ -1,1 +1,1 @@
-<div class="text-sm mt-0.5"><span class="opacity-65">{{ __('Slug') }}: /</span><span class="slug"></span></div>
+<div class="text-sm mt-0.5"><span class="opacity-65">{{ $slot }}/</span><span class="slug"></span></div>
