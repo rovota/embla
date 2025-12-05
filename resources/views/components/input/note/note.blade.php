@@ -1,1 +1,1 @@
-<div class="opacity-65 text-sm mt-0.5">{{ $slot }}</div>
+<div {{ $attributes->class('opacity-65 text-sm mt-0.5') }}>{{ $slot }}</div>
