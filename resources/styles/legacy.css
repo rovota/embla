@@ -41,18 +41,6 @@ kbd {
 	padding: 1px 6px;
 }
 
-mark {
-	background: rgba(var(--color-font), .15);
-	border-radius: var(--radius-small);
-	color: rgba(var(--color-font), 1);
-	font-size: 1em;
-	padding: 0 0.15em;
-}
-
-mark[class*='accent-'] {
-	background: rgba(var(--color-accent), .25);
-}
-
 /* ---------------------- */
 /* Filters */
 
