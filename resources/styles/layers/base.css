@@ -325,6 +325,26 @@
 		}
 	}
 
+	pre, code {
+		@apply bg-black/2 dark:bg-white/2 font-mono border border-black/10 dark:border-white/10 px-2 py-0.5 rounded-sm;
+
+		& > code {
+			@apply bg-transparent border-none p-0;
+		}
+	}
+
+	pre {
+		@apply block px-3 py-2 rounded-md;
+	}
+
+	pre::before {
+		@apply block opacity-65 text-sm font-medium mb-0.5 content-[attr(language)];
+	}
+
+	pre:not([language])::before {
+		@apply hidden;
+	}
+
 	article, comment, note {
 		& > h2, & > h3, & > h4, & > h5, & p, & blockquote, & ul, & ol, & > div, & > hr {
 			&:not(:last-child) {
@@ -344,11 +364,11 @@
 			@apply text-lg;
 		}
 
-		& > * + div {
+		& > * + div, & > * + pre {
 			@apply mt-4;
 		}
 
-		& > div + * {
+		& > div + *, & > pre + * {
 			@apply mt-4;
 		}
 

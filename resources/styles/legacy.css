@@ -211,58 +211,6 @@ progress.muted::-webkit-progress-value {
 }
 
 /* ---------------------- */
-/* Codeblocks */
-
-pre, code {
-	background: rgba(var(--color-font), .025);
-	border-radius: var(--radius-medium);
-	color: rgba(var(--color-font), 1);
-	font-family: monospace;
-	font-size: 1rem;
-	user-select: text;
-}
-
-pre > code {
-	background: none;
-}
-
-pre {
-	border: 1px solid rgba(var(--color-font), .1);
-	line-height: 1.4;
-	margin: 1.25rem 0 0;
-	overflow: auto;
-	padding: 0.8rem 1.25rem;
-}
-
-pre::before {
-	color: rgba(var(--color-font), var(--opacity-subtext));
-	content: attr(language);
-	display: block;
-	font-size: 0.875rem;
-	font-weight: 600;
-	margin-bottom: 0.8rem;
-}
-
-pre:not([language])::before {
-	display: none;
-}
-
-:not(pre) > code {
-	border: 1px solid rgba(var(--color-font), .1);
-	border-radius: var(--radius-small);
-	padding: 0 5px 1px;
-}
-
-pre::selection, code::selection {
-	background-color: rgba(var(--color-font), .15);
-	color: rgba(var(--color-font), .8);
-}
-
-pre > .code-comment, code > .code-comment {
-	opacity: var(--opacity-subtext);
-}
-
-/* ---------------------- */
 /* Cards */
 
 .card > actions {
