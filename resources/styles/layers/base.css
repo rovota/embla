@@ -32,10 +32,13 @@
 		@apply w-full;
 
 		& thead {
-			@apply border-b border-black/10 dark:border-white/10;;
+			@apply border-b border-black/10 dark:border-white/10;
+		}
+		& tbody + thead {
+			@apply border-t border-black/10 dark:border-white/10;
 		}
 		& tfoot {
-			@apply border-t border-black/10 dark:border-white/10;;
+			@apply border-t border-black/10 dark:border-white/10;
 		}
 
 		& th, & td {
@@ -347,6 +350,14 @@
 
 	mark {
 		@apply bg-neutral-200 dark:bg-neutral-800 rounded-sm;
+	}
+
+	kbd {
+		@apply font-mono text-sm rounded-sm bg-black/2 dark:bg-white/2 border border-black/10 dark:border-white/10 py-0.5 px-1 text-neutral-700 dark:text-neutral-300;
+
+		& + kbd {
+			@apply ml-1;
+		}
 	}
 
 	article, comment, note {

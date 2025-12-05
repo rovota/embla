@@ -30,17 +30,6 @@ sup {
 	top: -.1em;
 }
 
-kbd {
-	background: rgba(var(--color-font), 0.5);
-	border-radius: var(--radius-small);
-	color: rgba(var(--color-light), 1);
-	font-family: monospace;
-	font-size: 0.9em;
-	font-weight: 600;
-	margin: 0 1px;
-	padding: 1px 6px;
-}
-
 /* ---------------------- */
 /* Filters */
 
