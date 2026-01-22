@@ -69,6 +69,7 @@
 
 	.button {
 		@apply inline-flex cursor-pointer justify-center items-center text-center gap-x-2.5 px-4 py-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-offset-2;
+		transition: all .12s ease;
 
 		& > svg.icon {
 			height: 1.2rem;

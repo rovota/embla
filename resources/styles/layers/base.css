@@ -17,7 +17,7 @@
 	}
 
 	a, button {
-		transition: color .1s ease, background-color .1s ease, opacity .1s ease, box-shadow .1s ease;
+		transition: color .12s ease, background .12s ease, opacity .12s ease, box-shadow .12s ease;
 	}
 
 	svg {
