@@ -258,7 +258,7 @@
 		}
 
 		&.swatch {
-			@apply h-8.5 w-[auto] rounded-md forced-color-adjust-none inset-ring inset-ring-black/10 dark:inset-ring-white/50;
+			@apply h-8.5 w-auto rounded-md forced-color-adjust-none inset-ring inset-ring-black/10 dark:inset-ring-white/50;
 
 			&:before {
 				@apply size-5.5 scale-40 rounded-full top-1/2 -translate-y-1/2 left-1/2 opacity-0 -translate-x-1/2 bg-white dark:bg-neutral-900;
