@@ -4,6 +4,6 @@
 	'data-size' => $size,
 	'data-appearance' => $style,
 	'data-language' => $language,
-	'data-sitekey' => config('app.turnstile.public_key')
+	'data-sitekey' => config('services.turnstile.public_key')
 	]) }}>
 </div>
