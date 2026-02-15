@@ -128,6 +128,14 @@
 		&.success > svg {
 			@apply text-green-400 dark:text-green-700;
 		}
+
+		&.danger > svg {
+			@apply text-red-400 dark:text-red-500;
+		}
+
+		&.warning > svg {
+			@apply text-amber-400 dark:text-amber-500;
+		}
 	}
 
 	input-group {
