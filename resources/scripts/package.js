@@ -302,7 +302,7 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
 
 			if (input.files) {
 				if (input.files.length > 1) {
-					fileName = details.innerHTML.replace('%1$s', input.files.length.toString);
+					fileName = details.innerHTML.replace(':count', input.files.length.toString());
 				}
 				if (input.files.length === 1) {
 					fileName = event.target.value.split('\\').pop();
