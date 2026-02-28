@@ -48,17 +48,17 @@
 			@apply outline-2 outline-offset-2 outline-transparent hover:outline-neutral-500;
 		}
 
-		&[caption]::after {
+		&[data-caption]::after {
 			@apply bottom-0 left-0 w-full text-center text-sm bg-black/50 text-white p-2 rounded-b-[inherit];
-			content: attr(caption);
+			content: attr(data-caption);
 		}
 
-		&[caption]:not(.revealed)::after {
+		&[data-caption]:not(.revealed)::after {
 			@apply translate-y-full bg-black/80;
 			transition: all .15s ease;
 		}
 
-		&[caption]:not(.revealed):hover::after {
+		&[data-caption]:not(.revealed):hover::after {
 			@apply translate-y-0;
 		}
 	}
@@ -108,13 +108,13 @@
 	.context {
 		@apply grow w-full relative block px-4 py-3 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-black/20 dark:border-white/20;
 
-		&[caption] {
+		&[data-caption] {
 			@apply before:block;
 		}
 
-		&[caption]:before {
+		&[data-caption]:before {
 			@apply font-bold mb-1.5 text-sm;
-			content: attr(caption);
+			content: attr(data-caption);
 		}
 	}
 
