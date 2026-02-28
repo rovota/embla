@@ -547,6 +547,13 @@ document.addEventListener('livewire:navigated', () => {
 		}
 	}
 
+	document.querySelectorAll('trigger').forEach(trigger => {
+		if (trigger.dataset.type === 'overlay') {
+			window.top.postMessage(trigger.dataset.message, '*');
+			trigger.remove();
+		}
+	})
+
 	// -----------------
 	// Dialog Interactivity
 
