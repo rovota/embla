@@ -1,6 +1,6 @@
 {
    "name": "leandrotijink/embla",
-   "version": "1.0.12",
+   "version": "1.0.13",
    "description": "A lightweight component library, helping you to build modern interfaces more efficiently.",
    "keywords": ["components", "interface", "php", "laravel", "modern", "web"],
    "homepage": "https://github.com/leandrotijink/embla",
