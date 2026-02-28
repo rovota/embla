@@ -26,8 +26,6 @@
 	}
 
 	.image {
-		@apply relative inline-block rounded-lg overflow-hidden after:absolute;
-
 		&.left {
 			@apply float-right mr-4 max-w-1/3;
 		}
@@ -40,31 +38,31 @@
 			@apply w-full md:rounded-xl;
 		}
 
-		& > img {
-			@apply w-full h-full object-cover;
+		& > a {
+			@apply inline-block rounded-lg overflow-hidden relative after:absolute;
+
+			& > img {
+				@apply w-full h-full object-cover;
+			}
+
+			&[data-caption]::after {
+				@apply bottom-0 left-0 w-full text-center text-sm bg-black/50 text-white p-2 rounded-b-[inherit];
+				content: attr(data-caption);
+			}
+
+			&[data-caption]:not(.revealed)::after {
+				@apply translate-y-full bg-black/80;
+				transition: all .15s ease;
+			}
+
+			&[data-caption]:not(.revealed):hover::after {
+				@apply translate-y-0;
+			}
 		}
 
-		&.spotlight:not(:focus-visible) {
+		&.spotlight-group > a:not(:focus-visible) {
 			@apply outline-2 outline-offset-2 outline-transparent hover:outline-neutral-500;
 		}
-
-		&[data-caption]::after {
-			@apply bottom-0 left-0 w-full text-center text-sm bg-black/50 text-white p-2 rounded-b-[inherit];
-			content: attr(data-caption);
-		}
-
-		&[data-caption]:not(.revealed)::after {
-			@apply translate-y-full bg-black/80;
-			transition: all .15s ease;
-		}
-
-		&[data-caption]:not(.revealed):hover::after {
-			@apply translate-y-0;
-		}
-	}
-
-	.card {
-		@apply rounded-xl border overflow-hidden;
 	}
 
 	.button {
@@ -99,10 +97,6 @@
 				@apply absolute size-2 left-0 rounded-full;
 			};
 		}
-	}
-
-	.dot {
-		@apply size-2.5 rounded-full inline-block;
 	}
 
 	.context {
