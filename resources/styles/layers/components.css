@@ -37,32 +37,32 @@
 		&.full {
 			@apply w-full md:rounded-xl;
 		}
+	}
 
-		& > a {
-			@apply inline-block rounded-lg overflow-hidden relative after:absolute;
+	a.image, a.spotlight {
+		@apply inline-block rounded-lg overflow-hidden relative after:absolute;
 
-			& > img {
-				@apply w-full h-full object-cover;
-			}
-
-			&[data-caption]::after {
-				@apply bottom-0 left-0 w-full text-center text-sm bg-black/50 text-white p-2 rounded-b-[inherit];
-				content: attr(data-caption);
-			}
-
-			&[data-caption]:not(.revealed)::after {
-				@apply translate-y-full bg-black/80;
-				transition: all .15s ease;
-			}
-
-			&[data-caption]:not(.revealed):hover::after {
-				@apply translate-y-0;
-			}
+		& > img {
+			@apply w-full h-full object-cover;
 		}
 
-		&.spotlight-group > a:not(:focus-visible) {
-			@apply outline-2 outline-offset-2 outline-transparent hover:outline-neutral-500;
+		&[data-caption]::after {
+			@apply bottom-0 left-0 w-full text-center text-sm bg-black/50 text-white p-2 rounded-b-[inherit];
+			content: attr(data-caption);
 		}
+
+		&[data-caption]:not(.revealed)::after {
+			@apply translate-y-full bg-black/80;
+			transition: all .15s ease;
+		}
+
+		&[data-caption]:not(.revealed):hover::after {
+			@apply translate-y-0;
+		}
+	}
+
+	a.image:not(:focus-visible), a.spotlight:not(:focus-visible) {
+		@apply outline-2 outline-offset-2 outline-transparent hover:outline-neutral-500;
 	}
 
 	.button {
@@ -80,22 +80,6 @@
 
 		&.outlined {
 			@apply bg-transparent inset-ring-1;
-		}
-	}
-
-	.badge {
-		@apply inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md font-medium text-sm;
-
-		&.small {
-			@apply px-2 py-1 text-xs rounded-sm;
-		}
-
-		&.subtle {
-			@apply before:block relative items-center gap-1 pl-3 pr-0;
-
-			&:before {
-				@apply absolute size-2 left-0 rounded-full;
-			};
 		}
 	}
 
