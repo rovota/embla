@@ -14,7 +14,8 @@
    "require": {
       "php-64bit": "^8.5",
       "ext-mbstring": "*",
-      "laravel/framework": "^12.0"
+      "laravel/framework": "^12.0",
+      "livewire/flux": "^2.12"
    },
    "autoload": {
       "psr-4": {
